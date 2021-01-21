@@ -9,7 +9,10 @@
 		"type": "Binary",
 		"typeProperties": {
 			"location": {
-				"type": "AmazonS3Location"
+				"type": "AmazonS3Location",
+				"bucketName": "ab",
+				"folderPath": "bc",
+				"fileName": "dc"
 			}
 		}
 	}
