@@ -1,0 +1,20 @@
+{
+	"name": "AzureTableStorage1",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"parameters": {
+			"name": {
+				"type": "string"
+			},
+			"key": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "AzureTableStorage",
+		"typeProperties": {
+			"connectionString": "DefaultEndpointsProtocol=https;AccountName=@{linkedService().name};AccountKey=@{linkedService().key};",
+			"accountKey": "@{linkedService().key}"
+		}
+	}
+}
