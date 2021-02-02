@@ -13,8 +13,8 @@
 		"annotations": [],
 		"type": "AzureTableStorage",
 		"typeProperties": {
-			"connectionString": "DefaultEndpointsProtocol=https;AccountName=@{linkedService().name};AccountKey=@{linkedService().key};",
-			"accountKey": "@{linkedService().key}"
+			"sasUri": "@{linkedService().name}",
+			"sasToken": "@{linkedService().key}"
 		}
 	}
 }
