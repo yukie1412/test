@@ -5,7 +5,7 @@
 		"annotations": [],
 		"type": "AmazonS3",
 		"typeProperties": {
-			"serviceUrl": "",
+			"serviceUrl": "a",
 			"accessKeyId": "a",
 			"forcePathStyle": false,
 			"authenticationType": "AccessKey",
