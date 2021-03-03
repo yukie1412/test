@@ -5,20 +5,14 @@
 		"factoryName": {
 			"value": "jen"
 		},
-		"AzureDataLakeStorage1_accountKey": {
-			"value": ""
-		},
 		"AmazonS31_secretAccessKey": {
 			"value": ""
 		},
-		"AzureDataLakeStorage1_properties_typeProperties_url": {
-			"value": "a"
+		"AmazonS31_properties_typeProperties_accessKeyId": {
+			"value": "ab"
 		},
 		"AzureKeyVault1_properties_typeProperties_baseUrl": {
 			"value": "https://ADFBillingNightly.vault.azure.net/"
-		},
-		"AmazonS31_properties_typeProperties_accessKeyId": {
-			"value": "a"
 		}
 	}
 }

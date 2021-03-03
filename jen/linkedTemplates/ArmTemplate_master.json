@@ -7,25 +7,17 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "jen"
 		},
-		"AzureDataLakeStorage1_accountKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage1'"
-		},
 		"AmazonS31_secretAccessKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'secretAccessKey' of 'AmazonS31'"
 		},
-		"AzureDataLakeStorage1_properties_typeProperties_url": {
+		"AmazonS31_properties_typeProperties_accessKeyId": {
 			"type": "string",
-			"defaultValue": "a"
+			"defaultValue": "ab"
 		},
 		"AzureKeyVault1_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://ADFBillingNightly.vault.azure.net/"
-		},
-		"AmazonS31_properties_typeProperties_accessKeyId": {
-			"type": "string",
-			"defaultValue": "a"
 		},
 		"containerUri": {
 			"type": "string",
@@ -54,20 +46,14 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
-					"AzureDataLakeStorage1_accountKey": {
-						"value": "[parameters('AzureDataLakeStorage1_accountKey')]"
-					},
 					"AmazonS31_secretAccessKey": {
 						"value": "[parameters('AmazonS31_secretAccessKey')]"
 					},
-					"AzureDataLakeStorage1_properties_typeProperties_url": {
-						"value": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]"
+					"AmazonS31_properties_typeProperties_accessKeyId": {
+						"value": "[parameters('AmazonS31_properties_typeProperties_accessKeyId')]"
 					},
 					"AzureKeyVault1_properties_typeProperties_baseUrl": {
 						"value": "[parameters('AzureKeyVault1_properties_typeProperties_baseUrl')]"
-					},
-					"AmazonS31_properties_typeProperties_accessKeyId": {
-						"value": "[parameters('AmazonS31_properties_typeProperties_accessKeyId')]"
 					}
 				}
 			},
