@@ -13,7 +13,7 @@
 		},
 		"AmazonS31_properties_typeProperties_accessKeyId": {
 			"type": "string",
-			"defaultValue": "ab"
+			"defaultValue": "a"
 		},
 		"AzureKeyVault1_properties_typeProperties_baseUrl": {
 			"type": "string",
@@ -38,7 +38,6 @@
 						"type": "SecureString",
 						"value": "[parameters('AmazonS31_secretAccessKey')]"
 					},
-					"forcePathStyle": false,
 					"authenticationType": "AccessKey"
 				}
 			},

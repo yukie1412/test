@@ -9,7 +9,7 @@
 			"value": ""
 		},
 		"AmazonS31_properties_typeProperties_accessKeyId": {
-			"value": "ab"
+			"value": "a"
 		},
 		"AzureKeyVault1_properties_typeProperties_baseUrl": {
 			"value": "https://ADFBillingNightly.vault.azure.net/"
