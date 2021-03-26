@@ -5,12 +5,6 @@
 		"factoryName": {
 			"value": "jen"
 		},
-		"AmazonS31_secretAccessKey": {
-			"value": ""
-		},
-		"AmazonS31_properties_typeProperties_accessKeyId": {
-			"value": "a"
-		},
 		"AzureKeyVault1_properties_typeProperties_baseUrl": {
 			"value": "https://ADFBillingNightly.vault.azure.net/"
 		},

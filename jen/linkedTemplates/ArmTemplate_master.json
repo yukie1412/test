@@ -7,14 +7,6 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "jen"
 		},
-		"AmazonS31_secretAccessKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'secretAccessKey' of 'AmazonS31'"
-		},
-		"AmazonS31_properties_typeProperties_accessKeyId": {
-			"type": "string",
-			"defaultValue": "a"
-		},
 		"AzureKeyVault1_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://ADFBillingNightly.vault.azure.net/"
@@ -45,12 +37,6 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
-					},
-					"AmazonS31_secretAccessKey": {
-						"value": "[parameters('AmazonS31_secretAccessKey')]"
-					},
-					"AmazonS31_properties_typeProperties_accessKeyId": {
-						"value": "[parameters('AmazonS31_properties_typeProperties_accessKeyId')]"
 					},
 					"AzureKeyVault1_properties_typeProperties_baseUrl": {
 						"value": "[parameters('AzureKeyVault1_properties_typeProperties_baseUrl')]"
