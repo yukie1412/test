@@ -6,48 +6,6 @@
 			"type": "string",
 			"metadata": "Data Factory name",
 			"defaultValue": "jen"
-		},
-		"AmazonS32_secretAccessKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'secretAccessKey' of 'AmazonS32'"
-		},
-		"AmazonS33_secretAccessKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'secretAccessKey' of 'AmazonS33'"
-		},
-		"AmazonS31_properties_typeProperties_accessKeyId": {
-			"type": "object",
-			"defaultValue": {
-				"type": "AzureKeyVaultSecret",
-				"store": {
-					"referenceName": "AzureKeyVault1",
-					"type": "LinkedServiceReference"
-				},
-				"secretName": "a"
-			}
-		},
-		"AmazonS32_properties_typeProperties_accessKeyId": {
-			"type": "string",
-			"defaultValue": "a"
-		},
-		"AmazonS33_properties_typeProperties_accessKeyId": {
-			"type": "string",
-			"defaultValue": "a"
-		},
-		"AmazonS34_properties_typeProperties_accessKeyId": {
-			"type": "object",
-			"defaultValue": {
-				"type": "AzureKeyVaultSecret",
-				"store": {
-					"referenceName": "AzureKeyVault1",
-					"type": "LinkedServiceReference"
-				},
-				"secretName": "a"
-			}
-		},
-		"AzureKeyVault1_properties_typeProperties_baseUrl": {
-			"type": "string",
-			"defaultValue": "https://ADFBillingNightly.vault.azure.net/"
 		}
 	},
 	"variables": {
@@ -63,7 +21,14 @@
 				"type": "AmazonS3",
 				"typeProperties": {
 					"serviceUrl": "",
-					"accessKeyId": "[parameters('AmazonS31_properties_typeProperties_accessKeyId')]",
+					"accessKeyId": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "AzureKeyVault1",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "a"
+					},
 					"secretAccessKey": {
 						"type": "AzureKeyVaultSecret",
 						"store": {
@@ -76,9 +41,7 @@
 					"authenticationType": "AccessKey"
 				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault1')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AmazonS32')]",
@@ -89,10 +52,10 @@
 				"type": "AmazonS3",
 				"typeProperties": {
 					"serviceUrl": "",
-					"accessKeyId": "[parameters('AmazonS32_properties_typeProperties_accessKeyId')]",
+					"accessKeyId": "a",
 					"secretAccessKey": {
 						"type": "SecureString",
-						"value": "[parameters('AmazonS32_secretAccessKey')]"
+						"value": "**********"
 					},
 					"forcePathStyle": false,
 					"authenticationType": "AccessKey"
@@ -109,10 +72,10 @@
 				"type": "AmazonS3",
 				"typeProperties": {
 					"serviceUrl": "",
-					"accessKeyId": "[parameters('AmazonS33_properties_typeProperties_accessKeyId')]",
+					"accessKeyId": "a",
 					"secretAccessKey": {
 						"type": "SecureString",
-						"value": "[parameters('AmazonS33_secretAccessKey')]"
+						"value": "**********"
 					},
 					"forcePathStyle": false,
 					"authenticationType": "AccessKey"
@@ -129,7 +92,14 @@
 				"type": "AmazonS3",
 				"typeProperties": {
 					"serviceUrl": "",
-					"accessKeyId": "[parameters('AmazonS34_properties_typeProperties_accessKeyId')]",
+					"accessKeyId": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "AzureKeyVault1",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "a"
+					},
 					"secretAccessKey": {
 						"type": "AzureKeyVaultSecret",
 						"store": {
@@ -140,21 +110,6 @@
 					},
 					"forcePathStyle": false,
 					"authenticationType": "AccessKey"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureKeyVault1')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureKeyVault",
-				"typeProperties": {
-					"baseUrl": "[parameters('AzureKeyVault1_properties_typeProperties_baseUrl')]"
 				}
 			},
 			"dependsOn": []
