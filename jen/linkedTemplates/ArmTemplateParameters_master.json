@@ -5,38 +5,6 @@
 		"factoryName": {
 			"value": "jen"
 		},
-		"AmazonS32_secretAccessKey": {
-			"value": ""
-		},
-		"AmazonS33_secretAccessKey": {
-			"value": ""
-		},
-		"AmazonS31_properties_typeProperties_accessKeyId": {
-			"value": {
-				"type": "AzureKeyVaultSecret",
-				"store": {
-					"referenceName": "AzureKeyVault1",
-					"type": "LinkedServiceReference"
-				},
-				"secretName": "a"
-			}
-		},
-		"AmazonS32_properties_typeProperties_accessKeyId": {
-			"value": "a"
-		},
-		"AmazonS33_properties_typeProperties_accessKeyId": {
-			"value": "a"
-		},
-		"AmazonS34_properties_typeProperties_accessKeyId": {
-			"value": {
-				"type": "AzureKeyVaultSecret",
-				"store": {
-					"referenceName": "AzureKeyVault1",
-					"type": "LinkedServiceReference"
-				},
-				"secretName": "a"
-			}
-		},
 		"AzureKeyVault1_properties_typeProperties_baseUrl": {
 			"value": "https://ADFBillingNightly.vault.azure.net/"
 		},
