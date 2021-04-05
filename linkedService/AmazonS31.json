@@ -19,7 +19,7 @@
 					"referenceName": "AzureKeyVault1",
 					"type": "LinkedServiceReference"
 				},
-				"secretName": "asdf"
+				"secretName": "asdfdsf"
 			},
 			"authenticationType": "AccessKey"
 		}
