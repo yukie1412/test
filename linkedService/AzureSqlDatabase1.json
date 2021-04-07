@@ -31,7 +31,7 @@
 					"type": "LinkedServiceReference",
 					"parameters": {
 						"KeyVaultURL": {
-							"value": "@linkedService().key_vault_URL",
+							"value": "@{linkedService().key_vault_URL}",
 							"type": "Expression"
 						}
 					}
