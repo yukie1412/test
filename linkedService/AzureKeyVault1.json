@@ -1,10 +1,17 @@
 {
 	"name": "AzureKeyVault1",
 	"properties": {
+		"description": "Generic key vault, this will change in other environments (parameters overridden when Azure DevOps release occurs).",
+		"parameters": {
+			"KeyVaultURL": {
+				"type": "string",
+				"defaultValue": "https://kv-aue-prod-ospri-01.vault.azure.net/"
+			}
+		},
 		"annotations": [],
 		"type": "AzureKeyVault",
 		"typeProperties": {
-			"baseUrl": "https://ADFBillingNightly.vault.azure.net/"
+			"baseUrl": "@linkedService().KeyVaultURL"
 		}
 	}
 }
