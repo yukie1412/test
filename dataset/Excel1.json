@@ -10,9 +10,6 @@
 		"typeProperties": {
 			"location": {
 				"type": "AmazonS3Location"
-			},
-			"compression": {
-				"type": "bzip2"
 			}
 		},
 		"schema": []
