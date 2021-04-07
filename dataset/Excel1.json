@@ -10,6 +10,9 @@
 		"typeProperties": {
 			"location": {
 				"type": "AmazonS3Location"
+			},
+			"compression": {
+				"type": "gzip"
 			}
 		},
 		"schema": []
