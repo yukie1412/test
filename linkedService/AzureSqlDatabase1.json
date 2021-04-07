@@ -1,17 +1,45 @@
 {
 	"name": "AzureSqlDatabase1",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
+		"parameters": {
+			"Server_Name": {
+				"type": "String",
+				"defaultValue": "ospri-reporting-dev.database.windows.net"
+			},
+			"DB_Name": {
+				"type": "String",
+				"defaultValue": "sqldb-dev-etlcontrol"
+			},
+			"user_name": {
+				"type": "String",
+				"defaultValue": "report-etl-admin"
+			},
+			"key_vault_URL": {
+				"type": "string",
+				"defaultValue": "https://kv-aue-dev-ospri-01.vault.azure.net/"
+			}
+		},
 		"annotations": [],
 		"type": "AzureSqlDatabase",
 		"typeProperties": {
-			"connectionString": {
+			"connectionString": "Integrated Security=False;Encrypt=False;Connection Timeout=120;Data Source=@{linkedService().Server_Name};Initial Catalog=@{linkedService().DB_Name};User ID=@{linkedService().user_name};TrustServerCertificate=True",
+			"password": {
 				"type": "AzureKeyVaultSecret",
 				"store": {
 					"referenceName": "AzureKeyVault1",
-					"type": "LinkedServiceReference"
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"KeyVaultURL": {
+							"value": "@linkedService().key_vault_URL",
+							"type": "Expression"
+						}
+					}
 				},
-				"secretName": "a",
-				"secretVersion": ""
+				"secretName": {
+					"value": "@{linkedService().user_name}",
+					"type": "Expression"
+				}
 			}
 		}
 	}
