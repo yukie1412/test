@@ -1,7 +1,7 @@
 {
 	"name": "AzureKeyVault1",
 	"properties": {
-		"description": "Generic key vault, this will change in other environments (parameters overridden when Azure DevOps release occurs).",
+		"description": "asdf",
 		"parameters": {
 			"KeyVaultURL": {
 				"type": "string",
