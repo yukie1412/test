@@ -1,7 +1,7 @@
 {
 	"name": "AzureKeyVault1",
 	"properties": {
-		"description": "asdf",
+		"description": "wer",
 		"parameters": {
 			"KeyVaultURL": {
 				"type": "string",
