@@ -1,10 +1,11 @@
 {
 	"name": "AzureKeyVaultService",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
 		"annotations": [],
 		"type": "AzureKeyVault",
 		"typeProperties": {
-			"baseUrl": "https://ADFBillingNightly.vault.azure.net/"
+			"baseUrl": "https://vNextProdKeyVault.vault.azure.net/"
 		}
 	}
 }
