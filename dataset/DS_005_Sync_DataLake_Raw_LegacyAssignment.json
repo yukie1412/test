@@ -1,0 +1,78 @@
+{
+	"name": "DS_005_Sync_DataLake_Raw_LegacyAssignment",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorageErrorLog",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"DS_FolderName": {
+				"type": "string",
+				"defaultValue": "FTOPDataLiveSync"
+			},
+			"DS_ExtractFiles": {
+				"type": "string",
+				"defaultValue": "ExtractFiles"
+			},
+			"DS_EntityName": {
+				"type": "string",
+				"defaultValue": "LegacyAssignments"
+			},
+			"DS_TimeStamp": {
+				"type": "string",
+				"defaultValue": "\"\""
+			}
+		},
+		"folder": {
+			"name": "DataLake/Raw/Sync"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "LegacyAssignmentRawDataLake.csv",
+				"folderPath": {
+					"value": "@concat(dataset().DS_FolderName,'/',dataset().DS_EntityName,'/',dataset().DS_ExtractFiles,'/',dataset().DS_TimeStamp)",
+					"type": "Expression"
+				},
+				"fileSystem": "raw"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "TenantId",
+				"type": "String"
+			},
+			{
+				"name": "ActiveDirUserId",
+				"type": "String"
+			},
+			{
+				"name": "Role",
+				"type": "String"
+			},
+			{
+				"name": "CH_ServiceNames",
+				"type": "String"
+			},
+			{
+				"name": "CH_IsTenantPrimary",
+				"type": "String"
+			},
+			{
+				"name": "CH_Username",
+				"type": "String"
+			},
+			{
+				"name": "CH_Operation",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
