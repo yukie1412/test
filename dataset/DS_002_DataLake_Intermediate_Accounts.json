@@ -1,0 +1,58 @@
+{
+	"name": "DS_002_DataLake_Intermediate_Accounts",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorageErrorLog",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"DS_FolderName": {
+				"type": "string",
+				"defaultValue": "FTOPDataLiveSync"
+			},
+			"DS_ExtractFiles": {
+				"type": "string",
+				"defaultValue": "ExtractFiles"
+			},
+			"DS_EntityName": {
+				"type": "string",
+				"defaultValue": "TenantServices"
+			},
+			"DS_TimeStamp": {
+				"type": "string",
+				"defaultValue": "\"\""
+			}
+		},
+		"folder": {
+			"name": "DataLake/Intermediate"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "CRMAccountsDataLake.csv",
+				"folderPath": {
+					"value": "@concat(dataset().DS_FolderName,'/',dataset().DS_EntityName,'/',dataset().DS_ExtractFiles,'/',dataset().DS_TimeStamp)",
+					"type": "Expression"
+				},
+				"fileSystem": "raw"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "accountid",
+				"type": "String"
+			},
+			{
+				"name": "ftop_tenantid",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
