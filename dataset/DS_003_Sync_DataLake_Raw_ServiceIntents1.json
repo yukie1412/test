@@ -1,0 +1,95 @@
+{
+	"name": "DS_003_Sync_DataLake_Raw_ServiceIntents1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorageErrorLog",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"DS_FolderName": {
+				"type": "string",
+				"defaultValue": "FTOPDataLiveSync"
+			},
+			"DS_ExtractFiles": {
+				"type": "string",
+				"defaultValue": "ExtractFiles"
+			},
+			"DS_EntityName": {
+				"type": "string",
+				"defaultValue": "ServiceIntents"
+			},
+			"DS_TimeStamp": {
+				"type": "string",
+				"defaultValue": "\"\""
+			}
+		},
+		"folder": {
+			"name": "DataLake/Raw/Sync"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "ServiceIntentsRawDataLake.csv",
+				"folderPath": {
+					"value": "@concat(dataset().DS_FolderName,'/',dataset().DS_EntityName,'/',dataset().DS_ExtractFiles,'/',dataset().DS_TimeStamp)",
+					"type": "Expression"
+				},
+				"fileSystem": "raw"
+			},
+			"columnDelimiter": ",",
+			"rowDelimiter": "\r\n",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "TenantServiceId",
+				"type": "String"
+			},
+			{
+				"name": "CH_TenantId",
+				"type": "String"
+			},
+			{
+				"name": "EntitlementStatusId",
+				"type": "String"
+			},
+			{
+				"name": "CH_EntitlementCount",
+				"type": "String"
+			},
+			{
+				"name": "CH_TargetDate",
+				"type": "String"
+			},
+			{
+				"name": "CH_ScopeReasonTypeId",
+				"type": "String"
+			},
+			{
+				"name": "CH_EngineeringReasonTypeId",
+				"type": "String"
+			},
+			{
+				"name": "CH_NextActionDate",
+				"type": "String"
+			},
+			{
+				"name": "CH_Notes",
+				"type": "String"
+			},
+			{
+				"name": "CH_Owner",
+				"type": "String"
+			},
+			{
+				"name": "CH_Operation",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
