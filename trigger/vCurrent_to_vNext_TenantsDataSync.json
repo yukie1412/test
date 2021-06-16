@@ -3,15 +3,17 @@
 	"properties": {
 		"annotations": [],
 		"runtimeState": "Stopped",
-		"pipelines": [],
-		"type": "ScheduleTrigger",
+		"type": "TumblingWindowTrigger",
 		"typeProperties": {
-			"recurrence": {
-				"frequency": "Minute",
-				"interval": 15,
-				"startTime": "2021-06-16T10:03:00Z",
-				"timeZone": "UTC"
-			}
+			"frequency": "Minute",
+			"interval": 5,
+			"startTime": "2020-09-23T17:35:00Z",
+			"delay": "00:00:00",
+			"maxConcurrency": 1,
+			"retryPolicy": {
+				"intervalInSeconds": 30
+			},
+			"dependsOn": []
 		}
 	}
 }
