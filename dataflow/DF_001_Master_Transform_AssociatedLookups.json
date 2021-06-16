@@ -8,92 +8,208 @@
 		"typeProperties": {
 			"sources": [
 				{
+					"dataset": {
+						"referenceName": "DS_002_Sync_DataLake_Raw_TenantServices",
+						"type": "DatasetReference"
+					},
 					"name": "TenantServicesSource"
 				},
 				{
+					"dataset": {
+						"referenceName": "DS_002_DataLake_Intermediate_Accounts",
+						"type": "DatasetReference"
+					},
 					"name": "AccountSource"
 				},
 				{
+					"dataset": {
+						"referenceName": "DS_002_DataLake_Intermediate_MasterServices",
+						"type": "DatasetReference"
+					},
 					"name": "MasterServiceSource"
 				},
 				{
+					"dataset": {
+						"referenceName": "DS_002_DataLake_Intermediate_BusinessReason",
+						"type": "DatasetReference"
+					},
 					"name": "BusinessReasonSource"
 				},
 				{
+					"dataset": {
+						"referenceName": "DS_002_DataLake_Intermediate_SuccessOwnerRoles",
+						"type": "DatasetReference"
+					},
 					"name": "SuccessOwnerRoleSource"
 				},
 				{
+					"dataset": {
+						"referenceName": "DS_002_DataLake_Intermediate_Stakeholders",
+						"type": "DatasetReference"
+					},
 					"name": "StakeholderSource"
 				},
 				{
+					"dataset": {
+						"referenceName": "DS_002_DataLake_Intermediate_Scenarios",
+						"type": "DatasetReference"
+					},
 					"name": "ScenarioSource"
 				},
 				{
+					"dataset": {
+						"referenceName": "DS_002_DataLake_Intermediate_HasAwarenessPlans",
+						"type": "DatasetReference"
+					},
 					"name": "HasAwarenessPlanSource"
 				},
 				{
+					"dataset": {
+						"referenceName": "DS_002_DataLake_Intermediate_HasTrainingPlans",
+						"type": "DatasetReference"
+					},
 					"name": "HasTrainingPlanSource"
 				},
 				{
+					"dataset": {
+						"referenceName": "DS_002_DataLake_Intermediate_EngagementScenarios",
+						"type": "DatasetReference"
+					},
 					"name": "EngagementScenarioSource"
 				},
 				{
+					"dataset": {
+						"referenceName": "DS_001_Sync_DataLake_Raw_Tenants",
+						"type": "DatasetReference"
+					},
 					"name": "TenantSource"
 				},
 				{
+					"dataset": {
+						"referenceName": "DS_001_DataLake_Intermediate_OverallStatus",
+						"type": "DatasetReference"
+					},
 					"name": "OverAllStatusSource"
 				},
 				{
+					"dataset": {
+						"referenceName": "DS_003_Sync_DataLake_Raw_ServiceIntents1",
+						"type": "DatasetReference"
+					},
 					"name": "ServiceIntentSource"
 				},
 				{
+					"dataset": {
+						"referenceName": "DS_003_DataLake_Intermediate_L1",
+						"type": "DatasetReference"
+					},
 					"name": "L1Source"
 				},
 				{
+					"dataset": {
+						"referenceName": "DS_003_DataLake_Intermediate_L2",
+						"type": "DatasetReference"
+					},
 					"name": "L2Source"
 				},
 				{
+					"dataset": {
+						"referenceName": "DS_003_DataLake_Intermediate_L3",
+						"type": "DatasetReference"
+					},
 					"name": "L3Source"
 				},
 				{
+					"dataset": {
+						"referenceName": "DS_003_DataLake_Intermediate_Services",
+						"type": "DatasetReference"
+					},
 					"name": "ServiceSource"
 				},
 				{
+					"dataset": {
+						"referenceName": "DS_004_Sync_DataLake_Raw_DataMigration",
+						"type": "DatasetReference"
+					},
 					"name": "DataMigrationSource"
 				},
 				{
+					"dataset": {
+						"referenceName": "DS_004_DataLake_Intermediate_MigrationType",
+						"type": "DatasetReference"
+					},
 					"name": "MigrationTypeSource"
 				},
 				{
+					"dataset": {
+						"referenceName": "DS_004_DataLake_Intermediate_MigrationTypeStatus",
+						"type": "DatasetReference"
+					},
 					"name": "MigrationTypeStatusSource"
 				},
 				{
+					"dataset": {
+						"referenceName": "DS_005_Sync_DataLake_Raw_LegacyAssignment",
+						"type": "DatasetReference"
+					},
 					"name": "LegacyAssignmentSource"
 				},
 				{
+					"dataset": {
+						"referenceName": "DS_001_DataLake_Intermediate_CRMCustomerAccounts",
+						"type": "DatasetReference"
+					},
 					"name": "CustomerAccountSource"
 				},
 				{
+					"dataset": {
+						"referenceName": "DS_002_DataLake_Intermediate_MigrationRejectionReasons",
+						"type": "DatasetReference"
+					},
 					"name": "MigrationRejectionReasons"
 				},
 				{
+					"dataset": {
+						"referenceName": "DS_002_DataLake_Intermediate_ServiceStatus",
+						"type": "DatasetReference"
+					},
 					"name": "ServiceStatusSource"
 				}
 			],
 			"sinks": [
 				{
+					"dataset": {
+						"referenceName": "DS_002_DataLake_Cooked_TenantServices",
+						"type": "DatasetReference"
+					},
 					"name": "TenantServicesFinalSink"
 				},
 				{
+					"dataset": {
+						"referenceName": "DS_001_DataLake_Cooked_Tenants",
+						"type": "DatasetReference"
+					},
 					"name": "TenantsFinalSink"
 				},
 				{
+					"dataset": {
+						"referenceName": "DS_003_DataLake_Cooked_ServiceIntents",
+						"type": "DatasetReference"
+					},
 					"name": "ServiceIntentFinalSink"
 				},
 				{
+					"dataset": {
+						"referenceName": "DS_005_DataLake_Cooked_LegacyAssignment",
+						"type": "DatasetReference"
+					},
 					"name": "LegacyAssignmentFinalSink"
 				},
 				{
+					"dataset": {
+						"referenceName": "DS_004_DataLake_Cooked_DataMigrations",
+						"type": "DatasetReference"
+					},
 					"name": "DataMigrationFinalSink"
 				}
 			],
@@ -189,7 +305,7 @@
 					"name": "JoinServiceStatusIdwithV2Id"
 				}
 			],
-			"script": "parameters{\n\tDF_FolderName as string (''),\n\tOutputFileName1 as string (\"TenantsFinalSinkDataLake.csv\"),\n\tDF_SinkFiles as string (''),\n\tDF_EntityName1 as string (''),\n\tDF_TimeStamp as string (''),\n\tDF_EntityName2 as string (''),\n\tDF_EntityName3 as string (''),\n\tDF_EntityName4 as string (''),\n\tDF_EntityName5 as string (''),\n\tOutputFileName2 as string (\"ServicesFinalSinkDataLake.csv\"),\n\tOutputFileName3 as string (\"ServiceIntentsFinalSinkDataLake.csv\"),\n\tOutputFileName4 as string (\"DataMigrationsFinalSinkDataLake.csv\"),\n\tOutputFileName5 as string (\"LegacyAssignmentFinalSinkDataLake.csv\"),\n\tDF_EntityName6 as string ('')\n}\nsource(output(\n\t\tTenantServiceId as string,\n\t\tCH_TenantId as string,\n\t\tCH_ServiceId as integer,\n\t\tCH_ServiceName as string,\n\t\tCH_IsEntitled as string,\n\t\tCH_MaxEntitledSeatCount as string,\n\t\tCH_MaxEntitledSeatCountOverride as string,\n\t\tCH_MicrosoftPerformsMigration as string,\n\t\tCH_MigrationStartDate as string,\n\t\tCH_MigrationEndDate as string,\n\t\tCH_MigrationRejectionReasonId as integer,\n\t\tCH_MigrationRejectionNote as string,\n\t\tCH_EngagementScenarioId as integer,\n\t\tCH_PartnerMpnId as string,\n\t\tCH_PartnerTenantId as string,\n\t\tCH_BusinessReasonId as integer,\n\t\tCH_SuccessOwnerRoleId as integer,\n\t\tCH_StakeHolderId as integer,\n\t\tCH_ScenarioId as integer,\n\t\tCH_AwarenessPlanId as integer,\n\t\tCH_TrainingPlanId as integer,\n\t\tCH_EngagementStartDate as string,\n\t\tCH_PartnerName as string,\n\t\tCH_ServiceStatusId as integer,\n\t\tCH_Operation as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionBy('hash', 1)) ~> TenantServicesSource\nsource(output(\n\t\taccountid as string,\n\t\tftop_tenantid as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> AccountSource\nsource(output(\n\t\tftop_name as string,\n\t\tftop_masterdataid as string,\n\t\tftop_v2serviceid as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> MasterServiceSource\nsource(output(\n\t\tftop_businessreasonid as string,\n\t\tftop_v2serviceid as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> BusinessReasonSource\nsource(output(\n\t\tftop_successownerroleid as string,\n\t\tftop_v2serviceid as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> SuccessOwnerRoleSource\nsource(output(\n\t\tftop_stakeholdersid as string,\n\t\tftop_v2serviceid as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> StakeholderSource\nsource(output(\n\t\tftop_scenarioid as string,\n\t\tftop_v2serviceid as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> ScenarioSource\nsource(output(\n\t\tftop_hasawarenessplansid as string,\n\t\tftop_v2serviceid as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> HasAwarenessPlanSource\nsource(output(\n\t\tftop_hastrainingplansid as string,\n\t\tftop_v2serviceid as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> HasTrainingPlanSource\nsource(output(\n\t\tftop_engagementsenarioid as string,\n\t\tftop_v2serviceid as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> EngagementScenarioSource\nsource(output(\n\t\tId as string,\n\t\tCH_Name as string,\n\t\tCH_OverallStatusId as integer,\n\t\tCH_Tpid as integer,\n\t\tCH_PrimaryRM as string,\n\t\tCH_PrimaryFM as string,\n\t\tCH_PrimaryFE as string,\n\t\tCH_CountryName as string,\n\t\tCH_SubsidiaryName as string,\n\t\tCH_IsEligibleforOBC as string,\n\t\tCH_SegmentName as string,\n\t\tCH_PrimaryTopParentAccountName as string,\n\t\tCH_SubSegmentName as string,\n\t\t{CH_GCC-SKU} as string,\n\t\t{CH_GCC-Segment} as string,\n\t\tCH_Active as string,\n\t\tCH_Segment as string,\n\t\tCH_ParentSegmentName as string,\n\t\tCH_Is1500 as string,\n\t\tCH_RegionName as string,\n\t\tCH_WinnerTenant as string,\n\t\tCH_PrimaryMWA as string,\n\t\tCH_IsQuickStart as string,\n\t\tCH_IsS2500 as string,\n\t\tCH_IsMIPOfferType as string,\n\t\tCH_Operation as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionBy('hash', 1)) ~> TenantSource\nsource(output(\n\t\tftop_overallstatusid as string,\n\t\tftop_id as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> OverAllStatusSource\nsource(output(\n\t\tTenantServiceId as integer,\n\t\tCH_TenantId as string,\n\t\tEntitlementStatusId as integer,\n\t\tCH_EntitlementCount as integer,\n\t\tCH_TargetDate as string,\n\t\tCH_ScopeReasonTypeId as integer,\n\t\tCH_EngineeringReasonTypeId as integer,\n\t\tCH_NextActionDate as string,\n\t\tCH_Notes as string,\n\t\tCH_Owner as string,\n\t\tCH_Operation as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> ServiceIntentSource\nsource(output(\n\t\tftop_name as string,\n\t\tftop_l1id as string,\n\t\tftop_v2serviceid as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> L1Source\nsource(output(\n\t\tftop_l2id as string,\n\t\tftop_v2serviceid as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> L2Source\nsource(output(\n\t\tftop_l3id as string,\n\t\tftop_v2serviceid as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> L3Source\nsource(output(\n\t\tftop_servicesid as string,\n\t\tftop_name as string,\n\t\tftop_tenantaccid as string,\n\t\tftop_v2tenantserviceid as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> ServiceSource\nsource(output(\n\t\tId as string,\n\t\tCH_TenantServiceId as integer,\n\t\tCH_MigrationTypeId as integer,\n\t\tCH_SeatCount as string,\n\t\tCH_MigrationTypeStatusId as integer,\n\t\tCH_EstimatedDate as string,\n\t\tCH_Notes as string,\n\t\tCH_SizeOfData as string,\n\t\tCH_Operation as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> DataMigrationSource\nsource(output(\n\t\tftop_name as string,\n\t\tftop_migrationtypeid as string,\n\t\tftop_v2serviceid as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> MigrationTypeSource\nsource(output(\n\t\tftop_migrationtypestatusid as string,\n\t\tftop_id as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> MigrationTypeStatusSource\nsource(output(\n\t\tTenantId as string,\n\t\tActiveDirUserId as string,\n\t\tRole as string,\n\t\tCH_ServiceNames as string,\n\t\tCH_IsTenantPrimary as string,\n\t\tCH_Username as string,\n\t\tCH_Operation as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> LegacyAssignmentSource\nsource(output(\n\t\tname as string,\n\t\taccountid as string,\n\t\tftop_mstpid as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> CustomerAccountSource\nsource(output(\n\t\tftop_migrationrejectionreasonid as string,\n\t\tftop_v2migrationrejectionreasonid as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> MigrationRejectionReasons\nsource(output(\n\t\tftop_servicestatusesid as string,\n\t\tftop_v2servicestatusid as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> ServiceStatusSource\nDerivingTenantIdtoUppercaseform, DerivingCRMTenantIdtoUppercase join(CH_TenantId == ftop_tenantid,\n\tjoinType:'left',\n\tpartitionBy('hash', 1),\n\tbroadcast: 'auto')~> JoinTenantIdwithAccountsTenantId\nJoinTenantIdwithAccountsTenantId, MasterServiceSource join(CH_ServiceId == ftop_v2serviceid,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinServiceIdwithMasterServiceV2Id\nJoinServiceIdwithMasterServiceV2Id, BusinessReasonSource join(CH_BusinessReasonId == BusinessReasonSource@ftop_v2serviceid,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinBusinessReasonIdwithV2serviceId\nJoinBusinessReasonIdwithV2serviceId, SuccessOwnerRoleSource join(CH_SuccessOwnerRoleId == SuccessOwnerRoleSource@ftop_v2serviceid,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinSuccessOwnerRoleIdwithV2ServiceId\nJoinSuccessOwnerRoleIdwithV2ServiceId, StakeholderSource join(CH_StakeHolderId == StakeholderSource@ftop_v2serviceid,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinstakeholderIdwithV2ServiceId\nJoinstakeholderIdwithV2ServiceId, ScenarioSource join(CH_ScenarioId == ScenarioSource@ftop_v2serviceid,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinScenarioIdwithV2ServiceId\nJoinScenarioIdwithV2ServiceId, HasAwarenessPlanSource join(CH_AwarenessPlanId == HasAwarenessPlanSource@ftop_v2serviceid,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinHasAwarenessPlanIdwithV2ServiceId\nJoinHasAwarenessPlanIdwithV2ServiceId, HasTrainingPlanSource join(CH_TrainingPlanId == HasTrainingPlanSource@ftop_v2serviceid,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinHasTrainingPlanIdwithV2ServiceId\nJoinHasTrainingPlanIdwithV2ServiceId, EngagementScenarioSource join(CH_EngagementScenarioId == EngagementScenarioSource@ftop_v2serviceid,\n\tjoinType:'left',\n\tpartitionBy('hash', 1),\n\tbroadcast: 'auto')~> JoinEngagementScenarioIdwithV2ServiceId\nTenantSource, OverAllStatusSource join(CH_OverallStatusId == ftop_id,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinftopIdwithoverallstatusid\nServiceIntentSource, L1Source join(EntitlementStatusId == ftop_v2serviceid,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinEngagementStatusIdwithL1\nJoinEngagementStatusIdwithL1, L2Source join(CH_ScopeReasonTypeId == L2Source@ftop_v2serviceid,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinScopeReasonTypeIdwithL2\nJoinScopeReasonTypeIdwithL2, L3Source join(CH_EngineeringReasonTypeId == L3Source@ftop_v2serviceid,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinEngineeringReasonTypeIdwithL3\nJoinEngineeringReasonTypeIdwithL3, ServiceSource join(TenantServiceId == ftop_v2tenantserviceid,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinTenantServiceIdwithV2Id\nDerivingTenantIdtoUpper, DerivingCRMTenantIdtoUppercase join(CH_TenantId == ftop_tenantid,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinTenantIdwithV2Id\nDerivingTenantIdtoUppercase, DerivingCRMTenantIdtoUppercase join(TenantId == ftop_tenantid,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinAccountsIdwithV2Id\nDataMigrationSource, MigrationTypeSource join(CH_MigrationTypeId == ftop_v2serviceid,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinMigrationtypeIdwithV2Id\nJoinMigrationtypeIdwithV2Id, ServiceSource join(CH_TenantServiceId == ftop_v2tenantserviceid,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinServiceIdwithV2Id\nJoinServiceIdwithV2Id, MigrationTypeStatusSource join(CH_MigrationTypeStatusId == ftop_id,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinMigrationTypeStatusIdwithV2Id\nJoinTenantIdwithV2Id derive(ServiceIntentName = concatWS('-',ServiceSource@ftop_name,L1Source@ftop_name)) ~> DerivingServiceIntentName\nJoinTenantIdwithaccountId derive(DataMigrationName = concatWS('-',ServiceSource@ftop_name,MigrationTypeSource@ftop_name)) ~> DerivingDataMigrationName\nJoinMigrationTypeStatusIdwithV2Id, AccountSource join(ftop_tenantaccid == accountid,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinTenantIdwithaccountId\nJoinftopIdwithoverallstatusid, CustomerAccountSource join(CH_Tpid == ftop_mstpid,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinTPIDwithCustomerTPID\nJoinTPIDwithCustomerTPID derive(AccountType = toInteger(358410001)) ~> DerivingAccountType\nLegacyAssignmentSource derive(TenantId = upper(TenantId)) ~> DerivingTenantIdtoUppercase\nTenantServicesSource derive(CH_TenantId = upper(CH_TenantId)) ~> DerivingTenantIdtoUppercaseform\nJoinTenantServiceIdwithV2Id derive(CH_TenantId = upper(CH_TenantId)) ~> DerivingTenantIdtoUpper\nJoinEngagementScenarioIdwithV2ServiceId, MigrationRejectionReasons join(CH_MigrationRejectionReasonId == ftop_v2migrationrejectionreasonid,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinMigrationRejectionReasonwithV2Id\nAccountSource derive(ftop_tenantid = upper(ftop_tenantid)) ~> DerivingCRMTenantIdtoUppercase\nJoinMigrationRejectionReasonwithV2Id, ServiceStatusSource join(CH_ServiceStatusId == ftop_v2servicestatusid,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinServiceStatusIdwithV2Id\nJoinServiceStatusIdwithV2Id sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[(concatWS(\"/\", $DF_FolderName,$DF_EntityName2,$DF_SinkFiles,$DF_TimeStamp, $OutputFileName2))],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tmapColumn(\n\t\tTenantServiceId,\n\t\tTenantId = accountid,\n\t\tServiceId = ftop_masterdataid,\n\t\tServiceName = CH_ServiceName,\n\t\tIsEntitled = CH_IsEntitled,\n\t\tMaxEntitledSeatCount = CH_MaxEntitledSeatCount,\n\t\tMaxEntitledSeatCountOverride = CH_MaxEntitledSeatCountOverride,\n\t\tMicrosoftPerformsMigration = CH_MicrosoftPerformsMigration,\n\t\tMigrationStartDate = CH_MigrationStartDate,\n\t\tMigrationEndDate = CH_MigrationEndDate,\n\t\tMigrationRejectionReasonId = ftop_migrationrejectionreasonid,\n\t\tMigrationRejectionNote = CH_MigrationRejectionNote,\n\t\tEngagementScenarioId = ftop_engagementsenarioid,\n\t\tPartnerMpnId = CH_PartnerMpnId,\n\t\tPartnerTenantId = CH_PartnerTenantId,\n\t\tBusinessReasonId = ftop_businessreasonid,\n\t\tSuccessOwnerRoleId = ftop_successownerroleid,\n\t\tStakeHolderId = ftop_stakeholdersid,\n\t\tScenarioId = ftop_scenarioid,\n\t\tAwarenessPlanId = ftop_hasawarenessplansid,\n\t\tTrainingPlanId = ftop_hastrainingplansid,\n\t\tEngagementStartDate = CH_EngagementStartDate,\n\t\tPartnerName = CH_PartnerName,\n\t\tServiceStatusId = ftop_servicestatusesid,\n\t\tBaseTenantId = CH_TenantId\n\t),\n\tpartitionBy('hash', 1)) ~> TenantServicesFinalSink\nDerivingAccountType sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[(concatWS(\"/\", $DF_FolderName,$DF_EntityName1,$DF_SinkFiles,$DF_TimeStamp, $OutputFileName1))],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tmapColumn(\n\t\tId,\n\t\tName = CH_Name,\n\t\tOverallStatusId = ftop_overallstatusid,\n\t\tTpid = CH_Tpid,\n\t\tPrimaryRM = CH_PrimaryRM,\n\t\tPrimaryFM = CH_PrimaryFM,\n\t\tPrimaryFE = CH_PrimaryFE,\n\t\tCountryName = CH_CountryName,\n\t\tSubsidiaryName = CH_SubsidiaryName,\n\t\tIsEligibleforOBC = CH_IsEligibleforOBC,\n\t\tSegmentName = CH_SegmentName,\n\t\tPrimaryTopParentAccountName = CH_PrimaryTopParentAccountName,\n\t\tSubSegmentName = CH_SubSegmentName,\n\t\t{GCC-SKU} = {CH_GCC-SKU},\n\t\t{GCC-Segment} = {CH_GCC-Segment},\n\t\tActive = CH_Active,\n\t\tSegment = CH_Segment,\n\t\tParentSegmentName = CH_ParentSegmentName,\n\t\tIs1500 = CH_Is1500,\n\t\tRegionName = CH_RegionName,\n\t\tWinnerTenant = CH_WinnerTenant,\n\t\tPrimaryMWA = CH_PrimaryMWA,\n\t\tIsQuickStart = CH_IsQuickStart,\n\t\tIsS2500 = CH_IsS2500,\n\t\tIsMIPOfferType = CH_IsMIPOfferType,\n\t\tParentName = accountid,\n\t\tAccountType\n\t),\n\tpartitionBy('hash', 1)) ~> TenantsFinalSink\nDerivingServiceIntentName sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[(concatWS(\"/\", $DF_FolderName,$DF_EntityName3,$DF_SinkFiles,$DF_TimeStamp, $OutputFileName3))],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tmapColumn(\n\t\tTenantServiceId = ftop_servicesid,\n\t\tTenantId = accountid,\n\t\tEntitlementStatusId = ftop_l1id,\n\t\tEntitlementCount = CH_EntitlementCount,\n\t\tTargetDate = CH_TargetDate,\n\t\tScopeReasonTypeId = ftop_l2id,\n\t\tEngineeringReasonTypeId = ftop_l3id,\n\t\tNextActionDate = CH_NextActionDate,\n\t\tNotes = CH_Notes,\n\t\tOwner = CH_Owner,\n\t\tServiceIntentName,\n\t\tBaseTenantServiceId = TenantServiceId\n\t),\n\tpartitionBy('hash', 1)) ~> ServiceIntentFinalSink\nJoinAccountsIdwithV2Id sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[(concatWS(\"/\", $DF_FolderName,$DF_EntityName5,$DF_SinkFiles,$DF_TimeStamp, $OutputFileName5))],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tmapColumn(\n\t\tTenantId = accountid,\n\t\tActiveDirUserId,\n\t\tRole,\n\t\tServiceNames = CH_ServiceNames,\n\t\tIsTenantPrimary = CH_IsTenantPrimary,\n\t\tUsername = CH_Username,\n\t\tBaseTenantId = TenantId\n\t),\n\tpartitionBy('hash', 1)) ~> LegacyAssignmentFinalSink\nDerivingDataMigrationName sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[(concatWS(\"/\", $DF_FolderName,$DF_EntityName4,$DF_SinkFiles,$DF_TimeStamp, $OutputFileName4))],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tmapColumn(\n\t\tId,\n\t\tTenantServiceId = ftop_servicesid,\n\t\tMigrationTypeId = ftop_migrationtypeid,\n\t\tSeatCount = CH_SeatCount,\n\t\tMigrationTypeStatusId = ftop_migrationtypestatusid,\n\t\tEstimatedDate = CH_EstimatedDate,\n\t\tNotes = CH_Notes,\n\t\tSizeOfData = CH_SizeOfData,\n\t\tDataMigrationName,\n\t\taccountid,\n\t\tBaseTenantServiceId = CH_TenantServiceId\n\t),\n\tpartitionBy('hash', 1)) ~> DataMigrationFinalSink"
+			"script": "parameters{\n\tDF_FolderName as string (''),\n\tOutputFileName1 as string (\"TenantsFinalSinkDataLake.csv\"),\n\tDF_SinkFiles as string (''),\n\tDF_EntityName1 as string (''),\n\tDF_TimeStamp as string (''),\n\tDF_EntityName2 as string (''),\n\tDF_EntityName3 as string (''),\n\tDF_EntityName4 as string (''),\n\tDF_EntityName5 as string (''),\n\tOutputFileName2 as string (\"ServicesFinalSinkDataLake.csv\"),\n\tOutputFileName3 as string (\"ServiceIntentsFinalSinkDataLake.csv\"),\n\tOutputFileName4 as string (\"DataMigrationsFinalSinkDataLake.csv\"),\n\tOutputFileName5 as string (\"LegacyAssignmentFinalSinkDataLake.csv\"),\n\tDF_EntityName6 as string ('')\n}\nsource(output(\n\t\tTenantServiceId as string,\n\t\tCH_TenantId as string,\n\t\tCH_ServiceId as integer,\n\t\tCH_ServiceName as string,\n\t\tCH_IsEntitled as string,\n\t\tCH_MaxEntitledSeatCount as string,\n\t\tCH_MaxEntitledSeatCountOverride as string,\n\t\tCH_MicrosoftPerformsMigration as string,\n\t\tCH_MigrationStartDate as string,\n\t\tCH_MigrationEndDate as string,\n\t\tCH_MigrationRejectionReasonId as integer,\n\t\tCH_MigrationRejectionNote as string,\n\t\tCH_EngagementScenarioId as integer,\n\t\tCH_PartnerMpnId as string,\n\t\tCH_PartnerTenantId as string,\n\t\tCH_BusinessReasonId as integer,\n\t\tCH_SuccessOwnerRoleId as integer,\n\t\tCH_StakeHolderId as integer,\n\t\tCH_ScenarioId as integer,\n\t\tCH_AwarenessPlanId as integer,\n\t\tCH_TrainingPlanId as integer,\n\t\tCH_EngagementStartDate as string,\n\t\tCH_PartnerName as string,\n\t\tCH_ServiceStatusId as integer,\n\t\tCH_Operation as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tpartitionBy('hash', 1)) ~> TenantServicesSource\nsource(output(\n\t\taccountid as string,\n\t\tftop_tenantid as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> AccountSource\nsource(output(\n\t\tftop_name as string,\n\t\tftop_masterdataid as string,\n\t\tftop_v2serviceid as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> MasterServiceSource\nsource(output(\n\t\tftop_businessreasonid as string,\n\t\tftop_v2serviceid as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> BusinessReasonSource\nsource(output(\n\t\tftop_successownerroleid as string,\n\t\tftop_v2serviceid as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> SuccessOwnerRoleSource\nsource(output(\n\t\tftop_stakeholdersid as string,\n\t\tftop_v2serviceid as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> StakeholderSource\nsource(output(\n\t\tftop_scenarioid as string,\n\t\tftop_v2serviceid as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> ScenarioSource\nsource(output(\n\t\tftop_hasawarenessplansid as string,\n\t\tftop_v2serviceid as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> HasAwarenessPlanSource\nsource(output(\n\t\tftop_hastrainingplansid as string,\n\t\tftop_v2serviceid as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> HasTrainingPlanSource\nsource(output(\n\t\tftop_engagementsenarioid as string,\n\t\tftop_v2serviceid as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> EngagementScenarioSource\nsource(output(\n\t\tId as string,\n\t\tCH_Name as string,\n\t\tCH_OverallStatusId as integer,\n\t\tCH_Tpid as integer,\n\t\tCH_PrimaryRM as string,\n\t\tCH_PrimaryFM as string,\n\t\tCH_PrimaryFE as string,\n\t\tCH_CountryName as string,\n\t\tCH_SubsidiaryName as string,\n\t\tCH_IsEligibleforOBC as string,\n\t\tCH_SegmentName as string,\n\t\tCH_PrimaryTopParentAccountName as string,\n\t\tCH_SubSegmentName as string,\n\t\t{CH_GCC-SKU} as string,\n\t\t{CH_GCC-Segment} as string,\n\t\tCH_Active as string,\n\t\tCH_Segment as string,\n\t\tCH_ParentSegmentName as string,\n\t\tCH_Is1500 as string,\n\t\tCH_RegionName as string,\n\t\tCH_WinnerTenant as string,\n\t\tCH_PrimaryMWA as string,\n\t\tCH_IsQuickStart as string,\n\t\tCH_IsS2500 as string,\n\t\tCH_IsMIPOfferType as string,\n\t\tCH_Operation as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tpartitionBy('hash', 1)) ~> TenantSource\nsource(output(\n\t\tftop_overallstatusid as string,\n\t\tftop_id as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> OverAllStatusSource\nsource(output(\n\t\tTenantServiceId as integer,\n\t\tCH_TenantId as string,\n\t\tEntitlementStatusId as integer,\n\t\tCH_EntitlementCount as integer,\n\t\tCH_TargetDate as string,\n\t\tCH_ScopeReasonTypeId as integer,\n\t\tCH_EngineeringReasonTypeId as integer,\n\t\tCH_NextActionDate as string,\n\t\tCH_Notes as string,\n\t\tCH_Owner as string,\n\t\tCH_Operation as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> ServiceIntentSource\nsource(output(\n\t\tftop_name as string,\n\t\tftop_l1id as string,\n\t\tftop_v2serviceid as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> L1Source\nsource(output(\n\t\tftop_l2id as string,\n\t\tftop_v2serviceid as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> L2Source\nsource(output(\n\t\tftop_l3id as string,\n\t\tftop_v2serviceid as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> L3Source\nsource(output(\n\t\tftop_servicesid as string,\n\t\tftop_name as string,\n\t\tftop_tenantaccid as string,\n\t\tftop_v2tenantserviceid as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> ServiceSource\nsource(output(\n\t\tId as string,\n\t\tCH_TenantServiceId as integer,\n\t\tCH_MigrationTypeId as integer,\n\t\tCH_SeatCount as string,\n\t\tCH_MigrationTypeStatusId as integer,\n\t\tCH_EstimatedDate as string,\n\t\tCH_Notes as string,\n\t\tCH_SizeOfData as string,\n\t\tCH_Operation as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> DataMigrationSource\nsource(output(\n\t\tftop_name as string,\n\t\tftop_migrationtypeid as string,\n\t\tftop_v2serviceid as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> MigrationTypeSource\nsource(output(\n\t\tftop_migrationtypestatusid as string,\n\t\tftop_id as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> MigrationTypeStatusSource\nsource(output(\n\t\tTenantId as string,\n\t\tActiveDirUserId as string,\n\t\tRole as string,\n\t\tCH_ServiceNames as string,\n\t\tCH_IsTenantPrimary as string,\n\t\tCH_Username as string,\n\t\tCH_Operation as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> LegacyAssignmentSource\nsource(output(\n\t\tname as string,\n\t\taccountid as string,\n\t\tftop_mstpid as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> CustomerAccountSource\nsource(output(\n\t\tftop_migrationrejectionreasonid as string,\n\t\tftop_v2migrationrejectionreasonid as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> MigrationRejectionReasons\nsource(output(\n\t\tftop_servicestatusesid as string,\n\t\tftop_v2servicestatusid as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> ServiceStatusSource\nDerivingTenantIdtoUppercaseform, DerivingCRMTenantIdtoUppercase join(CH_TenantId == ftop_tenantid,\n\tjoinType:'left',\n\tpartitionBy('hash', 1),\n\tbroadcast: 'auto')~> JoinTenantIdwithAccountsTenantId\nJoinTenantIdwithAccountsTenantId, MasterServiceSource join(CH_ServiceId == ftop_v2serviceid,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinServiceIdwithMasterServiceV2Id\nJoinServiceIdwithMasterServiceV2Id, BusinessReasonSource join(CH_BusinessReasonId == BusinessReasonSource@ftop_v2serviceid,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinBusinessReasonIdwithV2serviceId\nJoinBusinessReasonIdwithV2serviceId, SuccessOwnerRoleSource join(CH_SuccessOwnerRoleId == SuccessOwnerRoleSource@ftop_v2serviceid,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinSuccessOwnerRoleIdwithV2ServiceId\nJoinSuccessOwnerRoleIdwithV2ServiceId, StakeholderSource join(CH_StakeHolderId == StakeholderSource@ftop_v2serviceid,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinstakeholderIdwithV2ServiceId\nJoinstakeholderIdwithV2ServiceId, ScenarioSource join(CH_ScenarioId == ScenarioSource@ftop_v2serviceid,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinScenarioIdwithV2ServiceId\nJoinScenarioIdwithV2ServiceId, HasAwarenessPlanSource join(CH_AwarenessPlanId == HasAwarenessPlanSource@ftop_v2serviceid,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinHasAwarenessPlanIdwithV2ServiceId\nJoinHasAwarenessPlanIdwithV2ServiceId, HasTrainingPlanSource join(CH_TrainingPlanId == HasTrainingPlanSource@ftop_v2serviceid,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinHasTrainingPlanIdwithV2ServiceId\nJoinHasTrainingPlanIdwithV2ServiceId, EngagementScenarioSource join(CH_EngagementScenarioId == EngagementScenarioSource@ftop_v2serviceid,\n\tjoinType:'left',\n\tpartitionBy('hash', 1),\n\tbroadcast: 'auto')~> JoinEngagementScenarioIdwithV2ServiceId\nTenantSource, OverAllStatusSource join(CH_OverallStatusId == ftop_id,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinftopIdwithoverallstatusid\nServiceIntentSource, L1Source join(EntitlementStatusId == ftop_v2serviceid,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinEngagementStatusIdwithL1\nJoinEngagementStatusIdwithL1, L2Source join(CH_ScopeReasonTypeId == L2Source@ftop_v2serviceid,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinScopeReasonTypeIdwithL2\nJoinScopeReasonTypeIdwithL2, L3Source join(CH_EngineeringReasonTypeId == L3Source@ftop_v2serviceid,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinEngineeringReasonTypeIdwithL3\nJoinEngineeringReasonTypeIdwithL3, ServiceSource join(TenantServiceId == ftop_v2tenantserviceid,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinTenantServiceIdwithV2Id\nDerivingTenantIdtoUpper, DerivingCRMTenantIdtoUppercase join(CH_TenantId == ftop_tenantid,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinTenantIdwithV2Id\nDerivingTenantIdtoUppercase, DerivingCRMTenantIdtoUppercase join(TenantId == ftop_tenantid,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinAccountsIdwithV2Id\nDataMigrationSource, MigrationTypeSource join(CH_MigrationTypeId == ftop_v2serviceid,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinMigrationtypeIdwithV2Id\nJoinMigrationtypeIdwithV2Id, ServiceSource join(CH_TenantServiceId == ftop_v2tenantserviceid,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinServiceIdwithV2Id\nJoinServiceIdwithV2Id, MigrationTypeStatusSource join(CH_MigrationTypeStatusId == ftop_id,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinMigrationTypeStatusIdwithV2Id\nJoinTenantIdwithV2Id derive(ServiceIntentName = concatWS('-',ServiceSource@ftop_name,L1Source@ftop_name)) ~> DerivingServiceIntentName\nJoinTenantIdwithaccountId derive(DataMigrationName = concatWS('-',ServiceSource@ftop_name,MigrationTypeSource@ftop_name)) ~> DerivingDataMigrationName\nJoinMigrationTypeStatusIdwithV2Id, AccountSource join(ftop_tenantaccid == accountid,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinTenantIdwithaccountId\nJoinftopIdwithoverallstatusid, CustomerAccountSource join(CH_Tpid == ftop_mstpid,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinTPIDwithCustomerTPID\nJoinTPIDwithCustomerTPID derive(AccountType = toInteger(358410001)) ~> DerivingAccountType\nLegacyAssignmentSource derive(TenantId = upper(TenantId)) ~> DerivingTenantIdtoUppercase\nTenantServicesSource derive(CH_TenantId = upper(CH_TenantId)) ~> DerivingTenantIdtoUppercaseform\nJoinTenantServiceIdwithV2Id derive(CH_TenantId = upper(CH_TenantId)) ~> DerivingTenantIdtoUpper\nJoinEngagementScenarioIdwithV2ServiceId, MigrationRejectionReasons join(CH_MigrationRejectionReasonId == ftop_v2migrationrejectionreasonid,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinMigrationRejectionReasonwithV2Id\nAccountSource derive(ftop_tenantid = upper(ftop_tenantid)) ~> DerivingCRMTenantIdtoUppercase\nJoinMigrationRejectionReasonwithV2Id, ServiceStatusSource join(CH_ServiceStatusId == ftop_v2servicestatusid,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinServiceStatusIdwithV2Id\nJoinServiceStatusIdwithV2Id sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[(concatWS(\"/\", $DF_FolderName,$DF_EntityName2,$DF_SinkFiles,$DF_TimeStamp, $OutputFileName2))],\n\tumask: 0022,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tmapColumn(\n\t\tTenantServiceId,\n\t\tTenantId = accountid,\n\t\tServiceId = ftop_masterdataid,\n\t\tServiceName = CH_ServiceName,\n\t\tIsEntitled = CH_IsEntitled,\n\t\tMaxEntitledSeatCount = CH_MaxEntitledSeatCount,\n\t\tMaxEntitledSeatCountOverride = CH_MaxEntitledSeatCountOverride,\n\t\tMicrosoftPerformsMigration = CH_MicrosoftPerformsMigration,\n\t\tMigrationStartDate = CH_MigrationStartDate,\n\t\tMigrationEndDate = CH_MigrationEndDate,\n\t\tMigrationRejectionReasonId = ftop_migrationrejectionreasonid,\n\t\tMigrationRejectionNote = CH_MigrationRejectionNote,\n\t\tEngagementScenarioId = ftop_engagementsenarioid,\n\t\tPartnerMpnId = CH_PartnerMpnId,\n\t\tPartnerTenantId = CH_PartnerTenantId,\n\t\tBusinessReasonId = ftop_businessreasonid,\n\t\tSuccessOwnerRoleId = ftop_successownerroleid,\n\t\tStakeHolderId = ftop_stakeholdersid,\n\t\tScenarioId = ftop_scenarioid,\n\t\tAwarenessPlanId = ftop_hasawarenessplansid,\n\t\tTrainingPlanId = ftop_hastrainingplansid,\n\t\tEngagementStartDate = CH_EngagementStartDate,\n\t\tPartnerName = CH_PartnerName,\n\t\tServiceStatusId = ftop_servicestatusesid,\n\t\tBaseTenantId = CH_TenantId\n\t),\n\tpartitionBy('hash', 1)) ~> TenantServicesFinalSink\nDerivingAccountType sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[(concatWS(\"/\", $DF_FolderName,$DF_EntityName1,$DF_SinkFiles,$DF_TimeStamp, $OutputFileName1))],\n\tumask: 0022,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tmapColumn(\n\t\tId,\n\t\tName = CH_Name,\n\t\tOverallStatusId = ftop_overallstatusid,\n\t\tTpid = CH_Tpid,\n\t\tPrimaryRM = CH_PrimaryRM,\n\t\tPrimaryFM = CH_PrimaryFM,\n\t\tPrimaryFE = CH_PrimaryFE,\n\t\tCountryName = CH_CountryName,\n\t\tSubsidiaryName = CH_SubsidiaryName,\n\t\tIsEligibleforOBC = CH_IsEligibleforOBC,\n\t\tSegmentName = CH_SegmentName,\n\t\tPrimaryTopParentAccountName = CH_PrimaryTopParentAccountName,\n\t\tSubSegmentName = CH_SubSegmentName,\n\t\t{GCC-SKU} = {CH_GCC-SKU},\n\t\t{GCC-Segment} = {CH_GCC-Segment},\n\t\tActive = CH_Active,\n\t\tSegment = CH_Segment,\n\t\tParentSegmentName = CH_ParentSegmentName,\n\t\tIs1500 = CH_Is1500,\n\t\tRegionName = CH_RegionName,\n\t\tWinnerTenant = CH_WinnerTenant,\n\t\tPrimaryMWA = CH_PrimaryMWA,\n\t\tIsQuickStart = CH_IsQuickStart,\n\t\tIsS2500 = CH_IsS2500,\n\t\tIsMIPOfferType = CH_IsMIPOfferType,\n\t\tParentName = accountid,\n\t\tAccountType\n\t),\n\tpartitionBy('hash', 1)) ~> TenantsFinalSink\nDerivingServiceIntentName sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[(concatWS(\"/\", $DF_FolderName,$DF_EntityName3,$DF_SinkFiles,$DF_TimeStamp, $OutputFileName3))],\n\tumask: 0022,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tmapColumn(\n\t\tTenantServiceId = ftop_servicesid,\n\t\tTenantId = accountid,\n\t\tEntitlementStatusId = ftop_l1id,\n\t\tEntitlementCount = CH_EntitlementCount,\n\t\tTargetDate = CH_TargetDate,\n\t\tScopeReasonTypeId = ftop_l2id,\n\t\tEngineeringReasonTypeId = ftop_l3id,\n\t\tNextActionDate = CH_NextActionDate,\n\t\tNotes = CH_Notes,\n\t\tOwner = CH_Owner,\n\t\tServiceIntentName,\n\t\tBaseTenantServiceId = TenantServiceId\n\t),\n\tpartitionBy('hash', 1)) ~> ServiceIntentFinalSink\nJoinAccountsIdwithV2Id sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[(concatWS(\"/\", $DF_FolderName,$DF_EntityName5,$DF_SinkFiles,$DF_TimeStamp, $OutputFileName5))],\n\tumask: 0022,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tmapColumn(\n\t\tTenantId = accountid,\n\t\tActiveDirUserId,\n\t\tRole,\n\t\tServiceNames = CH_ServiceNames,\n\t\tIsTenantPrimary = CH_IsTenantPrimary,\n\t\tUsername = CH_Username,\n\t\tBaseTenantId = TenantId\n\t),\n\tpartitionBy('hash', 1)) ~> LegacyAssignmentFinalSink\nDerivingDataMigrationName sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[(concatWS(\"/\", $DF_FolderName,$DF_EntityName4,$DF_SinkFiles,$DF_TimeStamp, $OutputFileName4))],\n\tumask: 0022,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tmapColumn(\n\t\tId,\n\t\tTenantServiceId = ftop_servicesid,\n\t\tMigrationTypeId = ftop_migrationtypeid,\n\t\tSeatCount = CH_SeatCount,\n\t\tMigrationTypeStatusId = ftop_migrationtypestatusid,\n\t\tEstimatedDate = CH_EstimatedDate,\n\t\tNotes = CH_Notes,\n\t\tSizeOfData = CH_SizeOfData,\n\t\tDataMigrationName,\n\t\taccountid,\n\t\tBaseTenantServiceId = CH_TenantServiceId\n\t),\n\tpartitionBy('hash', 1)) ~> DataMigrationFinalSink"
 		}
 	}
 }
