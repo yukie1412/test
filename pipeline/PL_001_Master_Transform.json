@@ -1,0 +1,91 @@
+{
+	"name": "PL_001_Master_Transform",
+	"properties": {
+		"activities": [
+			{
+				"name": "DF_Master_Transform_AssociatedLookups",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 3,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "DF_001_Master_Transform_AssociatedLookups",
+						"type": "DataFlowReference",
+						"parameters": {
+							"DF_FolderName": "''",
+							"OutputFileName1": "\"TenantsFinalSinkDataLake.csv\"",
+							"DF_SinkFiles": "''",
+							"DF_EntityName1": "''",
+							"DF_TimeStamp": "''",
+							"DF_EntityName2": "''",
+							"DF_EntityName3": "''",
+							"DF_EntityName4": "''",
+							"DF_EntityName5": "''",
+							"OutputFileName2": "\"ServicesFinalSinkDataLake.csv\"",
+							"OutputFileName3": "\"ServiceIntentsFinalSinkDataLake.csv\"",
+							"OutputFileName4": "\"DataMigrationsFinalSinkDataLake.csv\"",
+							"OutputFileName5": "\"LegacyAssignmentFinalSinkDataLake.csv\"",
+							"DF_EntityName6": "''"
+						}
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"parameters": {
+			"PL_FolderName": {
+				"type": "string",
+				"defaultValue": "FTOPDataLiveSync"
+			},
+			"PL_SinkFiles": {
+				"type": "string",
+				"defaultValue": "SinkFiles"
+			},
+			"PL_ExtractFiles": {
+				"type": "string",
+				"defaultValue": "ExtractFiles"
+			},
+			"PL_EntityName1": {
+				"type": "string",
+				"defaultValue": "Tenants"
+			},
+			"PL_EntityName2": {
+				"type": "string",
+				"defaultValue": "TenantServices"
+			},
+			"PL_EntityName3": {
+				"type": "string",
+				"defaultValue": "ServiceIntents"
+			},
+			"PL_EntityName4": {
+				"type": "string",
+				"defaultValue": "DataMigrations"
+			},
+			"PL_EntityName5": {
+				"type": "string",
+				"defaultValue": "LegacyAssignments"
+			},
+			"PL_TimeStamp": {
+				"type": "string",
+				"defaultValue": "\"\""
+			}
+		},
+		"folder": {
+			"name": "Live Sync ETLs/Tenants"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-05-24T06:13:44Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
