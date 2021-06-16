@@ -1,0 +1,154 @@
+{
+	"name": "DS_001_Sync_DataLake_Raw_Tenants",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorageErrorLog",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"DS_FolderName": {
+				"type": "string",
+				"defaultValue": "FTOPDataLiveSync"
+			},
+			"DS_ExtractFiles": {
+				"type": "string",
+				"defaultValue": "ExtractFiles"
+			},
+			"DS_EntityName": {
+				"type": "string",
+				"defaultValue": "Tenants"
+			},
+			"DS_TimeStamp": {
+				"type": "string",
+				"defaultValue": "\"\""
+			}
+		},
+		"folder": {
+			"name": "DataLake/Raw/Sync"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "TenantsRawDataLake.csv",
+				"folderPath": {
+					"value": "@concat(dataset().DS_FolderName,'/',dataset().DS_EntityName,'/',dataset().DS_ExtractFiles,'/',dataset().DS_TimeStamp)",
+					"type": "Expression"
+				},
+				"fileSystem": "raw"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Id",
+				"type": "String"
+			},
+			{
+				"name": "CH_Name",
+				"type": "String"
+			},
+			{
+				"name": "CH_OverallStatusId",
+				"type": "String"
+			},
+			{
+				"name": "CH_Tpid",
+				"type": "String"
+			},
+			{
+				"name": "CH_PrimaryRM",
+				"type": "String"
+			},
+			{
+				"name": "CH_PrimaryFM",
+				"type": "String"
+			},
+			{
+				"name": "CH_PrimaryFE",
+				"type": "String"
+			},
+			{
+				"name": "CH_CountryName",
+				"type": "String"
+			},
+			{
+				"name": "CH_SubsidiaryName",
+				"type": "String"
+			},
+			{
+				"name": "CH_IsEligibleforOBC",
+				"type": "String"
+			},
+			{
+				"name": "CH_SegmentName",
+				"type": "String"
+			},
+			{
+				"name": "CH_PrimaryTopParentAccountName",
+				"type": "String"
+			},
+			{
+				"name": "CH_SubSegmentName",
+				"type": "String"
+			},
+			{
+				"name": "CH_GCC-SKU",
+				"type": "String"
+			},
+			{
+				"name": "CH_GCC-Segment",
+				"type": "String"
+			},
+			{
+				"name": "CH_Active",
+				"type": "String"
+			},
+			{
+				"name": "CH_Segment",
+				"type": "String"
+			},
+			{
+				"name": "CH_ParentSegmentName",
+				"type": "String"
+			},
+			{
+				"name": "CH_Is1500",
+				"type": "String"
+			},
+			{
+				"name": "CH_RegionName",
+				"type": "String"
+			},
+			{
+				"name": "CH_WinnerTenant",
+				"type": "String"
+			},
+			{
+				"name": "CH_PrimaryMWA",
+				"type": "String"
+			},
+			{
+				"name": "CH_IsQuickStart",
+				"type": "String"
+			},
+			{
+				"name": "CH_IsS2500",
+				"type": "String"
+			},
+			{
+				"name": "CH_IsMIPOfferType",
+				"type": "String"
+			},
+			{
+				"name": "CH_Operation",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
