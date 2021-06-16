@@ -1,0 +1,150 @@
+{
+	"name": "DS_002_Sync_DataLake_Raw_TenantServices",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorageErrorLog",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"DS_FolderName": {
+				"type": "string",
+				"defaultValue": "FTOPDataLiveSync"
+			},
+			"DS_ExtractFiles": {
+				"type": "string",
+				"defaultValue": "ExtractFiles"
+			},
+			"DS_EntityName": {
+				"type": "string",
+				"defaultValue": "TenantServices"
+			},
+			"DS_TimeStamp": {
+				"type": "string",
+				"defaultValue": "\"\""
+			}
+		},
+		"folder": {
+			"name": "DataLake/Raw/Sync"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "TenantServicesDataLake.csv",
+				"folderPath": {
+					"value": "@concat(dataset().DS_FolderName,'/',dataset().DS_EntityName,'/',dataset().DS_ExtractFiles,'/',dataset().DS_TimeStamp)",
+					"type": "Expression"
+				},
+				"fileSystem": "raw"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "TenantServiceId",
+				"type": "String"
+			},
+			{
+				"name": "CH_TenantId",
+				"type": "String"
+			},
+			{
+				"name": "CH_ServiceId",
+				"type": "String"
+			},
+			{
+				"name": "CH_ServiceName",
+				"type": "String"
+			},
+			{
+				"name": "CH_IsEntitled",
+				"type": "String"
+			},
+			{
+				"name": "CH_MaxEntitledSeatCount",
+				"type": "String"
+			},
+			{
+				"name": "CH_MaxEntitledSeatCountOverride",
+				"type": "String"
+			},
+			{
+				"name": "CH_MicrosoftPerformsMigration",
+				"type": "String"
+			},
+			{
+				"name": "CH_MigrationStartDate",
+				"type": "String"
+			},
+			{
+				"name": "CH_MigrationEndDate",
+				"type": "String"
+			},
+			{
+				"name": "CH_MigrationRejectionReasonId",
+				"type": "String"
+			},
+			{
+				"name": "CH_MigrationRejectionNote",
+				"type": "String"
+			},
+			{
+				"name": "CH_EngagementScenarioId",
+				"type": "String"
+			},
+			{
+				"name": "CH_PartnerMpnId",
+				"type": "String"
+			},
+			{
+				"name": "CH_PartnerTenantId",
+				"type": "String"
+			},
+			{
+				"name": "CH_BusinessReasonId",
+				"type": "String"
+			},
+			{
+				"name": "CH_SuccessOwnerRoleId",
+				"type": "String"
+			},
+			{
+				"name": "CH_StakeHolderId",
+				"type": "String"
+			},
+			{
+				"name": "CH_ScenarioId",
+				"type": "String"
+			},
+			{
+				"name": "CH_AwarenessPlanId",
+				"type": "String"
+			},
+			{
+				"name": "CH_TrainingPlanId",
+				"type": "String"
+			},
+			{
+				"name": "CH_EngagementStartDate",
+				"type": "String"
+			},
+			{
+				"name": "CH_PartnerName",
+				"type": "String"
+			},
+			{
+				"name": "CH_ServiceStatusId",
+				"type": "String"
+			},
+			{
+				"name": "CH_Operation",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
