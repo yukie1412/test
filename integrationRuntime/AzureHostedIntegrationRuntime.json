@@ -1,0 +1,6 @@
+{
+	"name": "AzureHostedIntegrationRuntime",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}
