@@ -1,14 +1,10 @@
 {
 	"name": "LS_Internal_Azure_DWH_Data_Lake",
-	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
 		"annotations": [],
-		"type": "AmazonS3",
+		"type": "AzureBlobFS",
 		"typeProperties": {
-			"serviceUrl": "",
-			"accessKeyId": "a",
-			"authenticationType": "AccessKey",
-			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkpFTl8yNzlkMmZjNC0zZDhiLTRiNzMtYjMwZC03ZTg2MDc0NWRjYTQiDQp9"
+			"url": "https://allpaydwh01datalake.dfs.core.windows.net"
 		}
 	}
 }
