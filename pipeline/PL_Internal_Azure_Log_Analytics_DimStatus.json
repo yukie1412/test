@@ -1,0 +1,556 @@
+{
+	"name": "PL_Internal_Azure_Log_Analytics_DimStatus",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy DimStatus Dimension Bronze",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Get Azure AD Bearer Token",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": true
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "query"
+					},
+					{
+						"name": "Destination",
+						"value": "raw/logAnalytics/applicationInsights/prepaidAPI/@{concat('prepaidAPI_',utcnow('yyyy_MM_dd_HH_mm_ss'),'.json')}"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "RestSource",
+						"httpRequestTimeout": "00:01:40",
+						"requestInterval": "00.00:00:00.010",
+						"requestMethod": "POST",
+						"requestBody": "{\n    \"query\": \"dwh_dimension_dimstatus\"\n}",
+						"additionalHeaders": {
+							"Content-Type": "application/json",
+							"Authorization": {
+								"value": "@concat('Bearer ',activity('Get Azure AD Bearer Token').output.access_token)",
+								"type": "Expression"
+							}
+						}
+					},
+					"sink": {
+						"type": "JsonSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "JsonWriteSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_Internal_Azure_Log_Analytics",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_Internal_Azure_DWH_Data_Lake_JSON",
+						"type": "DatasetReference",
+						"parameters": {
+							"dataQualityLevel": "bronze",
+							"filename": "dimStatus.json",
+							"folderPath": {
+								"value": "@pipeline().parameters.bronzeFolder",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			},
+			{
+				"name": "Pivot Raw Data and Transform",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "Copy DimStatus Dimension Bronze",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Shared/bronze-silver/dimension-lookup/log-analytics-dimstatus",
+					"baseParameters": {
+						"bronzeFolderPath": {
+							"value": "@pipeline().parameters.bronzeFolder",
+							"type": "Expression"
+						},
+						"pipelineRunId": {
+							"value": "@pipeline().RunId",
+							"type": "Expression"
+						},
+						"parentPipelineRunId": {
+							"value": "@pipeline().parameters.parentPipelineRunId",
+							"type": "Expression"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "LS_Internal_Azure_Databricks",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Get Azure AD Bearer Token",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Get Log Analytics Client ID from KeyVault",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Get Log Analytics Client Secret from KeyVault",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": true,
+					"secureInput": true
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://login.microsoftonline.com/908947d6-359d-4725-b5b2-69ddfd857556/oauth2/token",
+					"connectVia": {
+						"referenceName": "AzureHostedIntegrationRuntime",
+						"type": "IntegrationRuntimeReference"
+					},
+					"method": "POST",
+					"headers": {
+						"Content-Type": "application/x-www-form-urlencoded"
+					},
+					"body": {
+						"value": "@concat('grant_type=client_credentials\n&client_id=',activity('Get Log Analytics Client ID from KeyVault').output.value,'&resource=https://api.loganalytics.io/&client_secret=',activity('Get Log Analytics Client Secret from KeyVault').output.value)",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Get Log Analytics Client Secret from KeyVault",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": true,
+					"secureInput": true
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://ap-dwh01-keyvault-dwh.vault.azure.net/secrets/AzureAD-Data-Factory-Service-Principal-Client-Secret?api-version=7.1",
+					"connectVia": {
+						"referenceName": "AzureHostedIntegrationRuntime",
+						"type": "IntegrationRuntimeReference"
+					},
+					"method": "GET",
+					"authentication": {
+						"type": "MSI",
+						"resource": "https://vault.azure.net"
+					}
+				}
+			},
+			{
+				"name": "Get Log Analytics Client ID from KeyVault",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": true,
+					"secureInput": true
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://ap-dwh01-keyvault-dwh.vault.azure.net/secrets/AzureAD-Data-Factory-Service-Principal-Client-ID?api-version=7.0",
+					"connectVia": {
+						"referenceName": "AzureHostedIntegrationRuntime",
+						"type": "IntegrationRuntimeReference"
+					},
+					"method": "GET",
+					"authentication": {
+						"type": "MSI",
+						"resource": "https://vault.azure.net"
+					}
+				}
+			},
+			{
+				"name": "Set Silver Folder Path",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Pivot Raw Data and Transform",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "silverFolderPath",
+					"value": {
+						"value": "@activity('Pivot Raw Data and Transform').output.runOutput",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Get files in Silver Output Directory",
+				"type": "GetMetadata",
+				"dependsOn": [
+					{
+						"activity": "Set Silver Folder Path",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "DS_Internal_Azure_DWH_Data_Lake_Parquet_Wildcard",
+						"type": "DatasetReference",
+						"parameters": {
+							"dataQualityLevel": "silver",
+							"folderPath": {
+								"value": "@variables('silverFolderPath')",
+								"type": "Expression"
+							}
+						}
+					},
+					"fieldList": [
+						"childItems"
+					],
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"recursive": true,
+						"enablePartitionDiscovery": false
+					}
+				}
+			},
+			{
+				"name": "Filter for Parquet file",
+				"type": "Filter",
+				"dependsOn": [
+					{
+						"activity": "Get files in Silver Output Directory",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('Get files in Silver Output Directory').Output.childItems",
+						"type": "Expression"
+					},
+					"condition": {
+						"value": "@endswith(item().name,'parquet')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set Silver File",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Filter for Parquet file",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "silverFile",
+					"value": {
+						"value": "@activity('Filter for Parquet file').output.Value[0].name",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Copy to DataPreparationDB",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Set Silver File",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "ParquetSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						}
+					},
+					"sink": {
+						"type": "SqlMISink"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "pipelineRunId",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ADF_Pipeline_Run_Id",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "parentPipelineRunId",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ADF_Parent_Pipeline_Run_Id",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "statusName",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Data_statusName",
+									"type": "String"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_Internal_Azure_DWH_Data_Lake_Parquet",
+						"type": "DatasetReference",
+						"parameters": {
+							"dataQualityLevel": "silver",
+							"folderPath": {
+								"value": "@variables('silverFolderPath')",
+								"type": "Expression"
+							},
+							"filename": {
+								"value": "@variables('silverFile')",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_Internal_Azure_Managed_Instance_DWH_DataPreparationDB_DimStatus",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Merge Silver - Live Table",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Copy to DataPreparationDB",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dimstaging].[sp_LogAnalytics_DimStatus]",
+					"storedProcedureParameters": {
+						"pipelineRunId": {
+							"value": {
+								"value": "@pipeline().RunId",
+								"type": "Expression"
+							}
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "LS_Internal_Azure_DWH_SQL_Managed_Instance_DataPreparationDB",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Copy to Gold in Datalake",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Merge Silver - Live Table",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlMISource",
+						"sqlReaderQuery": "SELECT *\nFROM [dbo].[DimStatus]\nWHERE [sk_Status_Key] != 1",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "sk_Status_Key",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "sk_Status_Key",
+									"type": "Int32",
+									"physicalType": "INT_32"
+								}
+							},
+							{
+								"source": {
+									"name": "Status_Name",
+									"type": "String",
+									"physicalType": "nvarchar"
+								},
+								"sink": {
+									"name": "Status_Name",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_Internal_Azure_Managed_Instance_DWH_allpayDataWarehouse",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_Internal_Azure_DWH_Data_Lake_Parquet",
+						"type": "DatasetReference",
+						"parameters": {
+							"dataQualityLevel": "gold",
+							"folderPath": "logAnalytics/applicationInsights/dimensionSource/dimStatus/",
+							"filename": {
+								"value": "@concat('dimStatus_',utcnow('yyyy_MM_dd_HH_mm'),'.snappy.parquet')",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			}
+		],
+		"parameters": {
+			"bronzeFolder": {
+				"type": "string"
+			},
+			"parentPipelineRunId": {
+				"type": "string"
+			}
+		},
+		"variables": {
+			"silverFolderPath": {
+				"type": "String"
+			},
+			"silverFile": {
+				"type": "String"
+			}
+		},
+		"folder": {
+			"name": "Data Warehouse/Telemetry/Dimension/Child Pipelines"
+		},
+		"annotations": []
+	}
+}
