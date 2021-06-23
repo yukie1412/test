@@ -1,0 +1,18 @@
+{
+	"name": "DS_Internal_Azure_Log_Analytics",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_Internal_Azure_Log_Analytics",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Internal/Azure/Log Analytics"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"typeProperties": {
+			"relativeUrl": "query"
+		},
+		"schema": []
+	}
+}

@@ -1,0 +1,39 @@
+{
+	"name": "DS_Internal_Azure_Managed_Instance_DWH_allpayDataWarehouse",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_Internal_Azure_DWH_SQL_Managed_Instance_allpayDataWarehouse",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Internal/Azure/SQL Managed Instance - DWH/allpayDatawarehouse"
+		},
+		"annotations": [],
+		"type": "AzureSqlMITable",
+		"schema": [
+			{
+				"name": "sk_API_Process_Key",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "API_Process_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Is_Current",
+				"type": "bit"
+			},
+			{
+				"name": "Valid_From",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "Valid_To",
+				"type": "datetime2",
+				"scale": 7
+			}
+		]
+	}
+}
