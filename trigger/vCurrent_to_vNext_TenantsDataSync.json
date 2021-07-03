@@ -2,7 +2,7 @@
 	"name": "vCurrent_to_vNext_TenantsDataSync",
 	"properties": {
 		"annotations": [],
-		"runtimeState": "Stopped",
+		"runtimeState": "Started",
 		"type": "TumblingWindowTrigger",
 		"typeProperties": {
 			"frequency": "Minute",
