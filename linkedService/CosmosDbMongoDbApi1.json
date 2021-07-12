@@ -1,0 +1,7 @@
+{
+	"name": "CosmosDbMongoDbApi1",
+	"properties": {
+		"annotations": [],
+		"type": "CosmosDbMongoDbApi"
+	}
+}
