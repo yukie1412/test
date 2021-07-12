@@ -1,0 +1,10 @@
+{
+	"name": "CosmosDbMongoDbApi3",
+	"properties": {
+		"annotations": [],
+		"type": "CosmosDbMongoDbApi",
+		"typeProperties": {
+			"isServer32": true
+		}
+	}
+}
