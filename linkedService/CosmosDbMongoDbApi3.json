@@ -1,0 +1,12 @@
+{
+	"name": "CosmosDbMongoDbApi3",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "CosmosDbMongoDbApi",
+		"typeProperties": {
+			"connectionString": "asdfasdf",
+			"database": "asdfasdf"
+		}
+	}
+}
