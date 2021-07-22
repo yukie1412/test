@@ -3,16 +3,10 @@
 	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
 		"annotations": [],
-		"type": "AmazonMWS",
+		"type": "AzureBlobStorage",
 		"typeProperties": {
-			"endpoint": "d",
-			"marketplaceID": "a",
-			"sellerID": "a",
-			"accessKeyId": "f",
-			"useEncryptedEndpoints": true,
-			"useHostVerification": true,
-			"usePeerVerification": true,
-			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkpFTl8yZjBlZTlkYy04NTk5LTQ3ZDAtOGU5MS1kNTM5MDMxMTg2NGMiDQp9"
+			"connectionString": "DefaultEndpointsProtocol=https;AccountName=ippm02xwestcusxstacxstg;EndpointSuffix=core.windows.net;",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIklQUE0wMi1XRVNUVVMyLURGMi1TVEdfMmE0ZGFhZDQtNWZlMy00MWY4LWE1NzMtMWExODZlZjk5ZjUwIg0KfQ=="
 		}
 	}
 }
