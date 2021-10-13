@@ -7,21 +7,37 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "jen"
 		},
+		"AmazonS31_secretAccessKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'secretAccessKey' of 'AmazonS31'"
+		},
 		"AzureBlobStorage1_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
 		},
-		"HttpServer1_password": {
+		"AzureSqlDatabase1_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'HttpServer1'"
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
+		},
+		"AzureSqlDatabase1_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureSqlDatabase1'"
+		},
+		"AmazonS31_properties_typeProperties_accessKeyId": {
+			"type": "string",
+			"defaultValue": "asdf"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "asdf"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "72f988bf-86f1-41af-91ab-2d7cd011db47"
 		},
 		"HttpServer1_properties_typeProperties_url": {
 			"type": "string",
-			"defaultValue": "http://www.microsoft.com"
-		},
-		"HttpServer1_properties_typeProperties_userName": {
-			"type": "string",
-			"defaultValue": "asdf"
+			"defaultValue": "http://001.io:8080/"
 		},
 		"containerUri": {
 			"type": "string",
@@ -50,17 +66,29 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"AmazonS31_secretAccessKey": {
+						"value": "[parameters('AmazonS31_secretAccessKey')]"
+					},
 					"AzureBlobStorage1_connectionString": {
 						"value": "[parameters('AzureBlobStorage1_connectionString')]"
 					},
-					"HttpServer1_password": {
-						"value": "[parameters('HttpServer1_password')]"
+					"AzureSqlDatabase1_connectionString": {
+						"value": "[parameters('AzureSqlDatabase1_connectionString')]"
+					},
+					"AzureSqlDatabase1_servicePrincipalKey": {
+						"value": "[parameters('AzureSqlDatabase1_servicePrincipalKey')]"
+					},
+					"AmazonS31_properties_typeProperties_accessKeyId": {
+						"value": "[parameters('AmazonS31_properties_typeProperties_accessKeyId')]"
+					},
+					"AzureSqlDatabase1_properties_typeProperties_servicePrincipalId": {
+						"value": "[parameters('AzureSqlDatabase1_properties_typeProperties_servicePrincipalId')]"
+					},
+					"AzureSqlDatabase1_properties_typeProperties_tenant": {
+						"value": "[parameters('AzureSqlDatabase1_properties_typeProperties_tenant')]"
 					},
 					"HttpServer1_properties_typeProperties_url": {
 						"value": "[parameters('HttpServer1_properties_typeProperties_url')]"
-					},
-					"HttpServer1_properties_typeProperties_userName": {
-						"value": "[parameters('HttpServer1_properties_typeProperties_userName')]"
 					}
 				}
 			},

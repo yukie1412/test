@@ -5,17 +5,29 @@
 		"factoryName": {
 			"value": "jen"
 		},
+		"AmazonS31_secretAccessKey": {
+			"value": ""
+		},
 		"AzureBlobStorage1_connectionString": {
 			"value": ""
 		},
-		"HttpServer1_password": {
+		"AzureSqlDatabase1_connectionString": {
 			"value": ""
 		},
-		"HttpServer1_properties_typeProperties_url": {
-			"value": "http://www.microsoft.com"
+		"AzureSqlDatabase1_servicePrincipalKey": {
+			"value": ""
 		},
-		"HttpServer1_properties_typeProperties_userName": {
+		"AmazonS31_properties_typeProperties_accessKeyId": {
 			"value": "asdf"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_servicePrincipalId": {
+			"value": "asdf"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_tenant": {
+			"value": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+		},
+		"HttpServer1_properties_typeProperties_url": {
+			"value": "http://001.io:8080/"
 		}
 	}
 }
