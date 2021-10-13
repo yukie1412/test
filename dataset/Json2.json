@@ -10,7 +10,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"container": "asdf"
+				"folderPath": "json",
+				"container": "outputfolder"
 			}
 		},
 		"schema": {}
