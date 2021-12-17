@@ -23,11 +23,36 @@
 						{
 							"text": "asdf",
 							"type": "Query",
+							"parameters": [
+								{
+									"name": "asd",
+									"type": "Byte[]",
+									"value": "",
+									"direction": "Input"
+								},
+								{
+									"name": "asdf",
+									"type": "Byte[]",
+									"value": "",
+									"direction": "Output",
+									"size": "23"
+								}
+							]
+						},
+						{
+							"text": "asdf",
+							"type": "NonQuery",
 							"parameters": []
 						}
 					],
 					"logSettings": {
-						"logDestination": "ActivityOutput"
+						"logDestination": "ExternalStore",
+						"logLocationSettings": {
+							"linkedServiceName": {
+								"referenceName": "AzureBlobStorage1",
+								"type": "LinkedServiceReference"
+							}
+						}
 					}
 				}
 			}
