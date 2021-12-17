@@ -60,6 +60,10 @@
 							"linkedServiceName": {
 								"referenceName": "AzureBlobStorage1",
 								"type": "LinkedServiceReference"
+							},
+							"path": {
+								"value": "@pipeline().parameters.test",
+								"type": "Expression"
 							}
 						}
 					}
