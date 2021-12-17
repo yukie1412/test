@@ -48,7 +48,10 @@
 								"value": "@pipeline().parameters.test",
 								"type": "Expression"
 							},
-							"parameters": []
+							"parameters": {
+								"value": "@pipeline().parameters.asf",
+								"type": "Expression"
+							}
 						}
 					],
 					"logSettings": {
@@ -69,6 +72,9 @@
 			},
 			"test": {
 				"type": "String"
+			},
+			"asf": {
+				"type": "Array"
 			}
 		},
 		"annotations": []
