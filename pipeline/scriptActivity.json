@@ -21,8 +21,11 @@
 				"typeProperties": {
 					"scripts": [
 						{
+							"type": {
+								"value": "@pipeline().parameters.query",
+								"type": "Expression"
+							},
 							"text": "asdf",
-							"type": "Query",
 							"parameters": [
 								{
 									"name": "asd",
@@ -40,8 +43,11 @@
 							]
 						},
 						{
-							"text": "asdf",
 							"type": "NonQuery",
+							"text": {
+								"value": "@pipeline().parameters.test",
+								"type": "Expression"
+							},
 							"parameters": []
 						}
 					],
@@ -57,6 +63,14 @@
 				}
 			}
 		],
+		"parameters": {
+			"query": {
+				"type": "String"
+			},
+			"test": {
+				"type": "String"
+			}
+		},
 		"annotations": []
 	}
 }
