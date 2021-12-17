@@ -1,0 +1,37 @@
+{
+	"name": "scriptActivity",
+	"properties": {
+		"activities": [
+			{
+				"name": "Script1",
+				"type": "Script",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"typeProperties": {
+					"scripts": [
+						{
+							"text": "asdf",
+							"type": "Query",
+							"parameters": []
+						}
+					],
+					"logSettings": {
+						"logDestination": "ActivityOutput"
+					}
+				}
+			}
+		],
+		"annotations": []
+	}
+}
