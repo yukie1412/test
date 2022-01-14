@@ -9,7 +9,10 @@
 		"type": "Json",
 		"typeProperties": {
 			"location": {
-				"type": "AmazonS3Location"
+				"type": "AmazonS3Location",
+				"bucketName": "asd",
+				"folderPath": "sdf",
+				"fileName": "sdf"
 			}
 		},
 		"schema": {}
