@@ -2,16 +2,16 @@
 	"name": "Json2",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureBlobStorage1",
+			"referenceName": "AmazonS31",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
 		"type": "Json",
 		"typeProperties": {
 			"location": {
-				"type": "AzureBlobStorageLocation",
-				"folderPath": "json",
-				"container": "outputfolder"
+				"type": "AmazonS3Location",
+				"bucketName": "outputfolder",
+				"folderPath": "json"
 			}
 		},
 		"schema": {}
