@@ -1,0 +1,9 @@
+{
+	"name": "jenWestUs",
+	"location": "westus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "ae5cf694-a98b-4a50-a3cf-bfcf95fb900e",
+		"tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+	}
+}
