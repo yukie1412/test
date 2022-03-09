@@ -1,0 +1,111 @@
+{
+	"name": "pipeline_sharepoint_web_activity",
+	"properties": {
+		"description": "pipeline_sharepoint_web_activity",
+		"activities": [
+			{
+				"name": "Lookup_Config",
+				"description": "Lookup_Config",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
+					"dataset": {
+						"referenceName": "sinostorageprod_config",
+						"type": "DatasetReference",
+						"parameters": {
+							"ConfigFileName": {
+								"value": "@concat('config_SharePoint_all_FnP_Hotel_Web_Synapse')",
+								"type": "Expression"
+							},
+							"ConfigFilePath": {
+								"value": "@concat('FnP', '/', 'FnP_Hotel_SharePoint_Site', '/', 'config')",
+								"type": "Expression"
+							},
+							"ConfigFileContainer": {
+								"value": "@concat('sinodashboardsynapsestorageprod')",
+								"type": "Expression"
+							}
+						}
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "ForEach_First_Step",
+				"description": "ForEach_First_Step",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Lookup_Config",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('Lookup_Config').output.value",
+						"type": "Expression"
+					},
+					"isSequential": false,
+					"activities": [
+						{
+							"name": "Executive_pipeline_FnP_Hotel_SharePoint_SQL_STG_web",
+							"description": "Executive_pipeline_FnP_Hotel_SharePoint_SQL_STG_web",
+							"type": "ExecutePipeline",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"pipeline": {
+									"referenceName": "Executive_pipeline_FnP_Hotel_SharePoint_SQL_STG_web_activity",
+									"type": "PipelineReference"
+								},
+								"waitOnCompletion": true,
+								"parameters": {
+									"item": {
+										"value": "@item()",
+										"type": "Expression"
+									},
+									"date": {
+										"value": "@utcnow()",
+										"type": "Expression"
+									},
+									"current_time": {
+										"value": "@convertFromUtc(pipeline().TriggerTime,'China Standard Time', 'yyyy-MM-dd HH:mm:ss')",
+										"type": "Expression"
+									}
+								}
+							}
+						}
+					]
+				}
+			}
+		],
+		"folder": {
+			"name": "FnP/FnP_Hotel"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-12-23T08:57:21Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

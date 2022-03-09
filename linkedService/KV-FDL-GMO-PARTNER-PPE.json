@@ -1,0 +1,11 @@
+{
+	"name": "KV-FDL-GMO-PARTNER-PPE",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://KV-FDL-GMO-PARTNER-PPE.vault.azure.net/"
+		}
+	}
+}

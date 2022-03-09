@@ -1,0 +1,21 @@
+{
+	"name": "ocpmart​",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDW",
+		"typeProperties": {
+			"connectionString": "a=b",
+			"servicePrincipalId": "77d636c9-657b-4a25-98e2-4687f76cb2bd",
+			"servicePrincipalKey": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "KV-FDL-GMO-PARTNER-PPE",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "ClientSecret"
+			},
+			"tenant": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+		}
+	}
+}

@@ -1,0 +1,19 @@
+{
+	"name": "HttpServer1",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "HttpServer",
+		"typeProperties": {
+			"url": "http://001.io:8080/",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous",
+			"authHeaders": {
+				"X-API-Key": {
+					"type": "SecureString",
+					"value": "**********"
+				}
+			}
+		}
+	}
+}

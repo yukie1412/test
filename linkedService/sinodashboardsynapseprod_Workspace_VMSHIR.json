@@ -1,0 +1,12 @@
+{
+	"name": "sinodashboardsynapseprod_Workspace_VMSHIR",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"description": "sinodashboardsynapseprod_Workspace_VMSHIR",
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://famesa03.dfs.core.windows.net"
+		}
+	}
+}

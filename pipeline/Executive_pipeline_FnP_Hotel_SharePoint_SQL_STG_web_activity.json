@@ -1,0 +1,402 @@
+{
+	"name": "Executive_pipeline_FnP_Hotel_SharePoint_SQL_STG_web_activity",
+	"properties": {
+		"description": "Executive_pipeline_FnP_Hotel_SharePoint_SQL_STG_web_activity",
+		"activities": [
+			{
+				"name": "Web_activity_Get the access token from SPO",
+				"description": "Web_activity_Get the access token from SPO",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@concat('https://accounts.accesscontrol.windows.net/', pipeline().parameters.item.tenantid,'/tokens/OAuth/2')",
+						"type": "Expression"
+					},
+					"method": "POST",
+					"headers": {
+						"Content-Type": {
+							"value": "application/x-www-form-urlencoded",
+							"type": "Expression"
+						}
+					},
+					"body": {
+						"value": "@concat('grant_type=client_credentials&client_id=', pipeline().parameters.item.serviceid, '@', pipeline().parameters.item.tenantid, '&client_secret=', pipeline().parameters.item.tenantkey, '&resource=00000003-0000-0ff1-ce00-000000000000/', 'sqlbluefun', '.sharepoint.com@', pipeline().parameters.item.tenantid)",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Web_activity_Get the list of files from SPO folder",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Web_activity_Get the access token from SPO",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@concat(pipeline().parameters.item.sharepointsite, '/_api/web/GetFolderByServerRelativeUrl(''', pipeline().parameters.item.siterelativeurl, pipeline().parameters.item.sharepointessentialfilepath, '/', pipeline().parameters.item.sharepointprimaryfilepath, '''', ')/Files')",
+						"type": "Expression"
+					},
+					"method": "GET",
+					"headers": {
+						"Authorization": {
+							"value": "@{concat('Bearer ', activity('Web_activity_Get the access token from SPO').output.access_token)}",
+							"type": "Expression"
+						},
+						"Accept": {
+							"value": "application/json",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			{
+				"name": "Set RunDatetime",
+				"description": "Set RunDatetime",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Web_activity_Get the list of files from SPO folder",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "RunDate",
+					"value": {
+						"value": "@addDays(pipeline().parameters.date, -96600)",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set Pipeline_Run_ID",
+				"description": "Set Pipeline_Run_ID",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Web_activity_Get the list of files from SPO folder",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "Pipeline_Run_ID",
+					"value": {
+						"value": "@pipeline().RunId",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "ForEach_Looping_SharePoint",
+				"description": "ForEach_Looping_SharePoint",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Set RunDatetime",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Set Pipeline_Run_ID",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('Web_activity_Get the list of files from SPO folder').output.value",
+						"type": "Expression"
+					},
+					"isSequential": false,
+					"activities": [
+						{
+							"name": "If Condition1",
+							"type": "IfCondition",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"expression": {
+									"value": "@startswith(item().Name, pipeline().parameters.item.filename)",
+									"type": "Expression"
+								},
+								"ifTrueActivities": [
+									{
+										"name": "Sharepoint_DLLand",
+										"description": "Sharepoint_DLLand",
+										"type": "Copy",
+										"dependsOn": [
+											{
+												"activity": "Web_activity_Get the list of files from SPO folder_2",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
+										"policy": {
+											"timeout": "7.00:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"source": {
+												"type": "DelimitedTextSource",
+												"storeSettings": {
+													"type": "HttpReadSettings",
+													"requestMethod": "GET",
+													"additionalHeaders": {
+														"value": "@{concat('Authorization: Bearer ',activity('Web_activity_Get the access token from SPO_2').output.access_token)}",
+														"type": "Expression"
+													},
+													"requestTimeout": ""
+												},
+												"formatSettings": {
+													"type": "DelimitedTextReadSettings"
+												}
+											},
+											"sink": {
+												"type": "DelimitedTextSink",
+												"storeSettings": {
+													"type": "AzureBlobFSWriteSettings"
+												},
+												"formatSettings": {
+													"type": "DelimitedTextWriteSettings",
+													"quoteAllText": true,
+													"fileExtension": ".txt"
+												}
+											},
+											"enableStaging": false,
+											"translator": {
+												"type": "TabularTranslator",
+												"typeConversion": true,
+												"typeConversionSettings": {
+													"allowDataTruncation": true,
+													"treatBooleanAsNumber": false
+												}
+											}
+										},
+										"inputs": [
+											{
+												"referenceName": "FnP_Dashboard_Staging_DelimitedText",
+												"type": "DatasetReference",
+												"parameters": {
+													"sharepointsite": {
+														"value": "pipeline().parameters.item.sharepointsite",
+														"type": "Expression"
+													},
+													"siterelativeurl": {
+														"value": "pipeline().parameters.item.siterelativeurl",
+														"type": "Expression"
+													},
+													"sharepointessentialfilepath": {
+														"value": "pipeline().parameters.item.sharepointessentialfilepath",
+														"type": "Expression"
+													},
+													"sharepointprimaryfilepath": {
+														"value": "pipeline().parameters.item.sharepointprimaryfilepath",
+														"type": "Expression"
+													},
+													"sharepointprimaryfilewithextension": {
+														"value": "@item().Name",
+														"type": "Expression"
+													},
+													"sharepointsourcefilepath": {
+														"value": "pipeline().parameters.item.sharepointsourcefilepath",
+														"type": "Expression"
+													}
+												}
+											}
+										],
+										"outputs": [
+											{
+												"referenceName": "sinostoragprod_data_lake_DelimitedText",
+												"type": "DatasetReference",
+												"parameters": {
+													"DLLandFileName": {
+														"value": "@item().Name",
+														"type": "Expression"
+													},
+													"DLLandFilePath": {
+														"value": "@concat('FnP', '/', 'FnP_Hotel_SharePoint_Site', '/', 'landing', '/', pipeline().parameters.item.sharepointessentialfilepath, '/', pipeline().parameters.item.filename, '/', formatDateTime(variables('RunDate'), 'yyyyMMdd_HHmmss'))",
+														"type": "Expression"
+													},
+													"DLLandFileContainer": {
+														"value": "@concat('sinodashboardsynapsestorageprod')",
+														"type": "Expression"
+													}
+												}
+											}
+										]
+									},
+									{
+										"name": "Web_activity_Get the access token from SPO_2",
+										"description": "Web_activity_Get the access token from SPO",
+										"type": "WebActivity",
+										"dependsOn": [],
+										"policy": {
+											"timeout": "7.00:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"url": {
+												"value": "@concat('https://accounts.accesscontrol.windows.net/', pipeline().parameters.item.tenantid,'/tokens/OAuth/2')",
+												"type": "Expression"
+											},
+											"method": "POST",
+											"headers": {
+												"Content-Type": {
+													"value": "application/x-www-form-urlencoded",
+													"type": "Expression"
+												}
+											},
+											"body": {
+												"value": "@concat('grant_type=client_credentials&client_id=', pipeline().parameters.item.serviceid, '@', pipeline().parameters.item.tenantid, '&client_secret=', pipeline().parameters.item.tenantkey, '&resource=00000003-0000-0ff1-ce00-000000000000/', 'sqlbluefun', '.sharepoint.com@', pipeline().parameters.item.tenantid)",
+												"type": "Expression"
+											}
+										}
+									},
+									{
+										"name": "Web_activity_Get the list of files from SPO folder_2",
+										"type": "WebActivity",
+										"dependsOn": [
+											{
+												"activity": "Web_activity_Get the access token from SPO_2",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
+										"policy": {
+											"timeout": "7.00:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"url": {
+												"value": "@concat(pipeline().parameters.item.sharepointsite, '/_api/web/GetFolderByServerRelativeUrl(''', pipeline().parameters.item.siterelativeurl, pipeline().parameters.item.sharepointessentialfilepath, '/', pipeline().parameters.item.sharepointprimaryfilepath, '''', ')/Files')",
+												"type": "Expression"
+											},
+											"method": "GET",
+											"headers": {
+												"Authorization": {
+													"value": "@{concat('Bearer ', activity('Web_activity_Get the access token from SPO_2').output.access_token)}",
+													"type": "Expression"
+												},
+												"Accept": {
+													"value": "application/json",
+													"type": "Expression"
+												}
+											}
+										}
+									},
+									{
+										"name": "Set variable1",
+										"type": "SetVariable",
+										"dependsOn": [
+											{
+												"activity": "Web_activity_Get the list of files from SPO folder_2",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
+										"userProperties": [],
+										"typeProperties": {
+											"variableName": "url",
+											"value": {
+												"value": "@{concat('https://sqlbluefun.sharepoint.com/sites/famens/_api/web/GetFileByServerRelativeUrl (''', pipeline().parameters.item.siterelativeurl, pipeline().parameters.item.sharepointessentialfilepath, '/', pipeline().parameters.item.sharepointprimaryfilepath, '/', item().Name, ''')/$value')}",
+												"type": "Expression"
+											}
+										}
+									}
+								]
+							}
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"item": {
+				"type": "object"
+			},
+			"date": {
+				"type": "string"
+			},
+			"current_time": {
+				"type": "string"
+			},
+			"web_activity": {
+				"type": "object"
+			},
+			"Url": {
+				"type": "string"
+			}
+		},
+		"variables": {
+			"RunDate": {
+				"type": "String"
+			},
+			"Pipeline_Run_ID": {
+				"type": "String"
+			},
+			"Pipeline_Trigger_ID": {
+				"type": "String"
+			},
+			"Pipeline_Trigger_Run_Time": {
+				"type": "String"
+			},
+			"assignjson": {
+				"type": "String"
+			},
+			"url": {
+				"type": "String"
+			}
+		},
+		"folder": {
+			"name": "FnP/FnP_Hotel"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-12-23T08:57:19Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

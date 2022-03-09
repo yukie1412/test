@@ -1,0 +1,29 @@
+{
+	"name": "Copy_Full_d347d64d_06b2_409f_886b_fb46c547b93a_Destination",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "gmopartnerfdlakeppe",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureBlobFSFile",
+		"typeProperties": {
+			"format": {
+				"type": "TextFormat",
+				"columnDelimiter": "\u0001",
+				"nullValue": "null",
+				"treatEmptyAsNull": true,
+				"firstRowAsHeader": true
+			},
+			"fileName": {
+				"value": "@concat('D_','OrganizationMPNPartner_','Full_',formatDateTime(pipeline().TriggerTime, 'yyyy'),'_',formatDateTime(pipeline().TriggerTime, 'MM'),'_',formatDateTime(pipeline().TriggerTime, 'dd'),'_',formatDateTime(pipeline().TriggerTime, 'HH'),'_',formatDateTime(pipeline().TriggerTime, 'mm'),'.txt')",
+				"type": "Expression"
+			},
+			"folderPath": {
+				"value": "standardzone/GMOPartner/OrganizationMPNPartner/Full/@{formatDateTime(pipeline().TriggerTime,'yyyyMMdd')}",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

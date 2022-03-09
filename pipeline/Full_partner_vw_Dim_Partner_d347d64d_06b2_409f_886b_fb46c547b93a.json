@@ -1,0 +1,365 @@
+{
+	"name": "Full_partner_vw_Dim_Partner_d347d64d_06b2_409f_886b_fb46c547b93a",
+	"properties": {
+		"activities": [
+			{
+				"name": "Start_TOKEN",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "00:03:00",
+					"retry": 3,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": true,
+					"secureInput": true
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://login.windows.net/microsoft.onmicrosoft.com/oauth2/token",
+					"method": "POST",
+					"headers": {
+						"Content-Type": "application/x-www-form-urlencoded"
+					},
+					"body": "grant_type=client_credentials&resource=ad11a544-8f6e-4bf3-a146-62548935b03a",
+					"authentication": {
+						"type": "Basic",
+						"username": "77d636c9-657b-4a25-98e2-4687f76cb2bd",
+						"password": {
+							"type": "AzureKeyVaultSecret",
+							"store": {
+								"referenceName": "KV-FDL-GMO-PARTNER-PPE",
+								"type": "LinkedServiceReference"
+							},
+							"secretName": "ClientSecret"
+						}
+					}
+				}
+			},
+			{
+				"name": "Start",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Start_TOKEN",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "00:03:00",
+					"retry": 3,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://fdlapippe.centralus.cloudapp.azure.com/api/V1/TelemetryManagement",
+					"method": "POST",
+					"headers": {
+						"Authorization": {
+							"value": "@Concat('Bearer ',activity('Start_TOKEN').output.access_token)",
+							"type": "Expression"
+						}
+					},
+					"body": {
+						"id": "00000000-0000-0000-0000-000000000000",
+						"PublisherId": "2a678a0d-fc6f-4439-b9e5-5f9290881589",
+						"EntityId": "d347d64d-06b2-409f-886b-fb46c547b93a",
+						"EntityName": "vw_Dim_Partner",
+						"Action": "Full_Data_Refresh_Started",
+						"ActionName": "Pipeline RunId: @{pipeline().RunId}",
+						"ActionDate": "@utcNow('yyyy-MM-ddTHH:mm:ssZ')",
+						"PublishedOn": 0
+					}
+				}
+			},
+			{
+				"name": "Copy_Full_d347d64d_06b2_409f_886b_fb46c547b93a",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Start",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "08:00:00",
+					"retry": 5,
+					"retryIntervalInSeconds": 30
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlSource",
+						"sqlReaderQuery": "SELECT DP.PartnerKey, DP.PartnerID, DP.PartnerName, DP.HierarchyLevel, PP.PreferredLanguage, PP.CountryName, PP.Subsidiary From [partner].[vw_Dim_Partner] DP left join [partner].vw_Dim_PartnerProfile PP ON DP.PartnerKey=PP.PartnerKey",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "AzureDataLakeStoreSink"
+					},
+					"enableStaging": false,
+					"parallelCopies": 1
+				},
+				"inputs": [
+					{
+						"referenceName": "Copy_Full_d347d64d_06b2_409f_886b_fb46c547b93a_Source",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Copy_Full_d347d64d_06b2_409f_886b_fb46c547b93a_Destination",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "EndSuccess_TOKEN",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Copy_Full_d347d64d_06b2_409f_886b_fb46c547b93a",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "00:03:00",
+					"retry": 3,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": true,
+					"secureInput": true
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://login.windows.net/microsoft.onmicrosoft.com/oauth2/token",
+					"method": "POST",
+					"headers": {
+						"Content-Type": "application/x-www-form-urlencoded"
+					},
+					"body": "grant_type=client_credentials&resource=ad11a544-8f6e-4bf3-a146-62548935b03a",
+					"authentication": {
+						"type": "Basic",
+						"username": "77d636c9-657b-4a25-98e2-4687f76cb2bd",
+						"password": {
+							"type": "AzureKeyVaultSecret",
+							"store": {
+								"referenceName": "KV-FDL-GMO-PARTNER-PPE",
+								"type": "LinkedServiceReference"
+							},
+							"secretName": "ClientSecret"
+						}
+					}
+				}
+			},
+			{
+				"name": "EndSuccess",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "EndSuccess_TOKEN",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "00:03:00",
+					"retry": 3,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://fdlapippe.centralus.cloudapp.azure.com/api/V1/TelemetryManagement",
+					"method": "POST",
+					"headers": {
+						"Authorization": {
+							"value": "@Concat('Bearer ',activity('EndSuccess_TOKEN').output.access_token)",
+							"type": "Expression"
+						}
+					},
+					"body": {
+						"id": "00000000-0000-0000-0000-000000000000",
+						"PublisherId": "2a678a0d-fc6f-4439-b9e5-5f9290881589",
+						"EntityId": "d347d64d-06b2-409f-886b-fb46c547b93a",
+						"EntityName": "vw_Dim_Partner",
+						"Action": "Full_Data_Refresh_Completed",
+						"ActionName": "Pipeline RunId: @{pipeline().RunId}",
+						"ActionDate": "@utcNow('yyyy-MM-ddTHH:mm:ssZ')",
+						"PublishedOn": 0
+					}
+				}
+			},
+			{
+				"name": "PipelineFailed3_TOKEN",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Copy_Full_d347d64d_06b2_409f_886b_fb46c547b93a",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "00:03:00",
+					"retry": 3,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": true,
+					"secureInput": true
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://login.windows.net/microsoft.onmicrosoft.com/oauth2/token",
+					"method": "POST",
+					"headers": {
+						"Content-Type": "application/x-www-form-urlencoded"
+					},
+					"body": "grant_type=client_credentials&resource=ad11a544-8f6e-4bf3-a146-62548935b03a",
+					"authentication": {
+						"type": "Basic",
+						"username": "77d636c9-657b-4a25-98e2-4687f76cb2bd",
+						"password": {
+							"type": "AzureKeyVaultSecret",
+							"store": {
+								"referenceName": "KV-FDL-GMO-PARTNER-PPE",
+								"type": "LinkedServiceReference"
+							},
+							"secretName": "ClientSecret"
+						}
+					}
+				}
+			},
+			{
+				"name": "PipelineFailed3",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "PipelineFailed3_TOKEN",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "00:03:00",
+					"retry": 3,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://fdlapippe.centralus.cloudapp.azure.com/api/V1/TelemetryManagement",
+					"method": "POST",
+					"headers": {
+						"Authorization": {
+							"value": "@Concat('Bearer ',activity('PipelineFailed3_TOKEN').output.access_token)",
+							"type": "Expression"
+						}
+					},
+					"body": {
+						"id": "00000000-0000-0000-0000-000000000000",
+						"PublisherId": "2a678a0d-fc6f-4439-b9e5-5f9290881589",
+						"EntityId": "d347d64d-06b2-409f-886b-fb46c547b93a",
+						"EntityName": "vw_Dim_Partner",
+						"Action": "Pipeline_Failure",
+						"ActionName": "Pipeline RunId: @{pipeline().RunId}, ErrorCode: @{activity('Copy_Full_d347d64d_06b2_409f_886b_fb46c547b93a').Error.ErrorCode}, ErrorMessage: @{activity('Copy_Full_d347d64d_06b2_409f_886b_fb46c547b93a').Error.message}, FailureType: @{activity('Copy_Full_d347d64d_06b2_409f_886b_fb46c547b93a').Error.failureType},",
+						"ActionDate": "@utcNow('yyyy-MM-ddTHH:mm:ssZ')",
+						"PublishedOn": 0
+					}
+				}
+			},
+			{
+				"name": "PipelineFailed_TOKEN",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Start",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "00:03:00",
+					"retry": 3,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": true,
+					"secureInput": true
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://login.windows.net/microsoft.onmicrosoft.com/oauth2/token",
+					"method": "POST",
+					"headers": {
+						"Content-Type": "application/x-www-form-urlencoded"
+					},
+					"body": "grant_type=client_credentials&resource=ad11a544-8f6e-4bf3-a146-62548935b03a",
+					"authentication": {
+						"type": "Basic",
+						"username": "77d636c9-657b-4a25-98e2-4687f76cb2bd",
+						"password": {
+							"type": "AzureKeyVaultSecret",
+							"store": {
+								"referenceName": "KV-FDL-GMO-PARTNER-PPE",
+								"type": "LinkedServiceReference"
+							},
+							"secretName": "ClientSecret"
+						}
+					}
+				}
+			},
+			{
+				"name": "PipelineFailed",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "PipelineFailed_TOKEN",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "00:03:00",
+					"retry": 3,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://fdlapippe.centralus.cloudapp.azure.com/api/V1/TelemetryManagement",
+					"method": "POST",
+					"headers": {
+						"Authorization": {
+							"value": "@Concat('Bearer ',activity('PipelineFailed_TOKEN').output.access_token)",
+							"type": "Expression"
+						}
+					},
+					"body": {
+						"id": "00000000-0000-0000-0000-000000000000",
+						"PublisherId": "2a678a0d-fc6f-4439-b9e5-5f9290881589",
+						"EntityId": "d347d64d-06b2-409f-886b-fb46c547b93a",
+						"EntityName": "vw_Dim_Partner",
+						"Action": "Pipeline_Failure",
+						"ActionName": "Pipeline RunId: @{pipeline().RunId}, ErrorCode: @{activity('Start').Error.ErrorCode}, ErrorMessage: @{activity('Start').Error.message}, FailureType: @{activity('Start').Error.failureType},",
+						"ActionDate": "@utcNow('yyyy-MM-ddTHH:mm:ssZ')",
+						"PublishedOn": 0
+					}
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2021-02-19T02:57:09Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

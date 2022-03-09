@@ -1,0 +1,19 @@
+{
+	"name": "Presto3",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "Presto",
+		"typeProperties": {
+			"host": "aas",
+			"serverVersion": "asd",
+			"catalog": "asdf",
+			"port": 8080,
+			"authenticationType": "LDAP",
+			"username": "asdf",
+			"enableSsl": false,
+			"timeZoneID": "",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQEIxRTM0M0EzLTMzRjktNDQ3NS1COTQzLTBCRTY0MDEwODYzMl8zY2I4ZTljMi01YTkzLTRiYzMtOGMxMC00ZjliMDE1MDUxYmIiDQp9"
+		}
+	}
+}

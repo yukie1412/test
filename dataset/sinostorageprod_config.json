@@ -1,0 +1,34 @@
+{
+	"name": "sinostorageprod_config",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "sinodashboardsynapseprod_Workspace_VMSHIR",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"ConfigFileName": {
+				"type": "string"
+			},
+			"ConfigFilePath": {
+				"type": "string"
+			},
+			"ConfigFileContainer": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "Azure_Data_Lake_Gen2/JSON"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "fileinfo.json",
+				"fileSystem": "json"
+			}
+		},
+		"schema": {}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

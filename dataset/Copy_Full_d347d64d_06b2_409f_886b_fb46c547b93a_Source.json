@@ -1,0 +1,15 @@
+{
+	"name": "Copy_Full_d347d64d_06b2_409f_886b_fb46c547b93a_Source",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ocpmartdw",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"typeProperties": {
+			"tableName": "partner.vw_Dim_Partner"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

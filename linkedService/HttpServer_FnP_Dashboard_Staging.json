@@ -1,0 +1,22 @@
+{
+	"name": "HttpServer_FnP_Dashboard_Staging",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"description": "HttpServer_FnP_Dashboard_Staging",
+		"parameters": {
+			"FileName": {
+				"type": "string"
+			},
+			"PathName": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "HttpServer",
+		"typeProperties": {
+			"url": "asdf",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous"
+		}
+	}
+}

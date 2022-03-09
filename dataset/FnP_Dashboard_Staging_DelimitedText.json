@@ -1,0 +1,41 @@
+{
+	"name": "FnP_Dashboard_Staging_DelimitedText",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "HttpServer_FnP_Dashboard_Staging",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"sharepointsite": {
+				"type": "string"
+			},
+			"siterelativeurl": {
+				"type": "string"
+			},
+			"sharepointessentialfilepath": {
+				"type": "string"
+			},
+			"sharepointprimaryfilepath": {
+				"type": "string"
+			},
+			"sharepointprimaryfilewithextension": {
+				"type": "string"
+			},
+			"sharepointsourcefilepath": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
