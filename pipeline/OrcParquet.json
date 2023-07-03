@@ -1,5 +1,5 @@
 {
-	"name": "pipeline3",
+	"name": "OrcParquet",
 	"properties": {
 		"activities": [
 			{
@@ -16,32 +16,20 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "DelimitedTextSource",
+						"type": "OrcSource",
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
-							"maxConcurrentConnections": {
-								"value": "@pipeline().parameters.asdf",
-								"type": "Expression"
-							},
 							"recursive": true,
-							"modifiedDatetimeStart": {
-								"value": "@pipeline().parameters.asdf",
-								"type": "Expression"
-							},
-							"modifiedDatetimeEnd": "2023-01-26T00:00:00Z",
 							"enablePartitionDiscovery": false
-						},
-						"formatSettings": {
-							"type": "DelimitedTextReadSettings"
 						}
 					},
 					"sink": {
-						"type": "AvroSink",
+						"type": "ParquetSink",
 						"storeSettings": {
 							"type": "AzureBlobStorageWriteSettings"
 						},
 						"formatSettings": {
-							"type": "AvroWriteSettings"
+							"type": "ParquetWriteSettings"
 						}
 					},
 					"enableStaging": false,
@@ -56,25 +44,20 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "DelimitedText1",
+						"referenceName": "OrcBlob",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "AvroBlob",
+						"referenceName": "ParquetBlob",
 						"type": "DatasetReference"
 					}
 				]
 			}
 		],
-		"parameters": {
-			"asdf": {
-				"type": "String"
-			}
-		},
 		"annotations": [],
-		"lastPublishTime": "2023-01-19T03:28:48Z"
+		"lastPublishTime": "2023-01-13T08:42:47Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }

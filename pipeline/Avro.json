@@ -1,5 +1,5 @@
 {
-	"name": "pipeline3",
+	"name": "Avro",
 	"properties": {
 		"activities": [
 			{
@@ -16,23 +16,12 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "DelimitedTextSource",
+						"type": "AvroSource",
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
-							"maxConcurrentConnections": {
-								"value": "@pipeline().parameters.asdf",
-								"type": "Expression"
-							},
 							"recursive": true,
-							"modifiedDatetimeStart": {
-								"value": "@pipeline().parameters.asdf",
-								"type": "Expression"
-							},
-							"modifiedDatetimeEnd": "2023-01-26T00:00:00Z",
+							"modifiedDatetimeStart": "2023-06-21T00:09:00Z",
 							"enablePartitionDiscovery": false
-						},
-						"formatSettings": {
-							"type": "DelimitedTextReadSettings"
 						}
 					},
 					"sink": {
@@ -56,7 +45,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "DelimitedText1",
+						"referenceName": "AvroBlob",
 						"type": "DatasetReference"
 					}
 				],
@@ -69,12 +58,12 @@
 			}
 		],
 		"parameters": {
-			"asdf": {
-				"type": "String"
+			"a b": {
+				"type": "string"
 			}
 		},
 		"annotations": [],
-		"lastPublishTime": "2023-01-19T03:28:48Z"
+		"lastPublishTime": "2023-07-03T09:50:37Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }

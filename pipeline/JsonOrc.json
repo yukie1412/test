@@ -1,5 +1,5 @@
 {
-	"name": "pipeline3",
+	"name": "JsonOrc",
 	"properties": {
 		"activities": [
 			{
@@ -16,65 +16,43 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "DelimitedTextSource",
+						"type": "JsonSource",
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
-							"maxConcurrentConnections": {
-								"value": "@pipeline().parameters.asdf",
-								"type": "Expression"
-							},
 							"recursive": true,
-							"modifiedDatetimeStart": {
-								"value": "@pipeline().parameters.asdf",
-								"type": "Expression"
-							},
-							"modifiedDatetimeEnd": "2023-01-26T00:00:00Z",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
-							"type": "DelimitedTextReadSettings"
+							"type": "JsonReadSettings"
 						}
 					},
 					"sink": {
-						"type": "AvroSink",
+						"type": "OrcSink",
 						"storeSettings": {
 							"type": "AzureBlobStorageWriteSettings"
 						},
 						"formatSettings": {
-							"type": "AvroWriteSettings"
+							"type": "OrcWriteSettings"
 						}
 					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"typeConversion": true,
-						"typeConversionSettings": {
-							"allowDataTruncation": true,
-							"treatBooleanAsNumber": false
-						}
-					}
+					"enableStaging": false
 				},
 				"inputs": [
 					{
-						"referenceName": "DelimitedText1",
+						"referenceName": "JsonBlob",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "AvroBlob",
+						"referenceName": "OrcBlob",
 						"type": "DatasetReference"
 					}
 				]
 			}
 		],
-		"parameters": {
-			"asdf": {
-				"type": "String"
-			}
-		},
 		"annotations": [],
-		"lastPublishTime": "2023-01-19T03:28:48Z"
+		"lastPublishTime": "2023-01-13T08:42:47Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }

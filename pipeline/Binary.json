@@ -1,5 +1,5 @@
 {
-	"name": "pipeline2",
+	"name": "Binary",
 	"properties": {
 		"activities": [
 			{
@@ -16,47 +16,44 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "SnowflakeSource",
-						"exportSettings": {
-							"type": "SnowflakeExportCopyCommand"
+						"type": "BinarySource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true
+						},
+						"formatSettings": {
+							"type": "BinaryReadSettings"
 						}
 					},
 					"sink": {
-						"type": "DelimitedTextSink",
+						"type": "BinarySink",
 						"storeSettings": {
 							"type": "AzureBlobStorageWriteSettings"
-						},
-						"formatSettings": {
-							"type": "DelimitedTextWriteSettings",
-							"quoteAllText": true,
-							"fileExtension": ".txt"
 						}
 					},
-					"enableStaging": true,
-					"stagingSettings": {
-						"linkedServiceName": {
-							"referenceName": "blobSas",
-							"type": "LinkedServiceReference"
-						},
-						"path": "jenoutput"
-					}
+					"enableStaging": false
 				},
 				"inputs": [
 					{
-						"referenceName": "SnowflakeTable1",
+						"referenceName": "BinaryBlob",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "DelimitedText2",
+						"referenceName": "BinaryBlob",
 						"type": "DatasetReference"
 					}
 				]
 			}
 		],
+		"parameters": {
+			"ab": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
-		"lastPublishTime": "2023-01-16T07:29:50Z"
+		"lastPublishTime": "2023-07-03T09:51:19Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }

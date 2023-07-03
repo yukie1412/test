@@ -1,18 +1,20 @@
 {
-	"name": "Binary1",
+	"name": "JsonBlob",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureDataLakeStorage3",
+			"referenceName": "AzureBlobStorage1",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
-		"type": "Binary",
+		"type": "Json",
 		"typeProperties": {
 			"location": {
-				"type": "AzureBlobFSLocation",
-				"fileSystem": "mgdcswsstesting"
+				"type": "AzureBlobStorageLocation",
+				"fileName": "asdf",
+				"container": "asdf"
 			}
-		}
+		},
+		"schema": {}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
 }

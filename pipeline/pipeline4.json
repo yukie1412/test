@@ -1,6 +1,469 @@
 {
 	"name": "pipeline4",
 	"properties": {
-		"annotations": []
-	}
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "Office365Source",
+						"outputColumns": [
+							{
+								"name": "AssistantName"
+							},
+							{
+								"name": "Birthday"
+							},
+							{
+								"name": "BusinessAddress"
+							},
+							{
+								"name": "BusinessHomePage"
+							},
+							{
+								"name": "BusinessPhones"
+							},
+							{
+								"name": "Categories"
+							},
+							{
+								"name": "ChangeKey"
+							},
+							{
+								"name": "Children"
+							},
+							{
+								"name": "CompanyName"
+							},
+							{
+								"name": "Department"
+							},
+							{
+								"name": "CreatedDateTime"
+							},
+							{
+								"name": "LastModifiedDateTime"
+							},
+							{
+								"name": "DisplayName"
+							},
+							{
+								"name": "EmailAddresses"
+							},
+							{
+								"name": "FileAs"
+							},
+							{
+								"name": "Generation"
+							},
+							{
+								"name": "GivenName"
+							},
+							{
+								"name": "HomeAddress"
+							},
+							{
+								"name": "HomePhones"
+							},
+							{
+								"name": "Id"
+							},
+							{
+								"name": "ImAddresses"
+							},
+							{
+								"name": "Initials"
+							},
+							{
+								"name": "JobTitle"
+							},
+							{
+								"name": "Manager"
+							},
+							{
+								"name": "MiddleName"
+							},
+							{
+								"name": "MobilePhone1"
+							},
+							{
+								"name": "NickName"
+							},
+							{
+								"name": "OfficeLocation"
+							},
+							{
+								"name": "OtherAddress"
+							},
+							{
+								"name": "ParentFolderId"
+							},
+							{
+								"name": "PersonalNotes"
+							},
+							{
+								"name": "Profession"
+							},
+							{
+								"name": "SpouseName"
+							},
+							{
+								"name": "Surname"
+							},
+							{
+								"name": "Title"
+							},
+							{
+								"name": "YomiCompanyName"
+							},
+							{
+								"name": "YomiGivenName"
+							},
+							{
+								"name": "YomiSurname"
+							}
+						]
+					},
+					"sink": {
+						"type": "BinarySink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "Microsoft365Table1",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Binary1",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Copy data2",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "Office365Source",
+						"outputColumns": [
+							{
+								"name": "AssistantName"
+							},
+							{
+								"name": "Birthday"
+							},
+							{
+								"name": "BusinessAddress"
+							},
+							{
+								"name": "BusinessHomePage"
+							},
+							{
+								"name": "BusinessPhones"
+							},
+							{
+								"name": "Categories"
+							},
+							{
+								"name": "ChangeKey"
+							},
+							{
+								"name": "Children"
+							},
+							{
+								"name": "CompanyName"
+							},
+							{
+								"name": "Department"
+							},
+							{
+								"name": "CreatedDateTime"
+							},
+							{
+								"name": "LastModifiedDateTime"
+							},
+							{
+								"name": "DisplayName"
+							},
+							{
+								"name": "EmailAddresses"
+							},
+							{
+								"name": "FileAs"
+							},
+							{
+								"name": "Generation"
+							},
+							{
+								"name": "GivenName"
+							},
+							{
+								"name": "HomeAddress"
+							},
+							{
+								"name": "HomePhones"
+							},
+							{
+								"name": "Id"
+							},
+							{
+								"name": "ImAddresses"
+							},
+							{
+								"name": "Initials"
+							},
+							{
+								"name": "JobTitle"
+							},
+							{
+								"name": "Manager"
+							},
+							{
+								"name": "MiddleName"
+							},
+							{
+								"name": "MobilePhone1"
+							},
+							{
+								"name": "NickName"
+							},
+							{
+								"name": "OfficeLocation"
+							},
+							{
+								"name": "OtherAddress"
+							},
+							{
+								"name": "ParentFolderId"
+							},
+							{
+								"name": "PersonalNotes"
+							},
+							{
+								"name": "Profession"
+							},
+							{
+								"name": "SpouseName"
+							},
+							{
+								"name": "Surname"
+							},
+							{
+								"name": "Title"
+							},
+							{
+								"name": "YomiCompanyName"
+							},
+							{
+								"name": "YomiGivenName"
+							},
+							{
+								"name": "YomiSurname"
+							}
+						]
+					},
+					"sink": {
+						"type": "BinarySink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "Microsoft365Table1",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Binary1",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Copy data3",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "Office365Source",
+						"outputColumns": [
+							{
+								"name": "AssistantName"
+							},
+							{
+								"name": "Birthday"
+							},
+							{
+								"name": "BusinessAddress"
+							},
+							{
+								"name": "BusinessHomePage"
+							},
+							{
+								"name": "BusinessPhones"
+							},
+							{
+								"name": "Categories"
+							},
+							{
+								"name": "ChangeKey"
+							},
+							{
+								"name": "Children"
+							},
+							{
+								"name": "CompanyName"
+							},
+							{
+								"name": "Department"
+							},
+							{
+								"name": "CreatedDateTime"
+							},
+							{
+								"name": "LastModifiedDateTime"
+							},
+							{
+								"name": "DisplayName"
+							},
+							{
+								"name": "EmailAddresses"
+							},
+							{
+								"name": "FileAs"
+							},
+							{
+								"name": "Generation"
+							},
+							{
+								"name": "GivenName"
+							},
+							{
+								"name": "HomeAddress"
+							},
+							{
+								"name": "HomePhones"
+							},
+							{
+								"name": "Id"
+							},
+							{
+								"name": "ImAddresses"
+							},
+							{
+								"name": "Initials"
+							},
+							{
+								"name": "JobTitle"
+							},
+							{
+								"name": "Manager"
+							},
+							{
+								"name": "MiddleName"
+							},
+							{
+								"name": "MobilePhone1"
+							},
+							{
+								"name": "NickName"
+							},
+							{
+								"name": "OfficeLocation"
+							},
+							{
+								"name": "OtherAddress"
+							},
+							{
+								"name": "ParentFolderId"
+							},
+							{
+								"name": "PersonalNotes"
+							},
+							{
+								"name": "Profession"
+							},
+							{
+								"name": "SpouseName"
+							},
+							{
+								"name": "Surname"
+							},
+							{
+								"name": "Title"
+							},
+							{
+								"name": "YomiCompanyName"
+							},
+							{
+								"name": "YomiGivenName"
+							},
+							{
+								"name": "YomiSurname"
+							}
+						]
+					},
+					"sink": {
+						"type": "BinarySink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "Microsoft365Table1",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Binary1",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2023-04-17T07:21:43Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
 }

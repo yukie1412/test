@@ -1,17 +1,16 @@
 {
-	"name": "Binary1",
+	"name": "SnowflakeTable1",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureDataLakeStorage3",
+			"referenceName": "Snowflake1",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
-		"type": "Binary",
+		"type": "SnowflakeTable",
+		"schema": [],
 		"typeProperties": {
-			"location": {
-				"type": "AzureBlobFSLocation",
-				"fileSystem": "mgdcswsstesting"
-			}
+			"schema": "PUBLIC",
+			"table": "test0728"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"

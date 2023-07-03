@@ -2,8 +2,18 @@
 	"name": "jen",
 	"location": "eastus",
 	"identity": {
-		"type": "SystemAssigned",
+		"type": "SystemAssigned,UserAssigned",
 		"principalId": "282ec715-94c2-4387-b33e-d9b62e72e8b3",
-		"tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+		"tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+		"userAssignedIdentities": {
+			"/subscriptions/eecfb6ee-86f1-45e1-bb7e-1f5b6bdf3951/resourcegroups/ADMS_UX_TEST/providers/Microsoft.ManagedIdentity/userAssignedIdentities/jenUami": {
+				"clientId": "a0a35074-0f2d-4b08-9715-d763183766af",
+				"principalId": "2816b3e4-7157-4b03-8183-4417eb64d6e8"
+			},
+			"/subscriptions/0d896d9f-3a7a-40bc-b4ac-d841958ded45/resourcegroups/MC_RG6f9b2b45f9534199a020_19407627-6ba7-4f5f-87e3-f8c41e43d985_eastus/providers/Microsoft.ManagedIdentity/userAssignedIdentities/19407627-6ba7-4f5f-87e3-f8c41e43d985-agentpool": {
+				"clientId": "bdb4ee93-5304-4fae-b326-0cbfa4053e1a",
+				"principalId": "3be294fd-1178-4191-8047-f080bf9a10ce"
+			}
+		}
 	}
 }

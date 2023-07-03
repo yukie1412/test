@@ -1,18 +1,20 @@
 {
-	"name": "Binary1",
+	"name": "AvroBlob",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureDataLakeStorage3",
+			"referenceName": "AzureBlobStorage1",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
-		"type": "Binary",
+		"type": "Avro",
 		"typeProperties": {
 			"location": {
-				"type": "AzureBlobFSLocation",
-				"fileSystem": "mgdcswsstesting"
+				"type": "AzureBlobStorageLocation",
+				"fileName": "asdf",
+				"container": "asdf"
 			}
-		}
+		},
+		"schema": {}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
 }

@@ -1,5 +1,5 @@
 {
-	"name": "pipeline3",
+	"name": "gen2Sink",
 	"properties": {
 		"activities": [
 			{
@@ -19,16 +19,7 @@
 						"type": "DelimitedTextSource",
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
-							"maxConcurrentConnections": {
-								"value": "@pipeline().parameters.asdf",
-								"type": "Expression"
-							},
 							"recursive": true,
-							"modifiedDatetimeStart": {
-								"value": "@pipeline().parameters.asdf",
-								"type": "Expression"
-							},
-							"modifiedDatetimeEnd": "2023-01-26T00:00:00Z",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
@@ -38,7 +29,7 @@
 					"sink": {
 						"type": "AvroSink",
 						"storeSettings": {
-							"type": "AzureBlobStorageWriteSettings"
+							"type": "AzureBlobFSWriteSettings"
 						},
 						"formatSettings": {
 							"type": "AvroWriteSettings"
@@ -62,19 +53,14 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "AvroBlob",
+						"referenceName": "Avro1",
 						"type": "DatasetReference"
 					}
 				]
 			}
 		],
-		"parameters": {
-			"asdf": {
-				"type": "String"
-			}
-		},
 		"annotations": [],
-		"lastPublishTime": "2023-01-19T03:28:48Z"
+		"lastPublishTime": "2023-03-14T12:17:51Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }

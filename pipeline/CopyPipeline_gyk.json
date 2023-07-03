@@ -1,0 +1,204 @@
+{
+	"name": "CopyPipeline_gyk",
+	"properties": {
+		"activities": [
+			{
+				"name": "ForEach_gyk",
+				"type": "ForEach",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.cw_items",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Copy_gyk",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [
+								{
+									"name": "Source",
+									"value": "APEX_040000.@{item().source.table}"
+								},
+								{
+									"name": "Destination",
+									"value": "APEX_040000.@{item().destination.table}"
+								}
+							],
+							"typeProperties": {
+								"source": {
+									"type": "AzureSqlSource",
+									"partitionOption": "None"
+								},
+								"sink": {
+									"type": "AzureSqlSink"
+								},
+								"enableStaging": false,
+								"validateDataConsistency": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"mappings": [
+										{
+											"source": {
+												"name": "ID",
+												"type": "Double",
+												"physicalType": "float"
+											},
+											"sink": {
+												"name": "ID",
+												"type": "Double",
+												"physicalType": "float"
+											}
+										},
+										{
+											"source": {
+												"name": "WS_APP_ID",
+												"type": "Double",
+												"physicalType": "float"
+											},
+											"sink": {
+												"name": "WS_APP_ID",
+												"type": "Double",
+												"physicalType": "float"
+											}
+										},
+										{
+											"source": {
+												"name": "USERNAME",
+												"type": "String",
+												"physicalType": "nvarchar"
+											},
+											"sink": {
+												"name": "USERNAME",
+												"type": "String",
+												"physicalType": "nvarchar"
+											}
+										},
+										{
+											"source": {
+												"name": "PRIV",
+												"type": "String",
+												"physicalType": "nvarchar"
+											},
+											"sink": {
+												"name": "PRIV",
+												"type": "String",
+												"physicalType": "nvarchar"
+											}
+										},
+										{
+											"source": {
+												"name": "CREATED_ON",
+												"type": "DateTime",
+												"physicalType": "datetime2"
+											},
+											"sink": {
+												"name": "CREATED_ON",
+												"type": "DateTime",
+												"physicalType": "datetime2"
+											}
+										},
+										{
+											"source": {
+												"name": "CREATED_BY",
+												"type": "String",
+												"physicalType": "nvarchar"
+											},
+											"sink": {
+												"name": "CREATED_BY",
+												"type": "String",
+												"physicalType": "nvarchar"
+											}
+										},
+										{
+											"source": {
+												"name": "UPDATED_ON",
+												"type": "DateTime",
+												"physicalType": "datetime2"
+											},
+											"sink": {
+												"name": "UPDATED_ON",
+												"type": "DateTime",
+												"physicalType": "datetime2"
+											}
+										},
+										{
+											"source": {
+												"name": "UPDATED_BY",
+												"type": "String",
+												"physicalType": "nvarchar"
+											},
+											"sink": {
+												"name": "UPDATED_BY",
+												"type": "String",
+												"physicalType": "nvarchar"
+											}
+										}
+									],
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "SourceDataset_gyk",
+									"type": "DatasetReference",
+									"parameters": {
+										"cw_table": "@item().source.table"
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "DestinationDataset_gyk",
+									"type": "DatasetReference",
+									"parameters": {
+										"cw_table": "@item().destination.table"
+									}
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"cw_items": {
+				"type": "Array",
+				"defaultValue": [
+					{
+						"source": {
+							"table": "APEX$_ACL"
+						},
+						"destination": {
+							"table": "APEX$_ACL"
+						}
+					},
+					{
+						"source": {
+							"table": "APEX$_ACLNEW"
+						},
+						"destination": {
+							"table": "APEX$_ACLNEW"
+						}
+					}
+				]
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-06-08T09:14:35Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,21 @@
+{
+	"name": "ExcelBlob",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "asdf",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "asdf",
+				"container": "asdf"
+			}
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

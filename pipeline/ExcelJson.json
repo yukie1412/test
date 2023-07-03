@@ -1,5 +1,5 @@
 {
-	"name": "pipeline2",
+	"name": "ExcelJson",
 	"properties": {
 		"activities": [
 			{
@@ -16,47 +16,40 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "SnowflakeSource",
-						"exportSettings": {
-							"type": "SnowflakeExportCopyCommand"
+						"type": "ExcelSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
 						}
 					},
 					"sink": {
-						"type": "DelimitedTextSink",
+						"type": "JsonSink",
 						"storeSettings": {
 							"type": "AzureBlobStorageWriteSettings"
 						},
 						"formatSettings": {
-							"type": "DelimitedTextWriteSettings",
-							"quoteAllText": true,
-							"fileExtension": ".txt"
+							"type": "JsonWriteSettings"
 						}
 					},
-					"enableStaging": true,
-					"stagingSettings": {
-						"linkedServiceName": {
-							"referenceName": "blobSas",
-							"type": "LinkedServiceReference"
-						},
-						"path": "jenoutput"
-					}
+					"enableStaging": false
 				},
 				"inputs": [
 					{
-						"referenceName": "SnowflakeTable1",
+						"referenceName": "ExcelBlob",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "DelimitedText2",
+						"referenceName": "JsonBlob",
 						"type": "DatasetReference"
 					}
 				]
 			}
 		],
 		"annotations": [],
-		"lastPublishTime": "2023-01-16T07:29:50Z"
+		"lastPublishTime": "2023-01-13T08:42:47Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }

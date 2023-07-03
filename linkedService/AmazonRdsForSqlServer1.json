@@ -1,0 +1,12 @@
+{
+	"name": "AmazonRdsForSqlServer1",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AmazonRdsForSqlServer",
+		"typeProperties": {
+			"connectionString": "integrated security=False;data source=d;initial catalog=f;user id=d",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQEIxRTM0M0EzLTMzRjktNDQ3NS1COTQzLTBCRTY0MDEwODYzMl9hZTU5MWJhMS00MDhkLTQ0ZGUtYjgyYS1mM2FiZDlhMWM1NTUiDQp9"
+		}
+	}
+}

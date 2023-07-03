@@ -1,17 +1,19 @@
 {
-	"name": "Binary1",
+	"name": "OrcBlob",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureDataLakeStorage3",
+			"referenceName": "AzureBlobStorage1",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
-		"type": "Binary",
+		"type": "Orc",
 		"typeProperties": {
 			"location": {
-				"type": "AzureBlobFSLocation",
-				"fileSystem": "mgdcswsstesting"
-			}
+				"type": "AzureBlobStorageLocation",
+				"fileName": "asdf",
+				"container": "asdf"
+			},
+			"enablePhysicalSchema": true
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"

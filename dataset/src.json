@@ -1,0 +1,27 @@
+{
+	"name": "src",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "jenq",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "test.csv",
+				"container": "test"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "",
+			"quoteChar": ""
+		},
+		"schema": [
+			{
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

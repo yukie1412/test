@@ -1,0 +1,17 @@
+{
+	"name": "Lakehouse1",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "Lakehouse",
+		"typeProperties": {
+			"workspaceId": "bb378869-860e-4af0-9239-a845c3dbb0d1",
+			"artifactId": "1e54037c-b6f1-4162-b951-d46a5f8f6746",
+			"rootFolder": "Files",
+			"credential": {
+				"referenceName": "credential2",
+				"type": "CredentialReference"
+			}
+		}
+	}
+}

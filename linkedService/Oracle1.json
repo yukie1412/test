@@ -1,0 +1,19 @@
+{
+	"name": "Oracle1",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "Oracle",
+		"typeProperties": {
+			"connectionString": "host=admsoracle11.eastus.cloudapp.azure.com;port=1521;sid=XE;user id=BinaryTypes",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "AzureKeyVault1",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "ADMS-UX-TEST-Oracle-Pass"
+			}
+		}
+	}
+}
