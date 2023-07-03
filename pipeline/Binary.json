@@ -47,6 +47,11 @@
 				]
 			}
 		],
+		"parameters": {
+			"ab": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"lastPublishTime": "2023-07-03T09:51:19Z"
 	},
