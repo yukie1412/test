@@ -1,5 +1,13 @@
 {
 	"name": "jen",
+	"properties": {
+		"globalParameters": {
+			"row": {
+				"type": "bool",
+				"value": true
+			}
+		}
+	},
 	"location": "eastus",
 	"identity": {
 		"type": "SystemAssigned,UserAssigned",
