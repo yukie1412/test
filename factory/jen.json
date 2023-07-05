@@ -5,6 +5,10 @@
 			"row": {
 				"type": "bool",
 				"value": true
+			},
+			"firstRow": {
+				"type": "bool",
+				"value": true
 			}
 		}
 	},
