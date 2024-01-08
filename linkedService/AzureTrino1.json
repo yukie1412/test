@@ -1,0 +1,45 @@
+{
+	"name": "AzureTrino1",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"parameters": {
+			"cat": {
+				"type": "String"
+			},
+			"sch": {
+				"type": "String"
+			},
+			"host": {
+				"type": "string"
+			},
+			"ten": {
+				"type": "string"
+			},
+			"id": {
+				"type": "string"
+			},
+			"tz": {
+				"type": "string"
+			}
+		},
+		"annotations": [
+			"wer",
+			"zxcv"
+		],
+		"type": "AzureTrino",
+		"typeProperties": {
+			"authenticationType": "ServicePrincipal",
+			"host": "@{linkedService().host}",
+			"catalog": "@{linkedService().cat}",
+			"schema": "@{linkedService().sch}",
+			"clientId": "@{linkedService().id}",
+			"clientSecret": {
+				"type": "SecureString",
+				"value": "**********"
+			},
+			"tenant": "@{linkedService().ten}",
+			"timeZoneID": "@{linkedService().tz}",
+			"sessionProperties": "34234:sfsd,wer:324"
+		}
+	}
+}

@@ -1,0 +1,21 @@
+{
+	"name": "AzureTrino7",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureTrino",
+		"typeProperties": {
+			"host": "georgedev.6762a0931d00459f8ee9094c468fe3d5.westus2.tip.hdinsightaks.net",
+			"catalog": "system",
+			"schema": "information_schema",
+			"authenticationType": "ServicePrincipal",
+			"clientId": "asdf",
+			"clientSecret": {
+				"type": "SecureString",
+				"value": "**********"
+			},
+			"tenant": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+			"timeZoneID": "Africa/Addis_Ababa"
+		}
+	}
+}

@@ -1,0 +1,18 @@
+{
+	"name": "Full_partner_vw_Dim_Partner_d347d64d_06b2_409f_886b_fb46c547b93a",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Day",
+				"interval": 1,
+				"startTime": "2021-02-17T06:01:58Z",
+				"endTime": "9999-12-31T23:59:59Z",
+				"timeZone": "UTC"
+			}
+		}
+	}
+}

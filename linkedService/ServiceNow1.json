@@ -1,0 +1,38 @@
+{
+	"name": "ServiceNow1",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"parameters": {
+			"endpoint": {
+				"type": "String"
+			},
+			"name": {
+				"type": "String"
+			},
+			"akv": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "ServiceNow",
+		"typeProperties": {
+			"endpoint": "@{linkedService().endpoint}",
+			"authenticationType": "Basic",
+			"username": "@{linkedService().name}",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "AzureKeyVault1",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": {
+					"value": "@linkedService().akv",
+					"type": "Expression"
+				}
+			},
+			"useEncryptedEndpoints": true,
+			"useHostVerification": true,
+			"usePeerVerification": true
+		}
+	}
+}

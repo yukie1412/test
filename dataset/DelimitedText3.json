@@ -1,21 +1,23 @@
 {
-	"name": "DelimitedText1",
+	"name": "DelimitedText3",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureBlobStorage1",
+			"referenceName": "adlsJenq",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
-				"type": "AzureBlobStorageLocation",
-				"fileName": "s1.txt",
+				"type": "AzureBlobFSLocation",
+				"fileName": "abcde.txt",
 				"folderPath": "source",
-				"container": "jenoutput"
+				"fileSystem": "jenoutput"
 			},
 			"columnDelimiter": ",",
+			"encodingName": "UTF-16LE",
 			"escapeChar": "\\",
+			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
 		"schema": []

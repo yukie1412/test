@@ -1,0 +1,21 @@
+{
+	"name": "AzureTrino4",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureTrino",
+		"typeProperties": {
+			"host": "cluster.pool.us.hdinsightaks.net",
+			"catalog": "system",
+			"schema": "information_schema",
+			"authenticationType": "ServicePrincipal",
+			"clientId": "asdf",
+			"clientSecret": {
+				"type": "SecureString",
+				"value": "**********"
+			},
+			"tenant": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+			"timeZoneID": "America/New_York"
+		}
+	}
+}

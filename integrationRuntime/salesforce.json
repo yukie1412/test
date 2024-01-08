@@ -1,0 +1,6 @@
+{
+	"name": "salesforce",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}

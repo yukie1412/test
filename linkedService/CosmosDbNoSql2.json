@@ -1,0 +1,16 @@
+{
+	"name": "CosmosDbNoSql2",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"parameters": {
+			"key": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "CosmosDb",
+		"typeProperties": {
+			"connectionString": "AccountEndpoint=https://admsuxtest.documents.azure.com:443/;Database=test;AccountKey=@{linkedService().key}"
+		}
+	}
+}

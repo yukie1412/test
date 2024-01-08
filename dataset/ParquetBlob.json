@@ -1,22 +1,19 @@
 {
-	"name": "DelimitedText1",
+	"name": "ParquetBlob",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureBlobStorage1",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
-		"type": "DelimitedText",
+		"type": "Parquet",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "s1.txt",
-				"folderPath": "source",
-				"container": "jenoutput"
+				"fileName": "asdf",
+				"container": "asdf"
 			},
-			"columnDelimiter": ",",
-			"escapeChar": "\\",
-			"quoteChar": "\""
+			"compressionCodec": "snappy"
 		},
 		"schema": []
 	},

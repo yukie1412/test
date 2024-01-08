@@ -1,0 +1,89 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"linkedService": {
+						"referenceName": "AzureSqlDatabase2",
+						"type": "LinkedServiceReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Avro1",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          Id as string,",
+				"          IsDeleted as boolean,",
+				"          MasterRecordId as string,",
+				"          Name as string,",
+				"          Type as string,",
+				"          ParentId as string,",
+				"          BillingStreet as string,",
+				"          BillingCity as string,",
+				"          BillingState as string,",
+				"          BillingPostalCode as string,",
+				"          BillingCountry as string,",
+				"          BillingLatitude as decimal(18,15),",
+				"          BillingLongitude as decimal(18,15),",
+				"          BillingGeocodeAccuracy as string,",
+				"          ShippingStreet as string,",
+				"          ShippingCity as string,",
+				"          ShippingState as string,",
+				"          ShippingPostalCode as string,",
+				"          ShippingCountry as string,",
+				"          ShippingLatitude as decimal(18,15),",
+				"          ShippingLongitude as decimal(18,15),",
+				"          ShippingGeocodeAccuracy as string,",
+				"          Phone as string,",
+				"          Fax as string,",
+				"          Website as string,",
+				"          PhotoUrl as string,",
+				"          Industry as string,",
+				"          AnnualRevenue as decimal(18,0),",
+				"          NumberOfEmployees as integer,",
+				"          Description as string,",
+				"          OwnerId as string,",
+				"          CreatedDate as timestamp,",
+				"          CreatedById as string,",
+				"          LastModifiedDate as timestamp,",
+				"          LastModifiedById as string,",
+				"          SystemModstamp as timestamp,",
+				"          LastActivityDate as timestamp,",
+				"          LastViewedDate as timestamp,",
+				"          LastReferencedDate as timestamp,",
+				"          Jigsaw as string,",
+				"          JigsawCompanyId as string,",
+				"          AccountSource as string,",
+				"          SicDesc as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     modifiedAfter: (toTimestamp(1686638984000L)),",
+				"     format: 'table',",
+				"     store: 'sqlserver',",
+				"     schemaName: 'dbo',",
+				"     tableName: 'Account',",
+				"     isolationLevel: 'NONE') ~> source1",
+				"source1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
+			]
+		}
+	}
+}

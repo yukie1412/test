@@ -1,8 +1,8 @@
 {
-	"name": "DelimitedText1",
+	"name": "src",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureBlobStorage1",
+			"referenceName": "jenq",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
@@ -10,15 +10,18 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "s1.txt",
-				"folderPath": "source",
-				"container": "jenoutput"
+				"fileName": "test.csv",
+				"container": "test"
 			},
 			"columnDelimiter": ",",
-			"escapeChar": "\\",
-			"quoteChar": "\""
+			"escapeChar": "",
+			"quoteChar": ""
 		},
-		"schema": []
+		"schema": [
+			{
+				"type": "String"
+			}
+		]
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
 }

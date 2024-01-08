@@ -1,22 +1,19 @@
 {
-	"name": "DelimitedText1",
+	"name": "ExcelBlob",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureBlobStorage1",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
-		"type": "DelimitedText",
+		"type": "Excel",
 		"typeProperties": {
+			"sheetName": "asdf",
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "s1.txt",
-				"folderPath": "source",
-				"container": "jenoutput"
-			},
-			"columnDelimiter": ",",
-			"escapeChar": "\\",
-			"quoteChar": "\""
+				"fileName": "asdf",
+				"container": "asdf"
+			}
 		},
 		"schema": []
 	},
