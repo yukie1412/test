@@ -1,0 +1,20 @@
+{
+	"name": "MetadataDrivenCopyTask_7mz_ControlDS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ParameterizedAzureSql",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "MetadataDrivenCopyTask_7mz_20210407"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "MainControlTable_7mz"
+		}
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

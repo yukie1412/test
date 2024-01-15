@@ -1,15 +1,19 @@
 {
 	"name": "AmazonRedshift1",
-	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"type": "Microsoft.Synapse/workspaces/linkedservices",
 	"properties": {
 		"annotations": [],
 		"type": "AmazonRedshift",
 		"typeProperties": {
-			"server": "ms-test.czkzkdm9fady.us-west-2.redshift.amazonaws.com",
-			"database": "dev",
+			"server": "a",
+			"database": "a",
 			"port": 5439,
-			"username": "rsadmin",
-			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQEIxRTM0M0EzLTMzRjktNDQ3NS1COTQzLTBCRTY0MDEwODYzMl80NWNhNjQyNi05YjZmLTQzODAtOGVhYy1lOGRhNTRkNmZjOGYiDQp9"
+			"username": "a",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIlRFU1RHQVdPUktTUEFDRV8wNTFiZDViOS0zZWZjLTQ3ZDctYjI3Zi1hMDQ3NWQ0Yzc5NjUiDQp9"
+		},
+		"connectVia": {
+			"referenceName": "AutoResolveIntegrationRuntime",
+			"type": "IntegrationRuntimeReference"
 		}
 	}
 }

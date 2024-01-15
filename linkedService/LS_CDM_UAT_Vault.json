@@ -1,0 +1,11 @@
+{
+	"name": "LS_CDM_UAT_Vault",
+	"type": "Microsoft.Synapse/workspaces/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://ADFBotKv.vault.azure.net/"
+		}
+	}
+}

@@ -1,0 +1,26 @@
+{
+	"name": "AdkSP",
+	"type": "Microsoft.Synapse/workspaces/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureDataExplorer",
+		"typeProperties": {
+			"endpoint": "https://jenkusto.eastus.kusto.windows.net",
+			"tenant": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+			"servicePrincipalId": "9056a1df-330f-480e-b385-95b326fa6b02",
+			"servicePrincipalKey": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "jenAkv",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "jen-sp-syn"
+			},
+			"database": "default"
+		},
+		"connectVia": {
+			"referenceName": "AutoResolveIntegrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

@@ -1,0 +1,30 @@
+{
+	"name": "DS_STAGE_PartitionInfo",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Lnk_RPT_SQL_DB",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "PartitionInformationID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "TableName",
+				"type": "varchar"
+			},
+			{
+				"name": "Partition",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"tableName": "[adt].[PartitionInformation]"
+		}
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

@@ -1,0 +1,22 @@
+{
+	"name": "SapCDC1",
+	"type": "Microsoft.Synapse/workspaces/linkedservices",
+	"properties": {
+		"type": "SapCDC",
+		"annotations": [],
+		"typeProperties": {
+			"clientId": "100",
+			"language": "EN",
+			"sncMode": false,
+			"userName": "enguser",
+			"subscriberName": "",
+			"server": "sapnwx01",
+			"systemNumber": "00",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiIwNDQwNGQyNC03MGVhLTQ1YzItYThiZi00MTY2YTE2YmYzZjkiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "IntegrationRuntime6",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

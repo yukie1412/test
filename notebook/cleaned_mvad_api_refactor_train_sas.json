@@ -1,0 +1,288 @@
+{
+	"name": "cleaned_mvad_api_refactor_train_sas",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"bigDataPool": {
+			"referenceName": "aaaa",
+			"type": "BigDataPoolReference"
+		},
+		"sessionProperties": {
+			"driverMemory": "28g",
+			"driverCores": 4,
+			"executorMemory": "28g",
+			"executorCores": 4,
+			"numExecutors": 2,
+			"runAsWorkspaceSystemIdentity": false,
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "2",
+				"spark.dynamicAllocation.maxExecutors": "2",
+				"spark.autotune.trackingId": "5f3995ad-b43e-408c-a56d-f218824ecb51"
+			}
+		},
+		"metadata": {
+			"saveOutput": true,
+			"synapse_widget": {
+				"version": "0.1"
+			},
+			"enableDebugMode": false,
+			"kernelspec": {
+				"name": "synapse_pyspark",
+				"display_name": "Synapse PySpark"
+			},
+			"language_info": {
+				"name": "python"
+			},
+			"a365ComputeOptions": {
+				"id": "/subscriptions/e23f6f88-73c0-43fe-93ed-2eb7b6a4b688/resourceGroups/adtml-synapse-poc/providers/Microsoft.Synapse/workspaces/adtml-synapse-poc/bigDataPools/contosospark1",
+				"name": "contosospark1",
+				"type": "Spark",
+				"endpoint": "https://adtml-synapse-poc.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/contosospark1",
+				"auth": {
+					"type": "AAD",
+					"authResource": "https://dev.azuresynapse.net",
+					"authHeader": null
+				},
+				"sparkVersion": "2.4",
+				"nodeCount": 10,
+				"cores": 4,
+				"memory": 28,
+				"extraHeader": null
+			}
+		},
+		"cells": [
+			{
+				"cell_type": "code",
+				"source": [
+					"import os\r\n",
+					"import time\r\n",
+					"from datetime import datetime, timezone, timedelta\r\n",
+					"from azure.identity import DefaultAzureCredential\r\n",
+					"from pyspark.sql import SparkSession\r\n",
+					"from azure.storage.blob import BlobServiceClient, generate_blob_sas, BlobSasPermissions\r\n",
+					"\r\n",
+					"sc = SparkSession.builder.getOrCreate()\r\n",
+					"token_library = sc._jvm.com.microsoft.azure.synapse.tokenlibrary.TokenLibrary"
+				],
+				"execution_count": 1
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"tags": [
+						"parameters"
+					]
+				},
+				"source": [
+					"adls_account_name = None\r\n",
+					"zipped_file_path = None\r\n",
+					"zipped_file_name = None\r\n",
+					"start_datetime = None\r\n",
+					"end_datetime = None\r\n",
+					"adls_container = None\r\n",
+					"kv_linked_service = None\r\n",
+					"kv_name = None\r\n",
+					"mvad_kv_secret_name = None\r\n",
+					"adls_kv_secret_name = None\r\n",
+					"mvad_endpoint = None\r\n",
+					"sliding_window = None\r\n",
+					""
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"def generate_blob_sas_url(adls_account_name, adls_container, zipped_file_path, zipped_file_name, adls_key):\r\n",
+					"    BLOB_SAS_TEMPLATE = \"https://{account_name}.blob.core.windows.net/{container_name}/{blob_name}?{sas_token}\"\r\n",
+					"    sas_token = generate_blob_sas(account_name=adls_account_name,\r\n",
+					"                                container_name=adls_container + \"/\" + zipped_file_path,\r\n",
+					"                                blob_name=zipped_file_name,\r\n",
+					"                                account_key=adls_key,\r\n",
+					"                                permission=BlobSasPermissions(read=True),\r\n",
+					"                                expiry=datetime.utcnow() + timedelta(days=1))\r\n",
+					"    blob_sas = BLOB_SAS_TEMPLATE.format(account_name=adls_account_name,\r\n",
+					"                                    container_name=adls_container + \"/\" + zipped_file_path,\r\n",
+					"                                    blob_name=zipped_file_name,\r\n",
+					"                                    sas_token=sas_token)\r\n",
+					"    return blob_sas\r\n",
+					""
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"import time\r\n",
+					"\r\n",
+					"from azure.ai.anomalydetector import AnomalyDetectorClient\r\n",
+					"from azure.ai.anomalydetector.models import DetectionRequest, ModelInfo, AlignPolicy\r\n",
+					"from azure.ai.anomalydetector.models import ModelStatus, DetectionStatus\r\n",
+					"from azure.core.credentials import AzureKeyCredential\r\n",
+					"from azure.core.exceptions import HttpResponseError\r\n",
+					"\r\n",
+					"\r\n",
+					"# https://docs.microsoft.com/en-us/python/api/azure-ai-anomalydetector/azure.ai.anomalydetector.models?view=azure-python-preview\r\n",
+					"\r\n",
+					"class MultivariateADCalls(object):\r\n",
+					"\r\n",
+					"    def __init__(self, subscription_key, anomaly_detector_endpoint, data_source=None):\r\n",
+					"        self.sub_key = subscription_key\r\n",
+					"        self.end_point = anomaly_detector_endpoint\r\n",
+					"\r\n",
+					"        # Create an Anomaly Detector client\r\n",
+					"\r\n",
+					"        # <client>\r\n",
+					"        self.ad_client = AnomalyDetectorClient(AzureKeyCredential(self.sub_key), self.end_point)\r\n",
+					"        # </client>\r\n",
+					"\r\n",
+					"        self.data_source = data_source\r\n",
+					"\r\n",
+					"    def train(self, start_time, end_time, sliding_window=500, align_mode=\"Outer\", fill_na_method=\"Linear\", padding_value=0):\r\n",
+					"        y_start = int(start_time.split(\"-\")[0])\r\n",
+					"        m_start = int(start_time.split(\"-\")[1])\r\n",
+					"        d_start = int(start_time.split(\"-\")[2])\r\n",
+					"\r\n",
+					"        y_end = int(end_time.split(\"-\")[0])\r\n",
+					"        m_end = int(end_time.split(\"-\")[1])\r\n",
+					"        d_end = int(end_time.split(\"-\")[2])\r\n",
+					"\r\n",
+					"        start_datetime = datetime(y_start, m_start, d_start, 0, 0, 0, tzinfo=timezone.utc)\r\n",
+					"        end_datetime = datetime(y_end, m_end, d_end, 0, 0, tzinfo=timezone.utc)\r\n",
+					"\r\n",
+					"        print(\"Training new model...(it may take a few minutes)\")\r\n",
+					"        data_feed = ModelInfo(start_time=start_datetime, end_time=end_datetime, source=self.data_source,\r\n",
+					"                             sliding_window=sliding_window,\r\n",
+					"                             align_policy=AlignPolicy( align_mode=align_mode, fill_na_method=fill_na_method,padding_value=padding_value))\r\n",
+					"        \r\n",
+					"        print(\"data_feed.as_dict():\",data_feed.as_dict())\r\n",
+					"        response_header = \\\r\n",
+					"            self.ad_client.train_multivariate_model(data_feed, cls=lambda *args: [args[i] for i in range(len(args))])[-1]\r\n",
+					"        trained_model_id = response_header['Location'].split(\"/\")[-1]\r\n",
+					"        print(\"trained_model_id:\", trained_model_id)\r\n",
+					"\r\n",
+					"        # Wait until the model is ready. It usually takes several minutes\r\n",
+					"        model_status = None\r\n",
+					"\r\n",
+					"        while model_status != ModelStatus.READY and model_status != ModelStatus.FAILED:\r\n",
+					"            model_info = self.ad_client.get_multivariate_model(trained_model_id).model_info\r\n",
+					"            model_status = model_info.status\r\n",
+					"            time.sleep(10)\r\n",
+					"\r\n",
+					"        if model_status == ModelStatus.FAILED:\r\n",
+					"            print(\"Creating model failed.\")\r\n",
+					"            print(\"Errors:\")\r\n",
+					"            if model_info.errors:\r\n",
+					"                for error in model_info.errors:\r\n",
+					"                    print(\"Error code: {}. Message: {}\".format(error.code, error.message))\r\n",
+					"            else:\r\n",
+					"                print(\"None\")\r\n",
+					"            return None\r\n",
+					"\r\n",
+					"        if model_status == ModelStatus.READY:\r\n",
+					"            # Model list after training\r\n",
+					"            new_model_list = list(self.ad_client.list_multivariate_model(skip=0, top=10000))\r\n",
+					"\r\n",
+					"            print(\"Done.\\n--------------------\")\r\n",
+					"            print(\"{:d} available models after training.\".format(len(new_model_list)))\r\n",
+					"            print(\"model_list\", new_model_list)\r\n",
+					"\r\n",
+					"            self.get_model_info(trained_model_id)\r\n",
+					"            # Return the latest model id\r\n",
+					"            return trained_model_id\r\n",
+					"    \r\n",
+					"    def get_model_info(self, model_id):\r\n",
+					"        model_info = self.ad_client.get_multivariate_model(model_id).model_info\r\n",
+					"        print(\"IN get_model_info, model_info:\" ,model_info)"
+				],
+				"execution_count": 133
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"adls_key = token_library.getSecret(kv_name, adls_kv_secret_name, kv_linked_service)\r\n",
+					"blob_sas_url = generate_blob_sas_url(adls_account_name, adls_container, zipped_file_path, zipped_file_name, adls_key)"
+				],
+				"execution_count": 134
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"mvad_key = token_library.getSecret(kv_name, mvad_kv_secret_name, kv_linked_service)\r\n",
+					"ad_instance = MultivariateADCalls(mvad_key, mvad_endpoint, blob_sas_url)\r\n",
+					"model_id = ad_instance.train(start_datetime, end_datetime, sliding_window=sliding_window)"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"mssparkutils.notebook.exit(model_id)"
+				],
+				"execution_count": 137
+			}
+		]
+	}
+}

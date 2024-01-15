@@ -1,0 +1,13 @@
+{
+	"name": "ds_AzureSQL_Codex",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_AzureSQL_Codex",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

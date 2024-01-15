@@ -1,0 +1,32 @@
+{
+	"name": "TestPipeline_DestinationDataset_bgy",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "TestPipeline_DestinationConnection_bgy",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"cw_fileName": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@dataset().cw_fileName",
+					"type": "Expression"
+				},
+				"folderPath": "powerquery-output",
+				"container": "testmetadatadriven"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

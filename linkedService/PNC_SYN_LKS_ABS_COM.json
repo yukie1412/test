@@ -1,0 +1,21 @@
+{
+	"name": "PNC_SYN_LKS_ABS_COM",
+	"type": "Microsoft.Synapse/workspaces/linkedservices",
+	"properties": {
+		"type": "AzureBlobFS",
+		"parameters": {
+			"AzBlobBaseUrl": {
+				"type": "string",
+				"defaultValue": "https://pncabscomdev01.dfs.core.windows.net"
+			}
+		},
+		"annotations": [],
+		"typeProperties": {
+			"url": "@{linkedService().AzBlobBaseUrl}"
+		},
+		"connectVia": {
+			"referenceName": "AutoResolveIntegrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

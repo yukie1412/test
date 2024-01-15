@@ -1,0 +1,13 @@
+{
+	"name": "Dataset_MonitorDB_UAT",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_BFHL_Monitoring_Admin",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureMySqlTable",
+		"schema": []
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

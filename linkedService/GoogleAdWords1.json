@@ -1,22 +1,19 @@
 {
 	"name": "GoogleAdWords1",
-	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"type": "Microsoft.Synapse/workspaces/linkedservices",
 	"properties": {
-		"parameters": {
-			"asdf": {
-				"type": "string"
-			}
-		},
-		"annotations": [
-			"asdf"
-		],
+		"annotations": [],
 		"type": "GoogleAdWords",
 		"typeProperties": {
-			"clientCustomerID": "asdf",
-			"loginCustomerID": "asdf",
+			"clientCustomerID": "clientCustomID",
+			"loginCustomerID": "loginCustomId",
 			"authenticationType": "UserAuthentication",
-			"clientId": "asdf",
-			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQEIxRTM0M0EzLTMzRjktNDQ3NS1COTQzLTBCRTY0MDEwODYzMl9lNjdmYWVkNC1hZjI1LTQ5OTYtYmUxMC0yYTlkYjE4OTY1NzYiDQp9"
+			"clientId": "CLIENTID",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQEJFMUMwRjFGLTcxOUEtNEJCRC1COEZFLTJBNDgwOEZCNDQxMl9kMGE4NGVhNy1mMzI1LTQ0NGEtYmU2My05ZDdlZWU1NGY0ZDciDQp9"
+		},
+		"connectVia": {
+			"referenceName": "AutoResolveIntegrationRuntime",
+			"type": "IntegrationRuntimeReference"
 		}
 	}
 }

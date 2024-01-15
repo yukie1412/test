@@ -1,0 +1,20 @@
+{
+	"name": "AzureDataExplorer3",
+	"type": "Microsoft.Synapse/workspaces/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureDataExplorer",
+		"typeProperties": {
+			"endpoint": "https://jenkusto.eastus.kusto.windows.net",
+			"database": "default",
+			"credential": {
+				"referenceName": "jenUami",
+				"type": "CredentialReference"
+			}
+		},
+		"connectVia": {
+			"referenceName": "AutoResolveIntegrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

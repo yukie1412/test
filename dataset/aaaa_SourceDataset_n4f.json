@@ -1,0 +1,24 @@
+{
+	"name": "aaaa_SourceDataset_n4f",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "aaaa_SourceConnection_n4f",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"cw_path": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "ODataResource",
+		"schema": [],
+		"typeProperties": {
+			"path": {
+				"value": "@dataset().cw_path",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

@@ -1,0 +1,549 @@
+{
+	"name": "PL_BFHL_LISTING_DATALAKE",
+	"properties": {
+		"activities": [
+			{
+				"name": "Send success Mail",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Creating Delta",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://prod-20.centralindia.logic.azure.com:443/workflows/d98c8062fa834f4bacac51f64c369198/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=FwVaC2r3D5zdFJEtmdHSmdkn5gAfoW5Gzq13glHnG4w",
+					"connectVia": {
+						"referenceName": "AutoResolveIntegrationRuntime",
+						"type": "IntegrationRuntimeReference"
+					},
+					"method": "POST",
+					"headers": {
+						"Content-Type": "application/json"
+					},
+					"body": {
+						"value": "@concat('{\"DataFactoryName\":\" ' , pipeline().DataFactory , '\",\"PipelineName\":\"',pipeline().Pipeline,'\",\"Subject\":\"',pipeline().parameters.p_source_name,'-Synapse source to delta data load succeeded\",\"ErrorMessage\":\"\",\"EmailTo\":\"',activity('GETEmailList').output.firstrow.EmailAlert,'\"}')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Creating Delta",
+				"type": "IfCondition",
+				"dependsOn": [
+					{
+						"activity": "Staging Copy",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@pipeline().parameters.move_to_delta",
+						"type": "Expression"
+					},
+					"ifFalseActivities": [
+						{
+							"name": "Send success Mail_copy1",
+							"type": "WebActivity",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"url": "https://prod-20.centralindia.logic.azure.com:443/workflows/d98c8062fa834f4bacac51f64c369198/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=FwVaC2r3D5zdFJEtmdHSmdkn5gAfoW5Gzq13glHnG4w",
+								"connectVia": {
+									"referenceName": "AutoResolveIntegrationRuntime",
+									"type": "IntegrationRuntimeReference"
+								},
+								"method": "POST",
+								"headers": {
+									"Content-Type": "application/json"
+								},
+								"body": {
+									"value": "@concat('{\"DataFactoryName\":\"',pipeline().DataFactory,'\",\"PipelineName\":\"',pipeline().Pipeline,'\",\"Subject\":\"',pipeline().parameters.p_source_name,'-Synapse source to Landing data load succeeded\",\"ErrorMessage\":\"\",\"EmailTo\":\"',activity('GETEmailList').output.firstrow.EmailAlert,'\"}')",
+									"type": "Expression"
+								}
+							}
+						}
+					],
+					"ifTrueActivities": [
+						{
+							"name": "Landing_To_Raw",
+							"type": "DatabricksNotebook",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"notebookPath": "/Repos/alakmar.shafin@bfhl.in/Databricks_Jobs/MySQL_landing_to_delta/Mysql Delta",
+								"baseParameters": {
+									"start_time": "{{start_time}}",
+									"source_container_name": "'listing'",
+									"audit_columns": "(id,Platform,data_source,job_source,job_target,Job_Type,Job_Name,run_start,run_end,Status,RunID,Error_logs)",
+									"run_id": "{{run_id}}",
+									"scope_name": "Secret-scope-delta-uat",
+									"delta_config_columns": "Id,object_name,primary_key,nested_table,source_container_name,target_container_name,landing_storage_account,delta_storage_name,last_run_date,first_time_run,history,current,last_run_path,isactive,mobile_hash_column,email_hash_column,column_list",
+									"newColAlert": "alakmar.shafin@bajajfinserv.in,arushi.joshi@bajajfinserv.in,aman.patel@bajajfinserv.in"
+								}
+							},
+							"linkedServiceName": {
+								"referenceName": "AzureDatabricks",
+								"type": "LinkedServiceReference"
+							}
+						}
+					]
+				}
+			},
+			{
+				"name": "If Condition1",
+				"type": "IfCondition",
+				"dependsOn": [
+					{
+						"activity": "GETEmailList",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@pipeline().parameters.move_to_landing",
+						"type": "Expression"
+					},
+					"ifTrueActivities": [
+						{
+							"name": "UpdateConfigTables",
+							"type": "Lookup",
+							"dependsOn": [
+								{
+									"activity": "InsertLogTable",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "AzureMySqlSource",
+									"query": {
+										"value": "call update_src_query_DataLake_config('@{pipeline().parameters.p_source_name}'); \nselect 1;",
+										"type": "Expression"
+									},
+									"queryTimeout": "02:00:00"
+								},
+								"dataset": {
+									"referenceName": "Monitoring_UAT",
+									"type": "DatasetReference"
+								},
+								"firstRowOnly": true
+							}
+						},
+						{
+							"name": "InsertLogTable",
+							"type": "Lookup",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "AzureMySqlSource",
+									"query": {
+										"value": "call Update_pipeline_log('synapse','@{pipeline().parameters.p_source_name}','@{pipeline().parameters.p_source_name}','ADLS Gen2 Landing','Pipeline','@{pipeline().Pipeline}','@{formatDateTime(addhours(addminutes(pipeline().TriggerTime,30),5),'yyyy-MM-dd HH:mm:ss')}','@{pipeline().RunId}');select 1;",
+										"type": "Expression"
+									},
+									"queryTimeout": "05:00:00"
+								},
+								"dataset": {
+									"referenceName": "Monitoring_UAT",
+									"type": "DatasetReference"
+								},
+								"firstRowOnly": false
+							}
+						},
+						{
+							"name": "Send Failure Mail -1",
+							"type": "WebActivity",
+							"dependsOn": [
+								{
+									"activity": "UpdateConfigTables",
+									"dependencyConditions": [
+										"Failed"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"url": "https://prod-20.centralindia.logic.azure.com:443/workflows/d98c8062fa834f4bacac51f64c369198/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=FwVaC2r3D5zdFJEtmdHSmdkn5gAfoW5Gzq13glHnG4w",
+								"connectVia": {
+									"referenceName": "AutoResolveIntegrationRuntime",
+									"type": "IntegrationRuntimeReference"
+								},
+								"method": "POST",
+								"headers": {
+									"Content-Type": "application/json"
+								},
+								"body": {
+									"value": "@concat('{\"DataFactoryName\":\"',pipeline().DataFactory,'\",\"PipelineName\":\"',pipeline().Pipeline,'\",\"Subject\":\"',pipeline().parameters.p_source_name,'-synapse data load failed\",\"ErrorMessage\":\"The synapse pipeline has crashed! Please check the logs.\",\"EmailTo\":\"',activity('GETEmailList').output.firstrow.EmailAlert,'\"}')",
+									"type": "Expression"
+								}
+							}
+						}
+					]
+				}
+			},
+			{
+				"name": "Send Failure Mail -4",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Creating Delta",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://prod-20.centralindia.logic.azure.com:443/workflows/d98c8062fa834f4bacac51f64c369198/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=FwVaC2r3D5zdFJEtmdHSmdkn5gAfoW5Gzq13glHnG4w",
+					"connectVia": {
+						"referenceName": "AutoResolveIntegrationRuntime",
+						"type": "IntegrationRuntimeReference"
+					},
+					"method": "POST",
+					"headers": {
+						"Content-Type": "application/json"
+					},
+					"body": {
+						"value": "@concat('{\"DataFactoryName\":\"',pipeline().DataFactory,'\",\"PipelineName\":\"',pipeline().Pipeline,'\",\"Subject\":\"',pipeline().parameters.p_source_name,'-synapse Delta load failed\",\"ErrorMessage\":\"The Databricks-Synapse pipeline has crashed! Please check the logs.\",\"EmailTo\":\"',activity('GETEmailList').output.firstrow.EmailAlert,'\"}')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "GetTableNames",
+				"type": "Lookup",
+				"dependsOn": [
+					{
+						"activity": "If Condition1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureMySqlSource",
+						"query": {
+							"value": "select id,Source as source,src_object as table1,src_query as queryy from DataLake_ingestion_config where Source='@{pipeline().parameters.p_source_name}' and Isactive=1 and @{pipeline().parameters.move_to_landing} = true;",
+							"type": "Expression"
+						},
+						"queryTimeout": "02:00:00"
+					},
+					"dataset": {
+						"referenceName": "Monitoring_UAT",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "Staging Copy",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "GetTableNames",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('GetTableNames').output.value",
+						"type": "Expression"
+					},
+					"isSequential": true,
+					"activities": [
+						{
+							"name": "CopyActivityStaging",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "AzureMySqlSource",
+									"query": {
+										"value": "@item().queryy",
+										"type": "Expression"
+									},
+									"queryTimeout": "02:00:00"
+								},
+								"sink": {
+									"type": "ParquetSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "ParquetWriteSettings"
+									}
+								},
+								"enableStaging": false,
+								"dataIntegrationUnits": 2
+							},
+							"inputs": [
+								{
+									"referenceName": "DS_BFHL_DoctorListing1",
+									"type": "DatasetReference"
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "DatasetLanding_UAT",
+									"type": "DatasetReference",
+									"parameters": {
+										"containername": {
+											"value": "@item().source",
+											"type": "Expression"
+										},
+										"folderpath": {
+											"value": "@concat(item().table1,'/',formatDateTime(addhours(addminutes(utcnow(),30),5),'yyyy'),'/',formatDateTime(addhours(addminutes(utcnow(),30),5),'MM'),'/',formatDateTime(addhours(addminutes(utcnow(),30),5),'dd'),'/',formatDateTime(addhours(addminutes(utcnow(),30),5),'HH'))",
+											"type": "Expression"
+										},
+										"targetfilename": {
+											"value": "@concat(item().table1,'_', formatDateTime(addhours(addminutes(utcnow(),30),5),'yyyyMMddHHmmss'),'.parquet')",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						},
+						{
+							"name": "UpdateNextRundate",
+							"type": "Lookup",
+							"dependsOn": [
+								{
+									"activity": "CopyActivityStaging",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 1,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "AzureMySqlSource",
+									"query": {
+										"value": "update datalake_ingestion_config set maxsrcupdatedate=nextruntime where source='@{pipeline().parameters.p_source_name}' and '@{activity('CopyActivityStaging').output.executionDetails[0].status}' ='Succeeded' and src_object='@{item().table1}';\nselect '@{item().table1}';",
+										"type": "Expression"
+									},
+									"queryTimeout": "02:00:00"
+								},
+								"dataset": {
+									"referenceName": "Dataset_MonitorDB_UAT",
+									"type": "DatasetReference"
+								}
+							}
+						}
+					]
+				}
+			},
+			{
+				"name": "Send Failure Mail -2",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "GetTableNames",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://prod-20.centralindia.logic.azure.com:443/workflows/d98c8062fa834f4bacac51f64c369198/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=FwVaC2r3D5zdFJEtmdHSmdkn5gAfoW5Gzq13glHnG4w",
+					"connectVia": {
+						"referenceName": "AutoResolveIntegrationRuntime",
+						"type": "IntegrationRuntimeReference"
+					},
+					"method": "POST",
+					"headers": {
+						"Content-Type": "application/json"
+					},
+					"body": {
+						"value": "@concat('{\"DataFactoryName\":\"',pipeline().DataFactory,'\",\"PipelineName\":\"',pipeline().Pipeline,'\",\"Subject\":\"',pipeline().parameters.p_source_name,'-synapse data load failed\",\"ErrorMessage\":\"The synapse pipeline has crashed! Please check the logs.\",\"EmailTo\":\"',activity('GETEmailList').output.firstrow.EmailAlert,'\"}')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Send Failure Mail -3",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Staging Copy",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://prod-20.centralindia.logic.azure.com:443/workflows/d98c8062fa834f4bacac51f64c369198/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=FwVaC2r3D5zdFJEtmdHSmdkn5gAfoW5Gzq13glHnG4w",
+					"connectVia": {
+						"referenceName": "AutoResolveIntegrationRuntime",
+						"type": "IntegrationRuntimeReference"
+					},
+					"method": "POST",
+					"headers": {
+						"Content-Type": "application/json"
+					},
+					"body": {
+						"value": "@concat('{\"DataFactoryName\":\"',pipeline().DataFactory,'\",\"PipelineName\":\"',pipeline().Pipeline,'\",\"Subject\":\"',pipeline().parameters.p_source_name,'-synapse load failed\",\"ErrorMessage\":\"The synapse pipeline has crashed! Please check the logs.\",\"EmailTo\":\"',activity('GETEmailList').output.firstrow.EmailAlert,'\"}')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "GETEmailList",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureMySqlSource",
+						"query": {
+							"value": "select AlertEmailTo as EmailAlert from email_alert_configuration where PipelineName = \"@{pipeline().Pipeline}\";",
+							"type": "Expression"
+						},
+						"queryTimeout": "02:00:00"
+					},
+					"dataset": {
+						"referenceName": "Monitoring_UAT",
+						"type": "DatasetReference"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"move_to_delta": {
+				"type": "bool",
+				"defaultValue": true
+			},
+			"move_to_landing": {
+				"type": "bool",
+				"defaultValue": true
+			},
+			"p_source_name": {
+				"type": "string",
+				"defaultValue": "listing"
+			}
+		},
+		"variables": {
+			"Landing_succ_obj": {
+				"type": "Array"
+			}
+		},
+		"folder": {
+			"name": "Datalake/Listing"
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-04-07T09:56:28Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}

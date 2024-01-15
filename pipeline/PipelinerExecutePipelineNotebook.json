@@ -1,0 +1,39 @@
+{
+	"name": "PipelinerExecutePipelineNotebook",
+	"properties": {
+		"activities": [
+			{
+				"name": "Execute Pipeline1",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "e2e_training_mvad_clean1",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"query": "a",
+						"start_time": "a",
+						"end_time": "a",
+						"adls_account": "a",
+						"adls_container": "a",
+						"kusto_linked_service": "a",
+						"kusto_database": "a",
+						"query_name": "a",
+						"kv_linked_service": "a",
+						"kv_name": "a",
+						"mvad_kv_secret_name": "a",
+						"adls_kv_secret_name": "a",
+						"mvad_endpoint": "a",
+						"sliding_window": 1
+					}
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2022-12-08T11:23:43Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}

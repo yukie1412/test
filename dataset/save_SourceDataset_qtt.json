@@ -1,0 +1,24 @@
+{
+	"name": "save_SourceDataset_qtt",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "save_SourceConnection_qtt",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"cw_path": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "ODataResource",
+		"schema": [],
+		"typeProperties": {
+			"path": {
+				"value": "@dataset().cw_path",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

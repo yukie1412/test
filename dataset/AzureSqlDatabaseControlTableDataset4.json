@@ -1,0 +1,14 @@
+{
+	"name": "AzureSqlDatabaseControlTableDataset4",
+	"properties": {
+		"description": "Dataset for control table, which is used to store the partition list of source data.",
+		"linkedServiceName": {
+			"referenceName": "linkedService1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

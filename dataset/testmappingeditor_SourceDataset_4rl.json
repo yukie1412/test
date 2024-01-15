@@ -1,0 +1,24 @@
+{
+	"name": "testmappingeditor_SourceDataset_4rl",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "test-mapping-editor_SourceConnection_4rl",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"cw_path": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "ODataResource",
+		"schema": [],
+		"typeProperties": {
+			"path": {
+				"value": "@dataset().cw_path",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

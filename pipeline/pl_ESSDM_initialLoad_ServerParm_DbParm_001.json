@@ -1,0 +1,529 @@
+{
+	"name": "pl_ESSDM_initialLoad_ServerParm_DbParm_001",
+	"properties": {
+		"activities": [
+			{
+				"name": "getServerDbSchemaTableList",
+				"description": "get list of tables (including server, database, and schema for each table) for pipeline",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.00:10:00",
+					"retry": 3,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": {
+							"value": "SELECT [SourceServer],[DatabaseName],[SchemaName], [TableName]\nFROM [SourceDataset].[vw_RawDataSourceTables]\nWHERE [Synapse_PipelineName] = '@{pipeline().Pipeline}'\nAND [PipelineControl_ID] = @{pipeline().parameters.PipelineControlID}",
+							"type": "Expression"
+						},
+						"queryTimeout": "00:30:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "ds_AzureSQL_Codex",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "forEachTable",
+				"description": "Loop through the tables in the list ",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "getServerDbSchemaTableList",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('getServerDbSchemaTableList').output.value",
+						"type": "Expression"
+					},
+					"isSequential": false,
+					"batchCount": 3,
+					"activities": [
+						{
+							"name": "CopyTable",
+							"type": "Copy",
+							"dependsOn": [
+								{
+									"activity": "getFileName",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "1.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "SqlServerSource",
+									"sqlReaderQuery": {
+										"value": "@concat('select * from ', item().SchemaName, '.', item().TableName)",
+										"type": "Expression"
+									},
+									"partitionOption": "None"
+								},
+								"sink": {
+									"type": "ParquetSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "ParquetWriteSettings"
+									}
+								},
+								"enableStaging": false,
+								"validateDataConsistency": true,
+								"logSettings": {
+									"enableCopyActivityLog": true,
+									"copyActivityLogSettings": {
+										"logLevel": "Info",
+										"enableReliableLogging": false
+									},
+									"logLocationSettings": {
+										"linkedServiceName": {
+											"referenceName": "ls_DataLakeGen2_StorageAccountParm",
+											"type": "LinkedServiceReference",
+											"parameters": {
+												"DataLakeStorageAccountURL": {
+													"value": "@pipeline().parameters.DataLakeStorageAccountURL",
+													"type": "Expression"
+												}
+											}
+										},
+										"path": {
+											"value": "@pipeline().parameters.LogFolderPath",
+											"type": "Expression"
+										}
+									}
+								},
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": false,
+										"treatBooleanAsNumber": false
+									}
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "ds_SqlServer_ServerParm_DbParm_AD_svc_synapse",
+									"type": "DatasetReference",
+									"parameters": {
+										"ServerName": {
+											"value": "@item().SourceServer",
+											"type": "Expression"
+										},
+										"DatabaseName": {
+											"value": "@item().DatabaseName",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "ds_DataLakeGen2_Parquet_AcctParm_FilepathParms",
+									"type": "DatasetReference",
+									"parameters": {
+										"StorageContainer": {
+											"value": "@pipeline().parameters.StorageContainer",
+											"type": "Expression"
+										},
+										"FolderPath": {
+											"value": "@concat(pipeline().parameters.SinkRootFolderPath, item().DatabaseName, pipeline().parameters.LoadCategoryFolder, item().SchemaName, '_', item().TableName)",
+											"type": "Expression"
+										},
+										"FileName": {
+											"value": "@{activity('getFileName').output.firstRow.fileName}",
+											"type": "Expression"
+										},
+										"DataLakeStorageAccountURL": {
+											"value": "@pipeline().parameters.DataLakeStorageAccountURL",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						},
+						{
+							"name": "getFileName",
+							"description": "Description: due to apparent limitation in Synapse pipelines of:\n\t(1) accessing the file name from the copy data activity output so that it can be logged\n\t(2) inability to create iteration scoped variables inside ForEach activities \n\tThis lookup activity uses a stored procedure to generate an inside ForEach activity scoped filename value with timestamp\n\t\twhich can then be logged after the copy data activity completes. \n",
+							"type": "Lookup",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.00:10:00",
+								"retry": 3,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "AzureSqlSource",
+									"sqlReaderStoredProcedureName": "[MAIN].[usp_controlCopyTableGenerateFileName]",
+									"storedProcedureParameters": {
+										"PipelineControlID": {
+											"type": "Int32",
+											"value": {
+												"value": "@pipeline().parameters.PipelineControlID",
+												"type": "Expression"
+											}
+										},
+										"PipelineName": {
+											"type": "String",
+											"value": {
+												"value": "@pipeline().Pipeline",
+												"type": "Expression"
+											}
+										},
+										"SchemaName": {
+											"type": "String",
+											"value": {
+												"value": "@item().SchemaName",
+												"type": "Expression"
+											}
+										},
+										"TableName": {
+											"type": "String",
+											"value": {
+												"value": "@item().TableName",
+												"type": "Expression"
+											}
+										}
+									},
+									"queryTimeout": "00:30:00",
+									"partitionOption": "None"
+								},
+								"dataset": {
+									"referenceName": "ds_AzureSQL_Codex",
+									"type": "DatasetReference"
+								}
+							}
+						},
+						{
+							"name": "logCopyTable_activitySuccess",
+							"description": "logs copy table activity execution details and performance characteristics to [Codex].[LOG].[PIPELINE_ACTIVITY_COPY_TABLE]",
+							"type": "SqlServerStoredProcedure",
+							"dependsOn": [
+								{
+									"activity": "CopyTable",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "0.00:10:00",
+								"retry": 3,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"storedProcedureName": "[MAIN].[usp_logPipelineCopyTable_activitySuccess]",
+								"storedProcedureParameters": {
+									"PipelineJSONlog": {
+										"value": {
+											"value": "@string(activity('CopyTable'))",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"PipelineControlID": {
+										"value": {
+											"value": "@pipeline().parameters.PipelineControlID",
+											"type": "Expression"
+										},
+										"type": "Int32"
+									},
+									"SchemaName": {
+										"value": {
+											"value": "@item().SchemaName",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"TableName": {
+										"value": {
+											"value": "@item().TableName",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"StorageContainer": {
+										"value": {
+											"value": "@pipeline().parameters.StorageContainer",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"SinkRootFolderPath": {
+										"value": {
+											"value": "@pipeline().parameters.SinkRootFolderPath",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"FolderPath": {
+										"value": {
+											"value": "@concat(pipeline().parameters.SinkRootFolderPath, item().DatabaseName, pipeline().parameters.LoadCategoryFolder, item().SchemaName, '_', item().TableName)",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"FileName": {
+										"value": {
+											"value": "@{activity('getFileName').output.firstRow.fileName}",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"PipelineSystemVariables": {
+										"value": {
+											"value": "@string\n(concat(\n '{\"PipelineName\": \"',pipeline().Pipeline,'\", '\n,'\"PipelineGroupId\": \"',pipeline().GroupId,'\", '\n,'\"PipelineRunId\": \"',pipeline().RunId,'\", '\n,'\"PipelineTriggerId\": \"',pipeline().TriggerId,'\", '\n,'\"PipelineTriggerName\": \"',pipeline().TriggerName,'\", '\n,'\"PipelineTriggerTime\": \"',pipeline().TriggerTime,'\", '\n,'\"PipelineTriggerType\": \"',pipeline().TriggerType,'\", '\n,'\"PipelineTriggeredByPipelineName\": \"',pipeline()?.TriggeredByPipelineName,'\", '\n,'\"PipelineTriggeredByPipelineRunId\": \"',pipeline()?.TriggeredByPipelineRunId,'\", '\n,'\"WorkspaceName\": \"',pipeline().DataFactory,'\" }'\n))",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"PipelineName": {
+										"value": {
+											"value": "@pipeline().Pipeline",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"ServerName": {
+										"value": {
+											"value": "@item().SourceServer",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"DatabaseName": {
+										"value": {
+											"value": "@item().DatabaseName",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"DataLakeStorageAccountURL": {
+										"value": {
+											"value": "@pipeline().parameters.DataLakeStorageAccountURL",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"LoadCategoryFolder": {
+										"value": {
+											"value": "@pipeline().parameters.LoadCategoryFolder",
+											"type": "Expression"
+										},
+										"type": "String"
+									}
+								}
+							},
+							"linkedServiceName": {
+								"referenceName": "ls_AzureSQL_Codex",
+								"type": "LinkedServiceReference"
+							}
+						},
+						{
+							"name": "logCopyTable_activityFailure",
+							"description": "logs copy table activity execution details and performance characteristics to [Codex].[LOG].[PIPELINE_ACTIVITY_COPY_TABLE]",
+							"type": "SqlServerStoredProcedure",
+							"dependsOn": [
+								{
+									"activity": "CopyTable",
+									"dependencyConditions": [
+										"Failed"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "0.00:10:00",
+								"retry": 3,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"storedProcedureName": "[MAIN].[usp_logPipelineCopyTable_activityFailure]",
+								"storedProcedureParameters": {
+									"PipelineJSONlog": {
+										"value": {
+											"value": "@string(activity('CopyTable'))",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"PipelineControlID": {
+										"value": {
+											"value": "@pipeline().parameters.PipelineControlID",
+											"type": "Expression"
+										},
+										"type": "Int32"
+									},
+									"SchemaName": {
+										"value": {
+											"value": "@item().SchemaName",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"TableName": {
+										"value": {
+											"value": "@item().TableName",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"StorageContainer": {
+										"value": {
+											"value": "@pipeline().parameters.StorageContainer",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"SinkRootFolderPath": {
+										"value": {
+											"value": "@pipeline().parameters.SinkRootFolderPath",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"FolderPath": {
+										"value": {
+											"value": "@concat(pipeline().parameters.SinkRootFolderPath, item().DatabaseName, pipeline().parameters.LoadCategoryFolder, item().SchemaName, '_', item().TableName)",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"FileName": {
+										"value": {
+											"value": "@{activity('getFileName').output.firstRow.fileName}",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"PipelineSystemVariables": {
+										"value": {
+											"value": "@string\n(concat(\n '{\"PipelineName\": \"',pipeline().Pipeline,'\", '\n,'\"PipelineGroupId\": \"',pipeline().GroupId,'\", '\n,'\"PipelineRunId\": \"',pipeline().RunId,'\", '\n,'\"PipelineTriggerId\": \"',pipeline().TriggerId,'\", '\n,'\"PipelineTriggerName\": \"',pipeline().TriggerName,'\", '\n,'\"PipelineTriggerTime\": \"',pipeline().TriggerTime,'\", '\n,'\"PipelineTriggerType\": \"',pipeline().TriggerType,'\", '\n,'\"PipelineTriggeredByPipelineName\": \"',pipeline()?.TriggeredByPipelineName,'\", '\n,'\"PipelineTriggeredByPipelineRunId\": \"',pipeline()?.TriggeredByPipelineRunId,'\", '\n,'\"WorkspaceName\": \"',pipeline().DataFactory,'\" }'\n))",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"PipelineName": {
+										"value": {
+											"value": "@pipeline().Pipeline",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"ServerName": {
+										"value": {
+											"value": "@item().SourceServer",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"DatabaseName": {
+										"value": {
+											"value": "@item().DatabaseName",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"DataLakeStorageAccountURL": {
+										"value": {
+											"value": "@pipeline().parameters.DataLakeStorageAccountURL",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"LoadCategoryFolder": {
+										"value": {
+											"value": "@pipeline().parameters.LoadCategoryFolder",
+											"type": "Expression"
+										},
+										"type": "String"
+									}
+								}
+							},
+							"linkedServiceName": {
+								"referenceName": "ls_AzureSQL_Codex",
+								"type": "LinkedServiceReference"
+							}
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"PipelineControlID": {
+				"type": "int",
+				"defaultValue": 61
+			},
+			"DataLakeStorageAccountURL": {
+				"type": "string",
+				"defaultValue": "https://fldcfaccesslanddev.dfs.core.windows.net/"
+			},
+			"StorageContainer": {
+				"type": "string",
+				"defaultValue": "landing"
+			},
+			"SinkRootFolderPath": {
+				"type": "string",
+				"defaultValue": "DATA_PARQUET/ESSDM/"
+			},
+			"LoadCategoryFolder": {
+				"type": "string",
+				"defaultValue": "/initialLoad/"
+			},
+			"LogFolderPath": {
+				"type": "string",
+				"defaultValue": "landing/LOG"
+			},
+			"ServerName": {
+				"type": "string"
+			},
+			"DatabaseName": {
+				"type": "string"
+			},
+			"SchemaName": {
+				"type": "string"
+			},
+			"TableName": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "ESS/load raw source to landing/initial load"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-11-05T01:47:03Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}

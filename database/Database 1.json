@@ -1,0 +1,25 @@
+{
+	"name": "Database 1",
+	"properties": {
+		"Name": "Database 1",
+		"EntityType": "DATABASE",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"Properties": {
+			"IsSyMSCDMDatabase": true
+		},
+		"Source": {
+			"Provider": "ADLS",
+			"Location": "abfss://synapse@fangldemo2.dfs.core.windows.net/Database 1",
+			"Properties": {
+				"FormatType": "csv",
+				"LinkedServiceName": "testgaworkspace-WorkspaceDefaultStorage"
+			}
+		},
+		"PublishStatus": "PUBLISHED",
+		"ObjectVersion": 2,
+		"ObjectId": "cab6437b-2bef-4655-8a09-7de7e8b2d68f"
+	},
+	"type": "DATABASE"
+}

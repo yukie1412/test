@@ -1,0 +1,274 @@
+{
+	"name": "cleaned_mvad_training_ingestion2",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"bigDataPool": {
+			"referenceName": "testspark",
+			"type": "BigDataPoolReference"
+		},
+		"sessionProperties": {
+			"driverMemory": "112g",
+			"driverCores": 16,
+			"executorMemory": "112g",
+			"executorCores": 16,
+			"numExecutors": 2,
+			"runAsWorkspaceSystemIdentity": false,
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "2",
+				"spark.dynamicAllocation.maxExecutors": "2",
+				"spark.autotune.trackingId": "3a4a0ffe-1245-4dfb-8ac5-319452bb0da0"
+			}
+		},
+		"metadata": {
+			"saveOutput": true,
+			"synapse_widget": {
+				"version": "0.1"
+			},
+			"enableDebugMode": false,
+			"kernelspec": {
+				"name": "synapse_pyspark",
+				"display_name": "Synapse PySpark"
+			},
+			"language_info": {
+				"name": "python"
+			},
+			"a365ComputeOptions": {
+				"id": "/subscriptions/eecfb6ee-86f1-45e1-bb7e-1f5b6bdf3951/resourceGroups/wangTest/providers/Microsoft.Synapse/workspaces/testgaworkspace/bigDataPools/testspark",
+				"name": "testspark",
+				"type": "Spark",
+				"endpoint": "https://testgaworkspace.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/testspark",
+				"auth": {
+					"type": "AAD",
+					"authResource": "https://dev.azuresynapse.net",
+					"authHeader": null
+				},
+				"sparkVersion": "2.4",
+				"nodeCount": 3,
+				"cores": 4,
+				"memory": 28,
+				"extraHeader": null
+			},
+			"sessionKeepAliveTimeout": 30
+		},
+		"cells": [
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"import pyspark\r\n",
+					"from pyspark.sql import functions as F\r\n",
+					"from datetime import datetime"
+				],
+				"execution_count": 1
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"tags": [
+						"parameters"
+					]
+				},
+				"source": [
+					"query = None\r\n",
+					"start_time = None\r\n",
+					"end_time = None\r\n",
+					"query_name = None\r\n",
+					"kusto_linked_service = None\r\n",
+					"kusto_database = None\r\n",
+					"adls_container = None"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"container_name = adls_container\r\n",
+					"short_path = query_name + \"/to_zip\"\r\n",
+					"output_path = \"abfs://\" + container_name + \"/\" + short_path + \"/\"\r\n",
+					"timerange = \"| where TimeStamp between (datetime(\" + start_time + \") .. datetime(\" + end_time + \"))\"\r\n",
+					"new_query = query + timerange"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"def query_adt_data(kusto_linked_service, kusto_database, query):\r\n",
+					"    \"\"\" Query ADT data and return the data as Spark dataframe\r\n",
+					"    :param kusto_linked_service: name of the ADX (historized data store) linked service registered in Synapse workspace\r\n",
+					"    :type: string\r\n",
+					"\r\n",
+					"    :param kusto_database: ADX database name containing historized ADX data\r\n",
+					"    :type: string\r\n",
+					"\r\n",
+					"    :param query: ADT-ADX joint query\r\n",
+					"    :type: string\r\n",
+					"\r\n",
+					"    :return: dataframe containing queried data\r\n",
+					"    :type: Spark dataframe\r\n",
+					"    \"\"\"\r\n",
+					"    df  = spark.read \\\r\n",
+					"        .format(\"com.microsoft.kusto.spark.synapse.datasource\") \\\r\n",
+					"        .option(\"spark.synapse.linkedService\", kusto_linked_service) \\\r\n",
+					"        .option(\"kustoDatabase\", kusto_database) \\\r\n",
+					"        .option(\"kustoQuery\", query) \\\r\n",
+					"        .option(\"authType\", \"LS\") \\\r\n",
+					"        .load()\r\n",
+					"    return df"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"def process_retrieved_df(df):\r\n",
+					"    \"\"\" Data processing to make sure data is ready for MVAD format\r\n",
+					"    :param df: Queried dataframe\r\n",
+					"    :type: Spark dataframe\r\n",
+					"\r\n",
+					"    :return: dataframe containing processed data\r\n",
+					"    :type: Spark dataframe\r\n",
+					"    \"\"\"\r\n",
+					"\r\n",
+					"    # Format timestamp to MVAD accepted format\r\n",
+					"    df = df.withColumn(\r\n",
+					"        'TimeStamp', \r\n",
+					"        F.date_format(F.col('TimeStamp'), \"yyyy-MM-dd'T'HH:mm:ss'Z'\")\r\n",
+					"        )\r\n",
+					"    \r\n",
+					"    # Change non alphanumeric or _ characters to _ for ModelId and Id columns\r\n",
+					"    df = df.withColumn(\"ModelId\", F.regexp_replace(F.col(\"ModelId\"), \"[^a-zA-Z0-9_]\", \"_\"));\r\n",
+					"    df = df.withColumn(\"Id\", F.regexp_replace(F.col(\"Id\"), \"[^a-zA-Z0-9_]\", \"_\"));\r\n",
+					"\r\n",
+					"    # Create UniqueKey column to identify unique key per ModelId, Id, Key combinations\r\n",
+					"    df = df.withColumn('UniqueKey', \r\n",
+					"                    F.concat(F.col('ModelId'), F.lit('_'), F.col('Id'), F.lit('_'), F.col('Key')))\r\n",
+					"\r\n",
+					"    # Select needed columns and make column names lowercase\r\n",
+					"    df = df.select(\"TimeStamp\", \"UniqueKey\", \"Value\").withColumnRenamed(\"TimeStamp\", \"timestamp\").withColumnRenamed(\"Value\", \"value\")\r\n",
+					"\r\n",
+					"    return df"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"def save_df_to_csvs(df, output_path):\r\n",
+					"    \"\"\" Generate CSVs in ADLS for MVAD input (1 csv per feature / dimension)\r\n",
+					"    :param df: Processed dataframe\r\n",
+					"    :type: Spark dataframe\r\n",
+					"\r\n",
+					"    :param output_path: ADLS path to save the MVAD input data\r\n",
+					"    :type: string\r\n",
+					"    \"\"\"\r\n",
+					"    features = [x.UniqueKey for x in df.select('UniqueKey').distinct().collect()]\r\n",
+					"    for feature in features:\r\n",
+					"        currDf = df.filter(df.UniqueKey == feature)\r\n",
+					"\r\n",
+					"        # Convert Spark df to Pandas to make sure the naming is unaltered\r\n",
+					"        currDf = currDf.select(\"timestamp\", \"value\").toPandas()\r\n",
+					"        currDf.to_csv(output_path + feature + '.csv', index=False)"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"df = query_adt_data(kusto_linked_service, kusto_database, new_query)\r\n",
+					"processed_df = process_retrieved_df(df)\r\n",
+					"save_df_to_csvs(processed_df, output_path)"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"# Set notebook output to the path of the written csvs\r\n",
+					"mssparkutils.notebook.exit(container_name + \",\" + short_path)"
+				]
+			}
+		]
+	}
+}

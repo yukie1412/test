@@ -1,0 +1,298 @@
+{
+	"name": "JobRequisition1_Extract_SPL_SAPSF_ABS",
+	"properties": {
+		"activities": [
+			{
+				"name": "Web1-GetCount",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Lookup1-GetLastModifiedDate",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": true
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@concat(\r\n         pipeline().parameters.APIBaseURL\r\n        ,'/odata/v2/',pipeline().parameters.Entity\r\n        ,'/$count?$filter=(lastModifiedDateTime gt '\r\n        ,''''\r\n        , activity('Lookup1-GetLastModifiedDate').output.firstRow.lastModifiedDateTime\r\n        ,''''\r\n        ,')'\r\n        )",
+						"type": "Expression"
+					},
+					"connectVia": {
+						"referenceName": "AutoResolveIntegrationRuntime",
+						"type": "IntegrationRuntimeReference"
+					},
+					"method": "GET",
+					"disableCertValidation": false,
+					"authentication": {
+						"type": "Basic",
+						"username": {
+							"value": "@pipeline().parameters.APIUser",
+							"type": "Expression"
+						},
+						"password": {
+							"type": "AzureKeyVaultSecret",
+							"store": {
+								"referenceName": "PNC_SYN_LKS_AKV_COM_01",
+								"type": "LinkedServiceReference",
+								"parameters": {
+									"PNC_AKV_COM_01": {
+										"value": "@pipeline().parameters.PNC_SCF_API_SEC_01",
+										"type": "Expression"
+									}
+								}
+							},
+							"secretName": "PNC-SCF-API-SEC-01"
+						}
+					}
+				}
+			},
+			{
+				"name": "Lookup1-GetLastModifiedDate",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": false,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"dataset": {
+						"referenceName": "DateInputDS",
+						"type": "DatasetReference",
+						"parameters": {
+							"AzBlobStorageAcnt": {
+								"value": "@pipeline().parameters.AzBlobStorageAcnt",
+								"type": "Expression"
+							},
+							"FilePath_Storage": {
+								"value": "@pipeline().parameters.AzBlobStorageContainer",
+								"type": "Expression"
+							}
+						}
+					}
+				}
+			},
+			{
+				"name": "ForEach1",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Web1-GetCount",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@range(0, \n        add(\n            if(\n               lessOrEquals(int(activity('Web1-GetCount').output.Response),pipeline().parameters.MaxRecRange)\n               , 1\n               , int(string(div(int(activity('Web1-GetCount').output.Response),pipeline().parameters.MaxRecRange)))\n              )\n           , 1\n           )\n      )",
+						"type": "Expression"
+					},
+					"isSequential": true,
+					"activities": [
+						{
+							"name": "Copy data1",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "RestSource",
+									"additionalColumns": [
+										{
+											"name": "Item",
+											"value": {
+												"value": "@item()",
+												"type": "Expression"
+											}
+										}
+									],
+									"httpRequestTimeout": "00:01:40",
+									"requestInterval": "00.00:00:01.000",
+									"requestMethod": "GET",
+									"paginationRules": {
+										"supportRFC5988": "true"
+									}
+								},
+								"sink": {
+									"type": "JsonSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "JsonWriteSettings",
+										"filePattern": "arrayOfObjects"
+									}
+								},
+								"enableStaging": false
+							},
+							"inputs": [
+								{
+									"referenceName": "PNC_SYN_SDS_RST_API",
+									"type": "DatasetReference",
+									"parameters": {
+										"CP_Rest_Param_Skip": {
+											"value": "@if(\n     equals(item(),0)\n   , 0\n   , mul(pipeline().parameters.PP_Param_Skip,int(item()))\n    )",
+											"type": "Expression"
+										},
+										"LastModifiedDateTime_Rest": {
+											"value": "@activity('Lookup1-GetLastModifiedDate').output.firstRow.lastModifiedDateTime",
+											"type": "Expression"
+										},
+										"RelativeURL": {
+											"value": "@concat(\n          '/odata/v2/',pipeline().parameters.Entity\n        , '?$format=json'\n        , '&$expand=', pipeline().parameters.Expand\n        , '&$filter=(lastModifiedDateTime gt '\n        , ''''\n        , activity('Lookup1-GetLastModifiedDate').output.firstRow.lastModifiedDateTime\n        , ''''\n        , ')&$orderby=', pipeline().parameters.OrderBy\n        , '&$top=1000&$skip='\n        , if(\n              equals(item(),0)\n            , 0\n            , mul(pipeline().parameters.PP_Param_Skip,int(item()))\n            )\n        )",
+											"type": "Expression"
+										},
+										"AKV": {
+											"value": "@pipeline().parameters.AKV",
+											"type": "Expression"
+										},
+										"APIBaseURL": {
+											"value": "@pipeline().parameters.APIBaseURL",
+											"type": "Expression"
+										},
+										"APIUser": {
+											"value": "@pipeline().parameters.APIUser",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "PNC_SYN_ABS_SDS_JSN",
+									"type": "DatasetReference",
+									"parameters": {
+										"AzBlobStorageAcnt": {
+											"value": "@pipeline().parameters.AzBlobStorageAcnt",
+											"type": "Expression"
+										},
+										"AzBlobStorageContainer": {
+											"value": "@pipeline().parameters.AzBlobStorageContainer",
+											"type": "Expression"
+										},
+										"AzBlobStorageDirectory": {
+											"value": "@pipeline().parameters.AzBlobStorageDirectory",
+											"type": "Expression"
+										},
+										"AzBlobStorageFileName": {
+											"value": "@pipeline().parameters.AzBlobStorageFileName",
+											"type": "Expression"
+										},
+										"LastDateTime": {
+											"value": "@activity('Lookup1-GetLastModifiedDate').output.firstrow.lastModifiedDateTime",
+											"type": "Expression"
+										},
+										"PageNo": {
+											"value": "@item()",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"PP_Param_Skip": {
+				"type": "int",
+				"defaultValue": 1000
+			},
+			"APIUser": {
+				"type": "String",
+				"defaultValue": "adminis@metcashtraT3"
+			},
+			"AzBlobStorageContainer": {
+				"type": "string",
+				"defaultValue": "pnc-abs-cnt-com-dev-01"
+			},
+			"AzBlobStorageDirectory": {
+				"type": "string",
+				"defaultValue": "SuccessFactors/Inbox/JobRequisition"
+			},
+			"AzBlobStorageFileName": {
+				"type": "string",
+				"defaultValue": "JobRequisition_SF_Extract"
+			},
+			"APIBaseURL": {
+				"type": "string",
+				"defaultValue": "https://api10preview.sapsf.com"
+			},
+			"AzBlobStorageAcnt": {
+				"type": "string",
+				"defaultValue": "https://pncabscomdev01.dfs.core.windows.net"
+			},
+			"Entity": {
+				"type": "string",
+				"defaultValue": "JobRequisition"
+			},
+			"Expand": {
+				"type": "string",
+				"defaultValue": "status/picklistLabels, hiringManager, custaddRep/picklistLabels, recruiter, recruiterTeamGroup"
+			},
+			"OrderBy": {
+				"type": "string",
+				"defaultValue": "jobReqId"
+			},
+			"Select": {
+				"type": "string",
+				"defaultValue": "*"
+			},
+			"MaxRecRange": {
+				"type": "int",
+				"defaultValue": 1000
+			},
+			"AKV": {
+				"type": "String",
+				"defaultValue": "https://pnc-akv-com-dev-01.vault.azure.net"
+			},
+			"PNC_SCF_API_SEC_01": {
+				"type": "string"
+			}
+		},
+		"variables": {
+			"APIOutputCount_Var": {
+				"type": "String"
+			}
+		},
+		"folder": {
+			"name": "P&C/SuccessFactor"
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-03-23T10:34:09Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}

@@ -1,0 +1,53 @@
+{
+	"name": "PNC_SYN_ABS_SDS_JSN",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "PNC_SYN_LKS_ABS_COM",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"AzBlobBaseUrl": "https://pncabscomdev01.dfs.core.windows.net"
+			}
+		},
+		"parameters": {
+			"AzBlobStorageAcnt": {
+				"type": "String"
+			},
+			"AzBlobStorageContainer": {
+				"type": "string"
+			},
+			"AzBlobStorageDirectory": {
+				"type": "string"
+			},
+			"AzBlobStorageFileName": {
+				"type": "string"
+			},
+			"LastDateTime": {
+				"type": "string"
+			},
+			"PageNo": {
+				"type": "Int"
+			}
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@concat(\n         dataset().AzBlobStorageFileName\n       , if(\n            equals(dataset().LastDateTime,'1900-01-01T00:00:00Z') \n            ,'_F_'\n            ,'_D_'\n            )\n       , 'Pg#', string(dataset().PageNo), '_'\n       , convertFromUtc(utcNow(),'AUS Eastern Standard Time','s') \n       ,'.JSON'\n       )",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@dataset().AzBlobStorageDirectory",
+					"type": "Expression"
+				},
+				"fileSystem": {
+					"value": "@dataset().AzBlobStorageContainer",
+					"type": "Expression"
+				}
+			}
+		},
+		"schema": {}
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

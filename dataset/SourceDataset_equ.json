@@ -1,0 +1,26 @@
+{
+	"name": "SourceDataset_equ",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabaseAKV",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "CustomerID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CustomerTypeID",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "CustomerCustomerDemo"
+		}
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

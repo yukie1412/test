@@ -1,0 +1,105 @@
+{
+	"name": "save_CopyPipeline_qtt",
+	"properties": {
+		"activities": [
+			{
+				"name": "ForEach_2ir",
+				"type": "ForEach",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.cw_items",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Copy_2ir",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [
+								{
+									"name": "Source",
+									"value": "@{item().source.path}"
+								},
+								{
+									"name": "Destination",
+									"value": "testmetadatadriven/powerquery-output/@{item().destination.fileName}"
+								}
+							],
+							"typeProperties": {
+								"source": {
+									"type": "ODataSource"
+								},
+								"sink": {
+									"type": "DelimitedTextSink",
+									"storeSettings": {
+										"type": "AzureBlobStorageWriteSettings"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextWriteSettings",
+										"quoteAllText": true,
+										"fileExtension": ".txt"
+									}
+								},
+								"enableStaging": false,
+								"validateDataConsistency": false
+							},
+							"inputs": [
+								{
+									"referenceName": "save_SourceDataset_qtt",
+									"type": "DatasetReference",
+									"parameters": {
+										"cw_path": "@item().source.path"
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "save_DestinationDataset_qtt",
+									"type": "DatasetReference",
+									"parameters": {
+										"cw_fileName": "@item().destination.fileName"
+									}
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"cw_items": {
+				"type": "Array",
+				"defaultValue": [
+					{
+						"source": {
+							"path": "Categories"
+						},
+						"destination": {
+							"fileName": "Categories.txt"
+						}
+					},
+					{
+						"source": {
+							"path": "Category_Sales_for_1997"
+						},
+						"destination": {
+							"fileName": "Category_Sales_for_1997.txt"
+						}
+					}
+				]
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-11-02T10:49:09Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}

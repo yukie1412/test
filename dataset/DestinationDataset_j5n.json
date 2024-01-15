@@ -1,0 +1,48 @@
+{
+	"name": "DestinationDataset_j5n",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabaseAKV",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "AD_ID",
+				"type": "decimal",
+				"precision": 11,
+				"scale": 0
+			},
+			{
+				"name": "AD_LINE1",
+				"type": "nvarchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "AD_LINE2",
+				"type": "nvarchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "AD_ZC_CODE",
+				"type": "nvarchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "AD_CTRY",
+				"type": "nvarchar",
+				"precision": 0,
+				"scale": 0
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "address"
+		}
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

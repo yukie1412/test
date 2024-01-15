@@ -1,0 +1,15 @@
+{
+	"name": "storetest5",
+	"type": "Microsoft.Synapse/workspaces/linkedservices",
+	"properties": {
+		"type": "AzureBlobStorage",
+		"connectVia": {
+			"referenceName": "AutoResolveIntegrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		},
+		"annotations": [],
+		"typeProperties": {
+			"serviceEndpoint": "https://stadmpjn31landing.blob.core.windows.net"
+		}
+	}
+}

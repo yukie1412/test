@@ -1,0 +1,20 @@
+{
+	"name": "AdxCredSp",
+	"type": "Microsoft.Synapse/workspaces/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureDataExplorer",
+		"typeProperties": {
+			"endpoint": "https://jenkusto.eastus.kusto.windows.net",
+			"database": "default",
+			"credential": {
+				"referenceName": "jenSp",
+				"type": "CredentialReference"
+			}
+		},
+		"connectVia": {
+			"referenceName": "AutoResolveIntegrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

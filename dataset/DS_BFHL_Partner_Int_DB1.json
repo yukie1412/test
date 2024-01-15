@@ -1,0 +1,24 @@
+{
+	"name": "DS_BFHL_Partner_Int_DB1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_BFHL_Partner_Integration_DB",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"tablename": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "AzureMySqlTable",
+		"schema": [],
+		"typeProperties": {
+			"tableName": {
+				"value": "@dataset().tablename",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

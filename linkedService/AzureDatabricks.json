@@ -1,0 +1,24 @@
+{
+	"name": "AzureDatabricks",
+	"type": "Microsoft.Synapse/workspaces/linkedservices",
+	"properties": {
+		"type": "AzureDatabricks",
+		"annotations": [],
+		"typeProperties": {
+			"domain": "https://adb-4166502160751924.4.azuredatabricks.net/?o=4166502160751924",
+			"accessToken": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "LS_CDM_UAT_Vault",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "synapse-databricks-token"
+			},
+			"existingClusterId": "0301-112322-npgs76l3"
+		},
+		"connectVia": {
+			"referenceName": "AutoResolveIntegrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

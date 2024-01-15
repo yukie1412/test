@@ -1,0 +1,288 @@
+{
+	"name": "DestinationDataset_gnz",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabaseAKV",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "abstime",
+				"type": "nvarchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "bigint",
+				"type": "bigint",
+				"precision": 19,
+				"scale": 0
+			},
+			{
+				"name": "bit",
+				"type": "varbinary",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "bitvarying",
+				"type": "varbinary",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "boolean",
+				"type": "bit",
+				"precision": 1,
+				"scale": 0
+			},
+			{
+				"name": "box",
+				"type": "nvarchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "bytea",
+				"type": "varbinary",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "character",
+				"type": "nvarchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "charactervarying",
+				"type": "nvarchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "cid",
+				"type": "nvarchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "cidr",
+				"type": "nvarchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "circle",
+				"type": "nvarchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "date",
+				"type": "datetime2",
+				"precision": 19,
+				"scale": 0
+			},
+			{
+				"name": "daterange",
+				"type": "nvarchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "doubleprecision",
+				"type": "float",
+				"precision": 53,
+				"scale": 0
+			},
+			{
+				"name": "inet",
+				"type": "nvarchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "intarray",
+				"type": "nvarchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "int4range",
+				"type": "nvarchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "int8range",
+				"type": "nvarchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "integer",
+				"type": "int",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "interval",
+				"type": "time",
+				"precision": 8,
+				"scale": 0
+			},
+			{
+				"name": "json",
+				"type": "nvarchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "lseg",
+				"type": "nvarchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "macaddr",
+				"type": "nvarchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "money",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 0
+			},
+			{
+				"name": "numeric",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 0
+			},
+			{
+				"name": "numrange",
+				"type": "nvarchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "oid",
+				"type": "nvarchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "path",
+				"type": "nvarchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "point",
+				"type": "nvarchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "polygon",
+				"type": "nvarchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "real",
+				"type": "real",
+				"precision": 24,
+				"scale": 0
+			},
+			{
+				"name": "smallint",
+				"type": "smallint",
+				"precision": 5,
+				"scale": 0
+			},
+			{
+				"name": "text",
+				"type": "nvarchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "tiemwithtimezone",
+				"type": "datetimeoffset",
+				"precision": 26,
+				"scale": 0
+			},
+			{
+				"name": "timewithouttimezone",
+				"type": "datetimeoffset",
+				"precision": 26,
+				"scale": 0
+			},
+			{
+				"name": "timestampwithtimezone",
+				"type": "datetime2",
+				"precision": 19,
+				"scale": 0
+			},
+			{
+				"name": "timestampwithouttimezone",
+				"type": "datetime2",
+				"precision": 19,
+				"scale": 0
+			},
+			{
+				"name": "tinterval",
+				"type": "nvarchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "tsrange",
+				"type": "nvarchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "tstzrange",
+				"type": "nvarchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "tsvector",
+				"type": "nvarchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "uuid",
+				"type": "uniqueidentifier",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "xid",
+				"type": "nvarchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "xml",
+				"type": "nvarchar",
+				"precision": 0,
+				"scale": 0
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "alltypes1"
+		}
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

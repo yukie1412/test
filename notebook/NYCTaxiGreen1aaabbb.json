@@ -1,0 +1,300 @@
+{
+	"name": "NYCTaxiGreen1aaabbb",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"bigDataPool": {
+			"referenceName": "aaaa",
+			"type": "BigDataPoolReference"
+		},
+		"sessionProperties": {
+			"driverMemory": "56g",
+			"driverCores": 8,
+			"executorMemory": "56g",
+			"executorCores": 8,
+			"numExecutors": 2,
+			"runAsWorkspaceSystemIdentity": false,
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "2",
+				"spark.dynamicAllocation.maxExecutors": "2",
+				"spark.autotune.trackingId": "ef1c008f-b754-4bdb-8614-761564c6ae29"
+			}
+		},
+		"metadata": {
+			"saveOutput": true,
+			"synapse_widget": {
+				"version": "0.1",
+				"state": {
+					"6a62a6f5-02df-4846-ab9e-fcf29c0a62ff": {
+						"type": "Synapse.DataFrame",
+						"sync_state": {
+							"table": {
+								"rows": [
+									{
+										"0": "59",
+										"1": "2",
+										"2": "32.1",
+										"3": "101.0",
+										"4": "157",
+										"5": "93.2",
+										"6": "38.0",
+										"7": "4.0",
+										"8": "4.8598",
+										"9": "87",
+										"10": "151"
+									},
+									{
+										"0": "48",
+										"1": "1",
+										"2": "21.6",
+										"3": "87.0",
+										"4": "183",
+										"5": "103.2",
+										"6": "70.0",
+										"7": "3.0",
+										"8": "3.8918",
+										"9": "69",
+										"10": "75"
+									},
+									{
+										"0": "72",
+										"1": "2",
+										"2": "30.5",
+										"3": "93.0",
+										"4": "156",
+										"5": "93.6",
+										"6": "41.0",
+										"7": "4.0",
+										"8": "4.6728",
+										"9": "85",
+										"10": "141"
+									},
+									{
+										"0": "24",
+										"1": "1",
+										"2": "25.3",
+										"3": "84.0",
+										"4": "198",
+										"5": "131.4",
+										"6": "40.0",
+										"7": "5.0",
+										"8": "4.8903",
+										"9": "89",
+										"10": "206"
+									},
+									{
+										"0": "50",
+										"1": "1",
+										"2": "23.0",
+										"3": "101.0",
+										"4": "192",
+										"5": "125.4",
+										"6": "52.0",
+										"7": "4.0",
+										"8": "4.2905",
+										"9": "80",
+										"10": "135"
+									},
+									{
+										"0": "23",
+										"1": "1",
+										"2": "22.6",
+										"3": "89.0",
+										"4": "139",
+										"5": "64.8",
+										"6": "61.0",
+										"7": "2.0",
+										"8": "4.1897",
+										"9": "68",
+										"10": "97"
+									},
+									{
+										"0": "36",
+										"1": "2",
+										"2": "22.0",
+										"3": "90.0",
+										"4": "160",
+										"5": "99.6",
+										"6": "50.0",
+										"7": "3.0",
+										"8": "3.9512",
+										"9": "82",
+										"10": "138"
+									},
+									{
+										"0": "66",
+										"1": "2",
+										"2": "26.2",
+										"3": "114.0",
+										"4": "255",
+										"5": "185.0",
+										"6": "56.0",
+										"7": "4.55",
+										"8": "4.2485",
+										"9": "92",
+										"10": "63"
+									},
+									{
+										"0": "60",
+										"1": "2",
+										"2": "32.1",
+										"3": "83.0",
+										"4": "179",
+										"5": "119.4",
+										"6": "42.0",
+										"7": "4.0",
+										"8": "4.4773",
+										"9": "94",
+										"10": "110"
+									},
+									{
+										"0": "29",
+										"1": "1",
+										"2": "30.0",
+										"3": "85.0",
+										"4": "180",
+										"5": "93.4",
+										"6": "43.0",
+										"7": "4.0",
+										"8": "5.3845",
+										"9": "88",
+										"10": "310"
+									}
+								],
+								"schema": [
+									{
+										"key": "0",
+										"name": "AGE",
+										"type": "bigint"
+									},
+									{
+										"key": "1",
+										"name": "SEX",
+										"type": "bigint"
+									},
+									{
+										"key": "2",
+										"name": "BMI",
+										"type": "double"
+									},
+									{
+										"key": "3",
+										"name": "BP",
+										"type": "double"
+									},
+									{
+										"key": "4",
+										"name": "S1",
+										"type": "bigint"
+									},
+									{
+										"key": "5",
+										"name": "S2",
+										"type": "double"
+									},
+									{
+										"key": "6",
+										"name": "S3",
+										"type": "double"
+									},
+									{
+										"key": "7",
+										"name": "S4",
+										"type": "double"
+									},
+									{
+										"key": "8",
+										"name": "S5",
+										"type": "double"
+									},
+									{
+										"key": "9",
+										"name": "S6",
+										"type": "bigint"
+									},
+									{
+										"key": "10",
+										"name": "Y",
+										"type": "bigint"
+									}
+								],
+								"truncated": false
+							},
+							"isSummary": false,
+							"language": "scala"
+						},
+						"persist_state": {
+							"view": {
+								"type": "details",
+								"chartOptions": {
+									"chartType": "bar",
+									"aggregationType": "sum",
+									"categoryFieldKeys": [
+										"1"
+									],
+									"seriesFieldKeys": [
+										"0"
+									],
+									"isStacked": false
+								}
+							}
+						}
+					}
+				}
+			},
+			"enableDebugMode": false,
+			"kernelspec": {
+				"name": "synapse_pyspark",
+				"display_name": "Synapse PySpark"
+			},
+			"language_info": {
+				"name": "python"
+			},
+			"a365ComputeOptions": {
+				"id": "/subscriptions/eecfb6ee-86f1-45e1-bb7e-1f5b6bdf3951/resourceGroups/wangTest/providers/Microsoft.Synapse/workspaces/testgaworkspace/bigDataPools/aaaa",
+				"name": "aaaa",
+				"type": "Spark",
+				"endpoint": "https://testgaworkspace.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/aaaa",
+				"auth": {
+					"type": "AAD",
+					"authResource": "https://dev.azuresynapse.net",
+					"authHeader": null
+				},
+				"sparkVersion": "2.4",
+				"nodeCount": 10,
+				"cores": 8,
+				"memory": 56,
+				"extraHeader": null
+			},
+			"sessionKeepAliveTimeout": 30
+		},
+		"cells": [
+			{
+				"cell_type": "code",
+				"metadata": {
+					"microsoft": {
+						"language": "python"
+					},
+					"collapsed": false
+				},
+				"source": [
+					"%%pyspark\n",
+					"blob_account_name = \"azureopendatastorage\"\n",
+					"blob_container_name = \"mlsamples\"\n",
+					"blob_relative_path = \"diabetes\"\n",
+					"blob_sas_token = r\"\"\n",
+					"# Allow SPARK to read from Blob remotely\n",
+					"wasbs_path = 'wasbs://%s@%s.blob.core.windows.net/%s' % (blob_container_name, blob_account_name, blob_relative_path)\n",
+					"\n",
+					"spark.conf.set(\n",
+					"    'fs.azure.sas.%s.%s.blob.core.windows.net' % (blob_container_name, blob_account_name),\n",
+					"    blob_sas_token)\n",
+					"df = spark.read.parquet(wasbs_path)\n",
+					"display(df.limit(10))"
+				],
+				"execution_count": 1
+			}
+		]
+	}
+}

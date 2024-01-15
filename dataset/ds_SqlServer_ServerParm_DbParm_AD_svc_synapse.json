@@ -1,0 +1,34 @@
+{
+	"name": "ds_SqlServer_ServerParm_DbParm_AD_svc_synapse",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_SqlServer_ServerParm_DbParm_AD_svc_synapse",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"ServerName": {
+					"value": "@dataset().ServerName",
+					"type": "Expression"
+				},
+				"DatabaseName": {
+					"value": "@dataset().DatabaseName",
+					"type": "Expression"
+				}
+			}
+		},
+		"parameters": {
+			"ServerName": {
+				"type": "string"
+			},
+			"DatabaseName": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "Access/ExternalDataSource"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": []
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

@@ -1,0 +1,43 @@
+{
+	"name": "Pipeline 2",
+	"properties": {
+		"activities": [
+			{
+				"name": "Stored procedure1",
+				"description": "j7",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "re"
+				},
+				"linkedServiceName": {
+					"referenceName": "testgaworkspace-WorkspaceDefaultSqlServer",
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"DBName": {
+							"value": "@pipeline().parameters.test",
+							"type": "Expression"
+						}
+					}
+				}
+			}
+		],
+		"parameters": {
+			"test": {
+				"type": "string",
+				"defaultValue": "fangl"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-09-17T12:51:43Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}

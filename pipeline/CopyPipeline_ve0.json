@@ -1,0 +1,749 @@
+{
+	"name": "CopyPipeline_ve0",
+	"properties": {
+		"activities": [
+			{
+				"name": "ForEach_ve0",
+				"type": "ForEach",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.cw_items",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Copy_ve0",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [
+								{
+									"name": "Source",
+									"value": "@{item().source.schema}.@{item().source.table}"
+								},
+								{
+									"name": "Destination",
+									"value": "@{item().destination.schema}.@{item().destination.table}"
+								}
+							],
+							"typeProperties": {
+								"source": {
+									"type": "AzureSqlSource",
+									"partitionOption": "None"
+								},
+								"sink": {
+									"type": "AzureSqlSink",
+									"tableOption": "autoCreate"
+								},
+								"enableStaging": false,
+								"validateDataConsistency": false,
+								"translator": {
+									"value": "@item().copyActivity.translator",
+									"type": "Expression"
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "SourceDataset_ve0",
+									"type": "DatasetReference",
+									"parameters": {
+										"cw_schema": "@item().source.schema",
+										"cw_table": "@item().source.table"
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "DestinationDataset_ve0",
+									"type": "DatasetReference",
+									"parameters": {
+										"cw_table": "@item().destination.table",
+										"cw_schema": "@item().destination.schema"
+									}
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"cw_items": {
+				"type": "Array",
+				"defaultValue": [
+					{
+						"source": {
+							"schema": "APEX_040000",
+							"table": "APEX$_ACL"
+						},
+						"destination": {
+							"table": "APEX$_ACL",
+							"schema": "APEX_040000"
+						},
+						"copyActivity": {
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "ID",
+											"type": "Double",
+											"physicalType": "float"
+										},
+										"sink": {
+											"name": "ID",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"name": "WS_APP_ID",
+											"type": "Double",
+											"physicalType": "float"
+										},
+										"sink": {
+											"name": "WS_APP_ID",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"name": "USERNAME",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "USERNAME",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "PRIV",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "PRIV",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "CREATED_ON",
+											"type": "DateTime",
+											"physicalType": "datetime2"
+										},
+										"sink": {
+											"name": "CREATED_ON",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "CREATED_BY",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "CREATED_BY",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "UPDATED_ON",
+											"type": "DateTime",
+											"physicalType": "datetime2"
+										},
+										"sink": {
+											"name": "UPDATED_ON",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "UPDATED_BY",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "UPDATED_BY",
+											"type": "String"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						}
+					},
+					{
+						"source": {
+							"schema": "APEX_040000",
+							"table": "APEX$_ACLNEW"
+						},
+						"destination": {
+							"table": "APEX$_ACLNEW",
+							"schema": "APEX_040000"
+						},
+						"copyActivity": {
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "ID",
+											"type": "Double",
+											"physicalType": "float"
+										},
+										"sink": {
+											"name": "ID",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"name": "WS_APP_ID",
+											"type": "Double",
+											"physicalType": "float"
+										},
+										"sink": {
+											"name": "WS_APP_ID",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"name": "USERNAME",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "USERNAME",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "PRIV",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "PRIV",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "CREATED_ON",
+											"type": "DateTime",
+											"physicalType": "datetime2"
+										},
+										"sink": {
+											"name": "CREATED_ON",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "CREATED_BY",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "CREATED_BY",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "UPDATED_ON",
+											"type": "DateTime",
+											"physicalType": "datetime2"
+										},
+										"sink": {
+											"name": "UPDATED_ON",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "UPDATED_BY",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "UPDATED_BY",
+											"type": "String"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						}
+					},
+					{
+						"source": {
+							"schema": "APEX_040000",
+							"table": "APEX$_WS_HISTORY"
+						},
+						"destination": {
+							"table": "APEX$_WS_HISTORY",
+							"schema": "APEX_040000"
+						},
+						"copyActivity": {
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "ROW_ID",
+											"type": "Double",
+											"physicalType": "float"
+										},
+										"sink": {
+											"name": "ROW_ID",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"name": "WS_APP_ID",
+											"type": "Double",
+											"physicalType": "float"
+										},
+										"sink": {
+											"name": "WS_APP_ID",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"name": "DATA_GRID_ID",
+											"type": "Double",
+											"physicalType": "float"
+										},
+										"sink": {
+											"name": "DATA_GRID_ID",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"name": "COLUMN_NAME",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "COLUMN_NAME",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "OLD_VALUE",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "OLD_VALUE",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "NEW_VALUE",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "NEW_VALUE",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "APPLICATION_USER_ID",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "APPLICATION_USER_ID",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "CHANGE_DATE",
+											"type": "DateTime",
+											"physicalType": "datetime2"
+										},
+										"sink": {
+											"name": "CHANGE_DATE",
+											"type": "DateTime"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						}
+					},
+					{
+						"source": {
+							"schema": "DB2ADMIN",
+							"table": "Categories"
+						},
+						"destination": {
+							"table": "Categories",
+							"schema": "DB2ADMIN"
+						},
+						"copyActivity": {
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "CategoryID",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "CategoryID",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "CategoryName",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "CategoryName",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Description",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "Description",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Picture",
+											"type": "Byte[]",
+											"physicalType": "varbinary"
+										},
+										"sink": {
+											"name": "Picture",
+											"type": "Byte[]"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						}
+					},
+					{
+						"source": {
+							"schema": "DB2ADMIN",
+							"table": "CustomerCustomerDemo"
+						},
+						"destination": {
+							"table": "CustomerCustomerDemo",
+							"schema": "DB2ADMIN"
+						},
+						"copyActivity": {
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "CustomerID",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "CustomerID",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "CustomerTypeID",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "CustomerTypeID",
+											"type": "String"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						}
+					},
+					{
+						"source": {
+							"schema": "DB2ADMIN",
+							"table": "Employees"
+						},
+						"destination": {
+							"table": "Employees",
+							"schema": "DB2ADMIN"
+						},
+						"copyActivity": {
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "EmployeeID",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "EmployeeID",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "LastName",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "LastName",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "FirstName",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "FirstName",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Title",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "Title",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "TitleOfCourtesy",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "TitleOfCourtesy",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "BirthDate",
+											"type": "DateTime",
+											"physicalType": "datetime2"
+										},
+										"sink": {
+											"name": "BirthDate",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "HireDate",
+											"type": "DateTime",
+											"physicalType": "datetime2"
+										},
+										"sink": {
+											"name": "HireDate",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "Address",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "Address",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "City",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "City",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Region",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "Region",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "PostalCode",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "PostalCode",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Country",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "Country",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "HomePhone",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "HomePhone",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Extension",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "Extension",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Photo",
+											"type": "Byte[]",
+											"physicalType": "varbinary"
+										},
+										"sink": {
+											"name": "Photo",
+											"type": "Byte[]"
+										}
+									},
+									{
+										"source": {
+											"name": "Notes",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "Notes",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "ReportsTo",
+											"type": "Int32",
+											"physicalType": "int"
+										},
+										"sink": {
+											"name": "ReportsTo",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"name": "PhotoPath",
+											"type": "String",
+											"physicalType": "nvarchar"
+										},
+										"sink": {
+											"name": "PhotoPath",
+											"type": "String"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						}
+					}
+				]
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-12-25T06:25:02Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}

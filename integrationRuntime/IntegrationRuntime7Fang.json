@@ -1,0 +1,6 @@
+{
+	"name": "IntegrationRuntime7Fang",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}

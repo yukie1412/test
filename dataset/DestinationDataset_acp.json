@@ -1,0 +1,47 @@
+{
+	"name": "DestinationDataset_acp",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "testgaworkspace-WorkspaceDefaultSqlServer",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"DBName": "@dataset().cw_ls_DBName"
+			}
+		},
+		"parameters": {
+			"cw_ls_DBName": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "PersonID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "LastName",
+				"type": "varchar"
+			},
+			{
+				"name": "FirstName",
+				"type": "varchar"
+			},
+			{
+				"name": "Address",
+				"type": "varchar"
+			},
+			{
+				"name": "City",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "PersonsAutoCreated"
+		}
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

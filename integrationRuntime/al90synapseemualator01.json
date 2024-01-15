@@ -1,0 +1,9 @@
+{
+	"name": "al90synapseemualator01",
+	"properties": {
+		"type": "SelfHosted",
+		"typeProperties": {
+			"subType": "Emulator"
+		}
+	}
+}

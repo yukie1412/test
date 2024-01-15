@@ -1,0 +1,54 @@
+{
+	"name": "DS_STAGE_Vendor",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Lnk_RPT_SQL_DB",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "VendorID",
+				"type": "uniqueidentifier"
+			},
+			{
+				"name": "Vendor",
+				"type": "nvarchar"
+			},
+			{
+				"name": "VendorStatus",
+				"type": "nvarchar"
+			},
+			{
+				"name": "IsActive",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CreatedBy",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CreatedOn",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "ModifiedBy",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ModifiedOn",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "stage",
+			"table": "Vendor"
+		}
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

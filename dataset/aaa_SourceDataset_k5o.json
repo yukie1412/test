@@ -1,0 +1,24 @@
+{
+	"name": "aaa_SourceDataset_k5o",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "aaa_SourceConnection_k5o",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"cw_path": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "ODataResource",
+		"schema": [],
+		"typeProperties": {
+			"path": {
+				"value": "@dataset().cw_path",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

@@ -1,0 +1,24 @@
+{
+	"name": "da_SourceDataset_2vf",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "da_SourceConnection_2vf",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"cw_path": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "ODataResource",
+		"schema": [],
+		"typeProperties": {
+			"path": {
+				"value": "@dataset().cw_path",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

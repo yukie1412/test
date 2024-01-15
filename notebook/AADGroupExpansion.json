@@ -1,0 +1,567 @@
+{
+	"name": "AADGroupExpansion",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"sessionProperties": {
+			"driverMemory": "28g",
+			"driverCores": 4,
+			"executorMemory": "28g",
+			"executorCores": 4,
+			"numExecutors": 2,
+			"runAsWorkspaceSystemIdentity": false,
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "2",
+				"spark.dynamicAllocation.maxExecutors": "2",
+				"spark.autotune.trackingId": "4834925c-de9b-4433-89e4-0511098059f4"
+			}
+		},
+		"metadata": {
+			"saveOutput": true,
+			"enableDebugMode": false,
+			"kernelspec": {
+				"name": "synapse_spark",
+				"display_name": "scala"
+			},
+			"language_info": {
+				"name": "scala"
+			},
+			"sessionKeepAliveTimeout": 30
+		},
+		"cells": [
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"**This Notebook is to expand AAD Groups dataset that is being generated from MGDC**\r\n",
+					"**Datasets needed: AADGroups, AADGroupOwners and AADGroupMembers**\r\n",
+					"\r\n",
+					"**_Input_**:\r\n",
+					"------------------------------------------------------------------------------------------------------------------------------------------------\r\n",
+					"Assuming datasets (AADGroups, AADGroupOwners and AADGroupMembers) are already pulled from MGDC and placed under required location as below  \r\n",
+					"AADGroups:  https://<<PipelineParameters:FillStorageAccountName>>.blob.core.windows.net/<<PipelineParameters:FillStorageAccountContainerName>>/groupdetails/2022/07/26/00000000-0000-0000-0000-000000000000/\r\n",
+					"\r\n",
+					"AADGroupOwners:  https://<<PipelineParameters:FillStorageAccountName>>.blob.core.windows.net/<<PipelineParameters:FillStorageAccountContainerName>>/groupowners/2022/07/26/00000000-0000-0000-0000-000000000000/\r\n",
+					"\r\n",
+					"AADGroupMembers:  https://<<PipelineParameters:FillStorageAccountName>>.blob.core.windows.net/<<PipelineParameters:FillStorageAccountContainerName>>/groupmembers/2022/07/26/00000000-0000-0000-0000-000000000000/\r\n",
+					"\r\n",
+					"_Note_: Please do change dates , storage account names and RunId (Guid) in the code cell - 2 \r\n",
+					"------------------------------------------------------------------------------------------------------------------------------------------------\r\n",
+					"------------------------------------------------------------------------------------------------------------------------------------------------\r\n",
+					"\r\n",
+					"**_Output_**:\r\n",
+					"------------------------------------------------------------------------------------------------------------------------------------------------\r\n",
+					"Data will be outputted into ADLS:\r\n",
+					"------------------------------------------------------------------------------------------------------------------------------------------------\r\n",
+					"\r\n",
+					"**AAD Owners and Members** - One row per AAD Group Which includes Owners and Members both expanded:  https://<<PipelineParameters:FillStorageAccountName>>.blob.core.windows.net/<<PipelineParameters:FillStorageAccountContainerName>>/latest/aadgroupsexpanded/\r\n",
+					"\r\n",
+					"Ex: GROUP1 -  OWNER1,OWNER2 - MEMBER1,MEMBER2\r\n",
+					"\r\n",
+					"Ex: GROUP2 -  OWNER21,OWNER22 - MEMBER21,MEMBER22\r\n",
+					"\r\n",
+					"**AAD Owners - One row per AAD Group & Owner (Expanded) ** : https://<<PipelineParameters:FillStorageAccountName>>.blob.core.windows.net/<<PipelineParameters:FillStorageAccountContainerName>>/latest/aadgroupsexpandedonlyowners/\r\n",
+					"\r\n",
+					"Ex: GROUP1 -  OWNER1\r\n",
+					"\r\n",
+					"Ex: GROUP1 -  OWNER2\r\n",
+					"\r\n",
+					"Ex: GROUP2 -  OWNER21\r\n",
+					"\r\n",
+					"Ex: GROUP2 -  OWNER22\r\n",
+					"\r\n",
+					"**AAD Members - One row per AAD Group & Member (Expanded)** : https://<<PipelineParameters:FillStorageAccountName>>.blob.core.windows.net/<<PipelineParameters:FillStorageAccountContainerName>>/latest/aadgroupsexpandedonlymembers/\r\n",
+					"\r\n",
+					"Ex: GROUP1 -  MEMBER1\r\n",
+					"\r\n",
+					"Ex: GROUP1 -  MEMBER2\r\n",
+					"\r\n",
+					"Ex: GROUP2 -  MEMBER21\r\n",
+					"\r\n",
+					"Ex: GROUP2 -  MEMBER22\r\n",
+					"\r\n",
+					"------------------------------------------------------------------------------------------------------------------------------------------------"
+				]
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"###### **Making sure Spark Context and spark utils are initialized**"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"microsoft": {
+						"language": "scala"
+					},
+					"tags": []
+				},
+				"source": [
+					"%%spark\r\n",
+					"println(\"Application Id: \" + spark.sparkContext.applicationId )\r\n",
+					"println(\"Application Name: \" + spark.sparkContext.appName)"
+				]
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"###### **Initialize all the incoming parameters.**\r\n",
+					"###### Note: **Below cell is marked as parameters. Values defined below are defaults and used when nothing is passed as input to notebook.**"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"tags": [
+						"parameters"
+					]
+				},
+				"source": [
+					"val windowStartTime  = \"2022-08-31T00:00:00Z\"\r\n",
+					"val windowEndTime = \"2022-08-31T00:00:00Z\"\r\n",
+					"val runId  = \"00000000-0000-0000-0000-000000000000\"\r\n",
+					"val storageAccountName = \"<<PipelineParameters:FillStorageAccountName>>\" // replace with your blob name\r\n",
+					"val storageContainerName = \"<<PipelineParameters:FillStorageAccountContainerName>>\" //replace with your container name"
+				]
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"###### **Initialize paths , storage accounts etc..**"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"tags": []
+				},
+				"source": [
+					"import java.text.SimpleDateFormat\r\n",
+					"import java.time.LocalDateTime\r\n",
+					"import java.time.format.DateTimeFormatter\r\n",
+					"import java.time.temporal.ChronoUnit\r\n",
+					"import org.apache.spark.sql.types._\r\n",
+					"\r\n",
+					"val standardDatePattern: String = \"yyyy-MM-dd'T'HH:mm:ss'Z'\"\r\n",
+					"val windowStartDateTimeLocal: LocalDateTime =\r\n",
+					"      LocalDateTime.parse(windowStartTime, DateTimeFormatter.ofPattern(standardDatePattern))\r\n",
+					"val windowEndTimeLocal: LocalDateTime =\r\n",
+					"      LocalDateTime.parse(windowEndTime, DateTimeFormatter.ofPattern(standardDatePattern))\r\n",
+					"\r\n",
+					"\r\n",
+					"val timeDirFormatter = DateTimeFormatter.ofPattern(\"yyyy/MM/dd\")\r\n",
+					"val yearMonthDayFormat = windowStartDateTimeLocal.format(timeDirFormatter).stripSuffix(\"/\")\r\n",
+					"\r\n",
+					"val adls_path = f\"abfss://$storageContainerName@$storageAccountName.dfs.core.windows.net\"\r\n",
+					"\r\n",
+					"val groupDetailsPath = adls_path + s\"/groupdetails/$yearMonthDayFormat/$runId/\"\r\n",
+					"val groupOwnersPath = adls_path + s\"/groupowners/$yearMonthDayFormat/$runId/\"\r\n",
+					"val groupMembersPath = adls_path + s\"/groupmembers/$yearMonthDayFormat/$runId/\"\r\n",
+					"val latestGroupsPath = adls_path + s\"/latest/aadgroupsexpanded/\"\r\n",
+					"val latestGroupsMembersOnlyPath = adls_path + s\"/latest/aadgroupsexpandedonlymembers/\"\r\n",
+					"val latestGroupsOwnersOnlyPath = adls_path + s\"/latest/aadgroupsexpandedonlyowners/\"\r\n",
+					"\r\n",
+					"\r\n",
+					"spark.conf.set(\"mapreduce.fileoutputcommitter.marksuccessfuljobs\", \"false\")\r\n",
+					"// if MSI Access not granted for syanpse workspace to blob then you might need to use below commands to read creds and to set spark conf\r\n",
+					"//spark.conf.set(s\"fs.azure.account.key.${storageAccountName}.blob.core.windows.net\",mssparkutils.credentials.getConnectionStringOrCreds(\"namarchimedessynapse-WorkspaceDefaultStorage\"))\r\n",
+					"//spark.conf.set(s\"fs.azure.account.key.${storageAccountName}.blob.core.windows.net\",mssparkutils.credentials.getConnectionStringOrCreds(\"LS_ADLSGen2\"))\r\n",
+					"\r\n",
+					"\r\n",
+					""
+				]
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"###### Reading Group Details"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"val inputJsonGroupDetailsDF =\r\n",
+					"    spark\r\n",
+					"      .read\r\n",
+					"      .format(\"json\")\r\n",
+					"      .option(\"recursiveFileLookup\", \"false\")\r\n",
+					"      .load(groupDetailsPath)\r\n",
+					"\r\n",
+					"val groupDetailsCustom = inputJsonGroupDetailsDF.filter(col(\"ODataType\")===\"#microsoft.graph.group\")\r\n",
+					"    .withColumn(\"GroupId\",col(\"id\"))\r\n",
+					"    .withColumn(\"GroupDisplayName\",col(\"displayName\"))\r\n",
+					"    .withColumn(\"Description\",col(\"description\"))\r\n",
+					"    .withColumn(\"EMail\",col(\"mail\"))\r\n",
+					"    .withColumn(\"Visibility\",col(\"visibility\"))\r\n",
+					"    .withColumn(\"SecurityEnabled\",col(\"securityEnabled\"))\r\n",
+					"    .withColumn(\"MailEnabled\",col(\"mailEnabled\"))\r\n",
+					"    .withColumn(\"GroupType\", when(size($\"groupTypes\") ===1,col(\"groupTypes\").getItem(0)).otherwise( lit(null)))\r\n",
+					"    .select(\"ptenant\",\"GroupId\",\"GroupDisplayName\",\"Description\",\"EMail\",\"Visibility\",\"SecurityEnabled\",\"MailEnabled\",\"GroupType\")        "
+				]
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"###### Reading Group Owners"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"val inputJsonGroupOwnersDF =\r\n",
+					"    spark\r\n",
+					"      .read\r\n",
+					"      .format(\"json\")\r\n",
+					"      .option(\"recursiveFileLookup\", \"false\")        \r\n",
+					"      .load(groupOwnersPath)\r\n",
+					"  \r\n",
+					"  val groupOwnersCustom = inputJsonGroupOwnersDF.filter(col(\"ODataType\")===\"#microsoft.graph.user\")\r\n",
+					"    .withColumn(\"GroupOwnerId\",col(\"id\"))\r\n",
+					"    .withColumn(\"GroupOwnerDisplayName\",col(\"displayName\"))\r\n",
+					"    .withColumn(\"GroupOwnerEMail\",col(\"userPrincipalName\"))\r\n",
+					"    .withColumnRenamed(\"ptenant\",\"GroupOwnerptenant\")\r\n",
+					"    .withColumn(\"GroupId\",regexp_replace(col(\"pObjectId\"),concat(lit(\"@\"),col(\"GroupOwnerptenant\")),lit(\"\")))\r\n",
+					"    .select(\"GroupOwnerptenant\",\"GroupId\",\"GroupOwnerId\",\"GroupOwnerDisplayName\",\"GroupOwnerEMail\")"
+				]
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"###### Reading Group Members"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"collapsed": false
+				},
+				"source": [
+					"val inputJsonGroupMembersDF =\r\n",
+					"      spark\r\n",
+					"      .read\r\n",
+					"      .format(\"json\")\r\n",
+					"      .option(\"recursiveFileLookup\", \"false\")\r\n",
+					"      .load(groupMembersPath)\r\n",
+					"\r\n",
+					"val groupMembersCustom = inputJsonGroupMembersDF //.filter(col(\"ODataType\")===\"#microsoft.graph.user\")\r\n",
+					".withColumn(\"puser\",col(\"id\"))\r\n",
+					".withColumn(\"DisplayName\",col(\"displayName\"))\r\n",
+					".withColumn(\"EMail\",col(\"userPrincipalName\"))\r\n",
+					".withColumn(\"GroupId\",regexp_replace(col(\"pObjectId\"),concat(lit(\"@\"),col(\"ptenant\")),lit(\"\")))\r\n",
+					".select(\"ptenant\",\"GroupId\",\"puser\",\"DisplayName\",\"EMail\",\"ODataType\")\r\n",
+					"\r\n",
+					"\r\n",
+					"groupMembersCustom\r\n",
+					".withColumn(\"MemberId\",col(\"puser\"))\r\n",
+					".createOrReplaceTempView(\"GroupMembersCustom\")\r\n",
+					""
+				]
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"###### Recursively Expand All AAD Groups With Members"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": true
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"collapsed": false
+				},
+				"source": [
+					"val CTEMembers = s\"\"\"\r\n",
+					"                    |WITH CTEGroupMembersT0 AS (\r\n",
+					"                    |  SELECT GroupId,MemberId,ODataType,DisplayName,EMail,ptenant, 0 AS Level\r\n",
+					"                    |    FROM GroupMembersCustom\r\n",
+					"                    |  )\r\n",
+					"                    |  ,CTEGroupMembersT1 AS (\r\n",
+					"                    |  SELECT G.GroupId,u.MemberId,U.ODataType,U.DisplayName,U.EMail,U.ptenant, Level + 1  AS Level\r\n",
+					"                    |    FROM CTEGroupMembersT0 G\r\n",
+					"                    |    JOIN GroupMembersCustom U\r\n",
+					"                    |      ON G.MemberId = U.GroupId\r\n",
+					"                    |     AND G.ptenant = U.ptenant\r\n",
+					"                    |    )\r\n",
+					"                    |  ,CTEGroupMembersT2 AS (\r\n",
+					"                    |  SELECT * FROM CTEGroupMembersT0 WHERE ODataType = '#microsoft.graph.user'\r\n",
+					"                    |  UNION\r\n",
+					"                    |  SELECT * FROM CTEGroupMembersT1 WHERE ODataType = '#microsoft.graph.user'\r\n",
+					"                    | )\r\n",
+					"                    | SELECT DISTINCT\r\n",
+					"                             GroupId\r\n",
+					"                    |       ,MemberId\r\n",
+					"                    |       ,DisplayName AS MemberDisplayName\r\n",
+					"                    |       ,EMail AS MemberEMail\r\n",
+					"                    |       ,ptenant AS Memberptenant\r\n",
+					"                    |       ,Level AS MemberLevel\r\n",
+					"                    |       ,\"User\" AS MemberType      \r\n",
+					"                    |   FROM CTEGroupMembersT2\r\n",
+					"                    |\"\"\".stripMargin\r\n",
+					"        \r\n",
+					"val groupMembersCustomExpanded =  spark.sql(CTEMembers)   \r\n",
+					""
+				]
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"###### Merge AAD Groups to Owners and preparing final dataset to output"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"collapsed": false
+				},
+				"source": [
+					"\r\n",
+					"val dfFinalGroupsWithOnlyOwnersNormalized=groupDetailsCustom.join(groupOwnersCustom,Seq(\"GroupId\"),\"left\")\r\n",
+					"    .withColumn(\"Owners\", struct(  col(\"GroupOwnerId\").alias(\"puser\")\r\n",
+					"                                            ,col(\"GroupOwnerDisplayName\").alias(\"DisplayName\")\r\n",
+					"                                            ,col(\"GroupOwnerEMail\").alias(\"EMail\")\r\n",
+					"                                            ,col(\"GroupOwnerptenant\").alias(\"ptenant\")\r\n",
+					"                                            ,(when(col(\"GroupOwnerId\").isNull,lit(null).cast(LongType)).otherwise(lit(-1).cast(LongType))).alias(\"Level\")\r\n",
+					"                                            ,(when(col(\"GroupOwnerId\").isNull,lit(null).cast(StringType)).otherwise(lit(\"User\").cast(StringType))).alias(\"Type\")\r\n",
+					"                                          )\r\n",
+					"                )\r\n",
+					"\r\n",
+					"val dfFinalGroupsWithOnlyMembersNormalized= groupDetailsCustom.join(groupMembersCustomExpanded,Seq(\"GroupId\"),\"left\")\r\n",
+					"    .withColumn(\"Members\", struct(  col(\"MemberId\").alias(\"puser\")\r\n",
+					"                                            ,col(\"MemberDisplayName\").alias(\"DisplayName\")\r\n",
+					"                                            ,col(\"MemberEMail\").alias(\"EMail\")                                            \r\n",
+					"                                            ,col(\"Memberptenant\").alias(\"ptenant\")\r\n",
+					"                                            ,col(\"MemberLevel\").alias(\"Level\")\r\n",
+					"                                            ,col(\"MemberType\").alias(\"Type\")\r\n",
+					"                                          )\r\n",
+					"              )\r\n",
+					"\r\n",
+					"val dfFinalGroups = groupDetailsCustom\r\n",
+					"                                .join(dfFinalGroupsWithOnlyOwnersNormalized.groupBy(\"GroupId\").agg(collect_set(col(\"Owners\")).alias(\"Owners\")),Seq(\"GroupId\"),\"left\")\r\n",
+					"                                .join(dfFinalGroupsWithOnlyMembersNormalized.groupBy(\"GroupId\").agg(collect_set(col(\"Members\")).alias(\"Members\")),Seq(\"GroupId\"),\"left\")\r\n",
+					"\r\n",
+					"/*\r\n",
+					"display(dfFinalGroups.filter(col(\"GroupId\") === \"c1448621-0fe5-4c22-a9b5-5aadac12812e\"))\r\n",
+					"display(dfFinalGroupsWithOnlyOwnersNormalized.filter(col(\"GroupId\") === \"c1448621-0fe5-4c22-a9b5-5aadac12812e\"))\r\n",
+					"display(dfFinalGroupsWithOnlyMembersNormalized.filter(col(\"GroupId\") === \"c1448621-0fe5-4c22-a9b5-5aadac12812e\"))\r\n",
+					"*/\r\n",
+					"\r\n",
+					""
+				]
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"###### Writing final dataset to latest location"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"dfFinalGroups\r\n",
+					"    .repartition(1)\r\n",
+					"    .write\r\n",
+					"    .format(\"json\")\r\n",
+					"    .mode(\"overwrite\")\r\n",
+					"    .save(latestGroupsPath)\r\n",
+					"\r\n",
+					"dfFinalGroupsWithOnlyOwnersNormalized\r\n",
+					"    .drop(\"Owners\")\r\n",
+					"    .repartition(1)\r\n",
+					"    .write\r\n",
+					"    .format(\"json\")\r\n",
+					"    .mode(\"overwrite\")\r\n",
+					"    .save(latestGroupsOwnersOnlyPath)    \r\n",
+					"    \r\n",
+					"dfFinalGroupsWithOnlyMembersNormalized\r\n",
+					"    .drop(\"Members\")\r\n",
+					"    .repartition(1)\r\n",
+					"    .write\r\n",
+					"    .format(\"json\")\r\n",
+					"    .mode(\"overwrite\")\r\n",
+					"    .save(latestGroupsMembersOnlyPath)\r\n",
+					"\r\n",
+					""
+				]
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"###### Display the sample data in table"
+				]
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"collapsed": false
+				},
+				"source": [
+					"display(dfFinalGroups)"
+				]
+			}
+		]
+	}
+}

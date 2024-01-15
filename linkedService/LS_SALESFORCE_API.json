@@ -1,0 +1,65 @@
+{
+	"name": "LS_SALESFORCE_API",
+	"type": "Microsoft.Synapse/workspaces/linkedservices",
+	"properties": {
+		"type": "Salesforce",
+		"annotations": [],
+		"parameters": {
+			"baseURL": {
+				"type": "string"
+			},
+			"UserName": {
+				"type": "string"
+			},
+			"SecretName": {
+				"type": "string"
+			},
+			"tokenSecretName": {
+				"type": "string"
+			},
+			"salesforceAPIversion": {
+				"type": "string"
+			}
+		},
+		"typeProperties": {
+			"environmentUrl": {
+				"value": "@linkedService().baseURL",
+				"type": "Expression"
+			},
+			"username": {
+				"value": "@linkedService().UserName",
+				"type": "Expression"
+			},
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "LS_AKV_SECURITY",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": {
+					"value": "@linkedService().SecretName",
+					"type": "Expression"
+				}
+			},
+			"securityToken": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "LS_AKV_SECURITY",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": {
+					"value": "@linkedService().tokenSecretName",
+					"type": "Expression"
+				}
+			},
+			"apiVersion": {
+				"value": "@linkedService().salesforceAPIversion",
+				"type": "Expression"
+			}
+		},
+		"connectVia": {
+			"referenceName": "AutoResolveIntegrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

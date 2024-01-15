@@ -1,0 +1,23 @@
+{
+	"name": "Pipeline10",
+	"properties": {
+		"activities": [
+			{
+				"name": "Execute Pipeline1",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Pipeline11",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2022-08-26T13:08:19Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}

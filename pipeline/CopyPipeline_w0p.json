@@ -1,0 +1,168 @@
+{
+	"name": "CopyPipeline_w0p",
+	"properties": {
+		"activities": [
+			{
+				"name": "ForEach_w0p",
+				"type": "ForEach",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.cw_items",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Copy_w0p",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [
+								{
+									"name": "Source",
+									"value": "dbo.@{item().source.table}"
+								},
+								{
+									"name": "Destination",
+									"value": "dbo.@{item().destination.table}"
+								}
+							],
+							"typeProperties": {
+								"source": {
+									"type": "SqlDWSource",
+									"partitionOption": "None"
+								},
+								"sink": {
+									"type": "SqlDWSink"
+								},
+								"enableStaging": false,
+								"validateDataConsistency": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"mappings": [
+										{
+											"source": {
+												"name": "PersonID",
+												"type": "Int32",
+												"physicalType": "int"
+											},
+											"sink": {
+												"name": "PersonID",
+												"type": "Int32",
+												"physicalType": "int"
+											}
+										},
+										{
+											"source": {
+												"name": "LastName",
+												"type": "String",
+												"physicalType": "varchar"
+											},
+											"sink": {
+												"name": "LastName",
+												"type": "String",
+												"physicalType": "varchar"
+											}
+										},
+										{
+											"source": {
+												"name": "FirstName",
+												"type": "String",
+												"physicalType": "varchar"
+											},
+											"sink": {
+												"name": "FirstName",
+												"type": "String",
+												"physicalType": "varchar"
+											}
+										},
+										{
+											"source": {
+												"name": "Address",
+												"type": "String",
+												"physicalType": "varchar"
+											},
+											"sink": {
+												"name": "Address",
+												"type": "String",
+												"physicalType": "varchar"
+											}
+										},
+										{
+											"source": {
+												"name": "City",
+												"type": "String",
+												"physicalType": "varchar"
+											},
+											"sink": {
+												"name": "City",
+												"type": "String",
+												"physicalType": "varchar"
+											}
+										}
+									],
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "SourceDataset_w0p",
+									"type": "DatasetReference",
+									"parameters": {
+										"cw_table": "@item().source.table"
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "DestinationDataset_w0p",
+									"type": "DatasetReference",
+									"parameters": {
+										"cw_table": "@item().destination.table"
+									}
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"cw_items": {
+				"type": "Array",
+				"defaultValue": [
+					{
+						"source": {
+							"table": "Persons"
+						},
+						"destination": {
+							"table": "Persons"
+						}
+					},
+					{
+						"source": {
+							"table": "PersonsAutoCreated"
+						},
+						"destination": {
+							"table": "PersonsAutoCreated"
+						}
+					}
+				]
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-07-27T09:20:03Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}

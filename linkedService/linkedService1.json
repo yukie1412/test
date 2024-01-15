@@ -1,12 +1,16 @@
 {
 	"name": "linkedService1",
-	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"type": "Microsoft.Synapse/workspaces/linkedservices",
 	"properties": {
 		"annotations": [],
-		"type": "AzureBlobFS",
+		"type": "AzureSqlDatabase",
 		"typeProperties": {
-			"url": "https://admsuxtest.dfs.core.windows.net/",
-			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQEIxRTM0M0EzLTMzRjktNDQ3NS1COTQzLTBCRTY0MDEwODYzMl9lMzdlZWUzZC1mY2JjLTQ5YzYtOGQ2Yi0xNzMyZmIzOTRiMTciDQp9"
+			"connectionString": "integrated security=False;encrypt=True;connection timeout=30;data source=testgaworkspace.database.windows.net;initial catalog=master;user id=fds",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIlRFU1RHQVdPUktTUEFDRV9lZDJjOTE1Yi0yZGEwLTRlNTctYjc0OS1hMDUzMmMxY2E3MTUiDQp9"
+		},
+		"connectVia": {
+			"referenceName": "AutoResolveIntegrationRuntime",
+			"type": "IntegrationRuntimeReference"
 		}
 	}
 }

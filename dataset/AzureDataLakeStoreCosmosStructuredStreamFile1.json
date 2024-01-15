@@ -1,0 +1,13 @@
+{
+	"name": "AzureDataLakeStoreCosmosStructuredStreamFile1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStoreCosmosStructuredStream1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureDataLakeStoreCosmosStructuredStreamFile",
+		"schema": []
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

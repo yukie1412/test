@@ -1,0 +1,19 @@
+{
+	"name": "Pipeline5t",
+	"properties": {
+		"activities": [
+			{
+				"name": "Wait12",
+				"type": "Wait",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"waitTimeInSeconds": 2
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2021-11-05T08:27:07Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}

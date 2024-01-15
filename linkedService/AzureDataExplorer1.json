@@ -1,20 +1,19 @@
 {
 	"name": "AzureDataExplorer1",
-	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"type": "Microsoft.Synapse/workspaces/linkedservices",
 	"properties": {
-		"parameters": {
-			"sp": {
-				"type": "String"
-			}
-		},
 		"annotations": [],
 		"type": "AzureDataExplorer",
 		"typeProperties": {
-			"endpoint": "https://admsuxtest.eastus.kusto.windows.net",
+			"endpoint": "https://purviewamericastest.centralus.kusto.windows.net",
 			"tenant": "72f988bf-86f1-41af-91ab-2d7cd011db47",
-			"servicePrincipalId": "@linkedService().sp",
-			"database": "asd",
-			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQEIxRTM0M0EzLTMzRjktNDQ3NS1COTQzLTBCRTY0MDEwODYzMl9iNGIxNGQzNy1mZWU0LTRiOWMtYjA1Yi1mZDBjODk2NDY0M2UiDQp9"
+			"servicePrincipalId": "fsf",
+			"database": "ffsdf",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIlRFU1RHQVdPUktTUEFDRV9lN2U4N2MxOS1mYjhjLTRhNzItYTBkOS0zNzI1ZGQ4OTA2Y2QiDQp9"
+		},
+		"connectVia": {
+			"referenceName": "AutoResolveIntegrationRuntime",
+			"type": "IntegrationRuntimeReference"
 		}
 	}
 }

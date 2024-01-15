@@ -1,0 +1,17 @@
+{
+	"name": "PNC_SYN_LKS_AKV_COM_01",
+	"type": "Microsoft.Synapse/workspaces/linkedservices",
+	"properties": {
+		"type": "AzureKeyVault",
+		"parameters": {
+			"PNC_AKV_COM_01": {
+				"type": "String",
+				"defaultValue": "https://pnc-akv-com-dev-01.vault.azure.net"
+			}
+		},
+		"annotations": [],
+		"typeProperties": {
+			"baseUrl": "@{linkedService().PNC_AKV_COM_01}"
+		}
+	}
+}

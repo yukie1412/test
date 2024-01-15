@@ -1,0 +1,24 @@
+{
+	"name": "test_SourceDataset_opo",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "test_SourceConnection_opo",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"cw_path": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "ODataResource",
+		"schema": [],
+		"typeProperties": {
+			"path": {
+				"value": "@dataset().cw_path",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

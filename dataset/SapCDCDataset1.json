@@ -1,0 +1,17 @@
+{
+	"name": "SapCDCDataset1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SapCDC1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SapCDCDataset",
+		"schema": [],
+		"typeProperties": {
+			"context": "ABAP_CDS",
+			"objectName": "SEPM_ICURRENCYT$T"
+		}
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

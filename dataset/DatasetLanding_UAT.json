@@ -1,0 +1,45 @@
+{
+	"name": "DatasetLanding_UAT",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_BFHL_LandingZone",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"containername": {
+				"type": "string",
+				"defaultValue": "@item().source"
+			},
+			"folderpath": {
+				"type": "string",
+				"defaultValue": "@concat(item().table1,'/',formatDateTime(addhours(addminutes(utcnow(),30),5),'yyyy'),'/',formatDateTime(addhours(addminutes(utcnow(),30),5),'MM'),'/',formatDateTime(addhours(addminutes(utcnow(),30),5),'dd'),'/',formatDateTime(addhours(addminutes(utcnow(),30),5),'HH'))"
+			},
+			"targetfilename": {
+				"type": "string",
+				"defaultValue": "@concat(item().table1,'_', formatDateTime(addhours(addminutes(utcnow(),30),5),'yyyyMMddHHmmss'),'.parquet')"
+			}
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().targetfilename",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@dataset().folderpath",
+					"type": "Expression"
+				},
+				"fileSystem": {
+					"value": "@dataset().containername",
+					"type": "Expression"
+				}
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

@@ -1,0 +1,24 @@
+{
+	"name": "TestPipeline_SourceDataset_bgy",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "TestPipeline_SourceConnection_bgy",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"cw_path": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "ODataResource",
+		"schema": [],
+		"typeProperties": {
+			"path": {
+				"value": "@dataset().cw_path",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

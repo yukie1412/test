@@ -1,0 +1,20 @@
+{
+	"name": "ls_DataLakeGen2_StorageAccountParm",
+	"type": "Microsoft.Synapse/workspaces/linkedservices",
+	"properties": {
+		"type": "AzureBlobFS",
+		"parameters": {
+			"DataLakeStorageAccountURL": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"typeProperties": {
+			"url": "@{linkedService().DataLakeStorageAccountURL}"
+		},
+		"connectVia": {
+			"referenceName": "AutoResolveIntegrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

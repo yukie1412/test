@@ -1,0 +1,29 @@
+{
+	"name": "Pipeline 7",
+	"properties": {
+		"activities": [
+			{
+				"name": "Wait1",
+				"type": "Wait",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"waitTimeInSeconds": 1
+				}
+			}
+		],
+		"parameters": {
+			"id": {
+				"type": "string",
+				"defaultValue": "test"
+			},
+			"id1": {
+				"type": "string",
+				"defaultValue": "test2"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-01-28T09:34:56Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}

@@ -1,0 +1,29 @@
+{
+	"name": "Pipelinespark",
+	"properties": {
+		"activities": [
+			{
+				"name": "Spark job definition1",
+				"type": "SparkJob",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"sparkJob": {
+						"referenceName": "Spark job definition 1",
+						"type": "SparkJobDefinitionReference"
+					}
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2022-12-08T02:17:27Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}

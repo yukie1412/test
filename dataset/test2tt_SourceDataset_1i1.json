@@ -1,0 +1,24 @@
+{
+	"name": "test2tt_SourceDataset_1i1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "test2tt_SourceConnection_1i1",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"cw_path": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "ODataResource",
+		"schema": [],
+		"typeProperties": {
+			"path": {
+				"value": "@dataset().cw_path",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

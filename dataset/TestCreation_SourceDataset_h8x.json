@@ -1,0 +1,24 @@
+{
+	"name": "TestCreation_SourceDataset_h8x",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Test-Creation_SourceConnection_h8x",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"cw_path": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "ODataResource",
+		"schema": [],
+		"typeProperties": {
+			"path": {
+				"value": "@dataset().cw_path",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

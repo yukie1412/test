@@ -1,0 +1,11 @@
+{
+	"name": "jenAkv",
+	"type": "Microsoft.Synapse/workspaces/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://jenAkv.vault.azure.net/"
+		}
+	}
+}

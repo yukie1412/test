@@ -1,0 +1,31 @@
+{
+	"name": "ls_db2_source",
+	"type": "Microsoft.Synapse/workspaces/linkedservices",
+	"properties": {
+		"type": "Db2",
+		"annotations": [],
+		"typeProperties": {
+			"connectionString": "@{linkedService().DB2ConnectionString}",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "ls_kv_ifp_secrets_pwd",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "@{linkedService().DB2Pwd}"
+			}
+		},
+		"parameters": {
+			"DB2ConnectionString": {
+				"type": "String"
+			},
+			"DB2Pwd": {
+				"type": "String"
+			}
+		},
+		"connectVia": {
+			"referenceName": "AutoResolveIntegrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

@@ -1,0 +1,126 @@
+{
+	"name": "BulkCopyFromDBToAzureDataExplorer1",
+	"properties": {
+		"description": "Use this template to copy large amount of data in bulk from database like SQL Server, Google BigQuery, etc to Azure Data Explorer (ADX), using control table to store partition list of source data.\n\nIf you want to copy data from a small number of tables with moderate size of data into ADX, it's more efficient to use “Copy Data tool” with intuitive wizard-based experience.",
+		"activities": [
+			{
+				"name": "GetPartitionList",
+				"description": "Lookup activity to retrieve the list of partitions stored in the control table.\n\nThis template assumes your control table is located in the same database as your source data, with the following schema. You can change the linked service in dataset or query in Settings to adapt to your case.\n\nPartitionId | SourceQuery | ADXTableName\n<e.g. 1> | <e.g. select * from table where lastModifiedTime >= '2019-08-01 00:00:00'> | <e.g. MyAdxTable>",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlSource",
+						"sqlReaderQuery": {
+							"value": "select @{pipeline().parameters.ControlTableSchemaPartitionID} as PartitionID, @{pipeline().parameters.ControlTableSchemaSourceQuery} as SourceQuery, @{pipeline().parameters.ControlTableSchemaADXTableName} as ADXTableName from @{pipeline().parameters.ControlTableName}",
+							"type": "Expression"
+						},
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "AzureSqlDatabaseControlTableDataset4",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "ForEachPartition",
+				"description": "ForEach activity to get the partition list from Lookup activity and then iterate each of them to Copy activity. ",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "GetPartitionList",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('GetPartitionList').output.value",
+						"type": "Expression"
+					},
+					"batchCount": 10,
+					"activities": [
+						{
+							"name": "CopyData",
+							"description": "Copy activity to copy each partition from source database to ADX.",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "SqlSource",
+									"sqlReaderQuery": {
+										"value": "@item().SourceQuery",
+										"type": "Expression"
+									},
+									"partitionOption": "None"
+								},
+								"sink": {
+									"type": "AzureDataExplorerSink"
+								},
+								"enableStaging": false
+							},
+							"inputs": [
+								{
+									"referenceName": "AzureSqlDatabaseSourceDataset4",
+									"type": "DatasetReference"
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "AzureDataExplorerTable4",
+									"type": "DatasetReference",
+									"parameters": {
+										"ADXTableName": {
+											"value": "@item().ADXTableName",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"ControlTableName": {
+				"type": "string"
+			},
+			"ControlTableSchemaPartitionId": {
+				"type": "string",
+				"defaultValue": "PartitionId"
+			},
+			"ControlTableSchemaSourceQuery": {
+				"type": "string",
+				"defaultValue": "SourceQuery"
+			},
+			"ControlTableSchemaADXTableName": {
+				"type": "string",
+				"defaultValue": "ADXTableName"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-08-27T05:20:37Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}

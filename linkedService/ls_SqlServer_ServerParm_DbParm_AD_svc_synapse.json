@@ -1,0 +1,25 @@
+{
+	"name": "ls_SqlServer_ServerParm_DbParm_AD_svc_synapse",
+	"type": "Microsoft.Synapse/workspaces/linkedservices",
+	"properties": {
+		"type": "SqlServer",
+		"parameters": {
+			"ServerName": {
+				"type": "string"
+			},
+			"DatabaseName": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"typeProperties": {
+			"connectionString": "integrated security=True;data source=@{linkedService().ServerName};initial catalog=@{linkedService().DatabaseName}",
+			"userName": "ad\\svc_synapse",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiIwOGI3MGUyYS1lMjIwLTQwMDQtYjc3Zi1kZDQ3NDdiMWViYWYiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "AutoResolveIntegrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

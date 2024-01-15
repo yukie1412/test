@@ -1,0 +1,56 @@
+{
+	"name": "PNC_SYN_SDS_RST_API",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "PNC_SYN_LKS_SCF_RST_API_COM_01",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"AKV": {
+					"value": "@dataset().AKV",
+					"type": "Expression"
+				},
+				"APIBaseURL": {
+					"value": "@dataset().APIBaseURL",
+					"type": "Expression"
+				},
+				"APIUser": {
+					"value": "@dataset().APIUser",
+					"type": "Expression"
+				}
+			}
+		},
+		"parameters": {
+			"CP_Rest_Param_Skip": {
+				"type": "int"
+			},
+			"LastModifiedDateTime_Rest": {
+				"type": "string"
+			},
+			"RelativeURL": {
+				"type": "string"
+			},
+			"AKV": {
+				"type": "String",
+				"defaultValue": "https://pnc-akv-com-dev-01.vault.azure.net"
+			},
+			"APIBaseURL": {
+				"type": "String",
+				"defaultValue": "https://api10preview.sapsf.com"
+			},
+			"APIUser": {
+				"type": "String",
+				"defaultValue": "30Sweetsai30@metcashtraT3"
+			}
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"typeProperties": {
+			"relativeUrl": {
+				"value": "@dataset().RelativeURL",
+				"type": "Expression"
+			}
+		},
+		"schema": []
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

@@ -1,0 +1,43 @@
+{
+	"name": "MetadataDrivenCopyTask_fo8_DestinationDS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ParameterizedSql2",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"aa": {
+					"value": "@dataset().cw_ls_aa",
+					"type": "Expression"
+				}
+			}
+		},
+		"parameters": {
+			"cw_table": {
+				"type": "String"
+			},
+			"cw_schema": {
+				"type": "String"
+			},
+			"cw_ls_aa": {
+				"type": "String"
+			}
+		},
+		"folder": {
+			"name": "MetadataDrivenCopyTask_fo8_20231225"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": {
+				"value": "@dataset().cw_schema",
+				"type": "Expression"
+			},
+			"table": {
+				"value": "@dataset().cw_table",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

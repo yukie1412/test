@@ -1,0 +1,46 @@
+{
+	"name": "PNC_SYN_LKS_SCF_RST_API_COM_01",
+	"type": "Microsoft.Synapse/workspaces/linkedservices",
+	"properties": {
+		"type": "RestService",
+		"parameters": {
+			"AKV": {
+				"type": "String",
+				"defaultValue": "https://pnc-akv-com-dev-01.vault.azure.net"
+			},
+			"APIBaseURL": {
+				"type": "String",
+				"defaultValue": "https://api10preview.sapsf.com "
+			},
+			"APIUser": {
+				"type": "String",
+				"defaultValue": "30Sweetsai30@metcashtraT3"
+			}
+		},
+		"annotations": [],
+		"typeProperties": {
+			"url": "@{linkedService().APIBaseURL}",
+			"enableServerCertificateValidation": false,
+			"authenticationType": "Basic",
+			"userName": "@{linkedService().APIUser}",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "PNC_SYN_LKS_AKV_COM_01",
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"PNC_AKV_COM_01": {
+							"value": "@linkedService().AKV",
+							"type": "Expression"
+						}
+					}
+				},
+				"secretName": "PNC-SCF-API-SEC-01"
+			}
+		},
+		"connectVia": {
+			"referenceName": "AutoResolveIntegrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

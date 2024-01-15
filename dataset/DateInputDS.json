@@ -1,0 +1,48 @@
+{
+	"name": "DateInputDS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "PNC_SYN_LKS_ABS_COM",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"AzBlobBaseUrl": {
+					"value": "@dataset().AzBlobStorageAcnt",
+					"type": "Expression"
+				}
+			}
+		},
+		"parameters": {
+			"AzBlobStorageAcnt": {
+				"type": "string",
+				"defaultValue": "https://sav2pim.dfs.core.windows.net"
+			},
+			"FilePath_Storage": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "DateInput.csv",
+				"folderPath": "SuccessFactors/XRef",
+				"fileSystem": {
+					"value": "@dataset().FilePath_Storage",
+					"type": "Expression"
+				}
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "CurrentDate\tLoadType",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

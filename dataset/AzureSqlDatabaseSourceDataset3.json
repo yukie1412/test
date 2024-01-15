@@ -1,0 +1,14 @@
+{
+	"name": "AzureSqlDatabaseSourceDataset3",
+	"properties": {
+		"description": "Dataset for source.",
+		"linkedServiceName": {
+			"referenceName": "linkedService1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

@@ -1,0 +1,17 @@
+{
+	"name": "costanalysisdb",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "mydevsqldb",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "costanalysis"
+		}
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

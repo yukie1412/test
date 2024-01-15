@@ -1,0 +1,213 @@
+{
+	"name": "SourceDataset_w00",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ParameterizedAzureSql",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "abstime",
+				"type": "nvarchar"
+			},
+			{
+				"name": "bigint",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "bit",
+				"type": "varbinary"
+			},
+			{
+				"name": "bitvarying",
+				"type": "varbinary"
+			},
+			{
+				"name": "boolean",
+				"type": "bit"
+			},
+			{
+				"name": "box",
+				"type": "nvarchar"
+			},
+			{
+				"name": "bytea",
+				"type": "varbinary"
+			},
+			{
+				"name": "character",
+				"type": "nvarchar"
+			},
+			{
+				"name": "charactervarying",
+				"type": "nvarchar"
+			},
+			{
+				"name": "cid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "cidr",
+				"type": "nvarchar"
+			},
+			{
+				"name": "circle",
+				"type": "nvarchar"
+			},
+			{
+				"name": "date",
+				"type": "datetime2",
+				"scale": 0
+			},
+			{
+				"name": "daterange",
+				"type": "nvarchar"
+			},
+			{
+				"name": "doubleprecision",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "inet",
+				"type": "nvarchar"
+			},
+			{
+				"name": "intarray",
+				"type": "nvarchar"
+			},
+			{
+				"name": "int4range",
+				"type": "nvarchar"
+			},
+			{
+				"name": "int8range",
+				"type": "nvarchar"
+			},
+			{
+				"name": "integer",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "interval",
+				"type": "time",
+				"scale": 0
+			},
+			{
+				"name": "json",
+				"type": "nvarchar"
+			},
+			{
+				"name": "lseg",
+				"type": "nvarchar"
+			},
+			{
+				"name": "macaddr",
+				"type": "nvarchar"
+			},
+			{
+				"name": "money",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 0
+			},
+			{
+				"name": "numeric",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 0
+			},
+			{
+				"name": "numrange",
+				"type": "nvarchar"
+			},
+			{
+				"name": "oid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "path",
+				"type": "nvarchar"
+			},
+			{
+				"name": "point",
+				"type": "nvarchar"
+			},
+			{
+				"name": "polygon",
+				"type": "nvarchar"
+			},
+			{
+				"name": "real",
+				"type": "real",
+				"precision": 7
+			},
+			{
+				"name": "smallint",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "text",
+				"type": "nvarchar"
+			},
+			{
+				"name": "tiemwithtimezone",
+				"type": "datetimeoffset",
+				"scale": 0
+			},
+			{
+				"name": "timewithouttimezone",
+				"type": "datetimeoffset",
+				"scale": 0
+			},
+			{
+				"name": "timestampwithtimezone",
+				"type": "datetime2",
+				"scale": 0
+			},
+			{
+				"name": "timestampwithouttimezone",
+				"type": "datetime2",
+				"scale": 0
+			},
+			{
+				"name": "tinterval",
+				"type": "nvarchar"
+			},
+			{
+				"name": "tsrange",
+				"type": "nvarchar"
+			},
+			{
+				"name": "tstzrange",
+				"type": "nvarchar"
+			},
+			{
+				"name": "tsvector",
+				"type": "nvarchar"
+			},
+			{
+				"name": "uuid",
+				"type": "uniqueidentifier"
+			},
+			{
+				"name": "xid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "xml",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "alltypes"
+		}
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

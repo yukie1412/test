@@ -1,0 +1,24 @@
+{
+	"name": "onCloseSavePQModal_SourceDataset_1x8",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "onCloseSavePQModal_SourceConnection_1x8",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"cw_path": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "ODataResource",
+		"schema": [],
+		"typeProperties": {
+			"path": {
+				"value": "@dataset().cw_path",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

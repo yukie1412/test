@@ -1,0 +1,51 @@
+{
+	"name": "ds_DataLakeGen2_Parquet_AcctParm_FilepathParms",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_DataLakeGen2_StorageAccountParm",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"DataLakeStorageAccountURL": {
+					"value": "@dataset().DataLakeStorageAccountURL",
+					"type": "Expression"
+				}
+			}
+		},
+		"parameters": {
+			"StorageContainer": {
+				"type": "string"
+			},
+			"FolderPath": {
+				"type": "string"
+			},
+			"FileName": {
+				"type": "string"
+			},
+			"DataLakeStorageAccountURL": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().FileName",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@dataset().FolderPath",
+					"type": "Expression"
+				},
+				"fileSystem": {
+					"value": "@dataset().StorageContainer",
+					"type": "Expression"
+				}
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

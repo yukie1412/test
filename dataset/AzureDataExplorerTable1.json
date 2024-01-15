@@ -1,0 +1,25 @@
+{
+	"name": "AzureDataExplorerTable1",
+	"properties": {
+		"description": "Dataset for Azure Data Explorer sink.",
+		"linkedServiceName": {
+			"referenceName": "AzureDataExplorer1",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"ADXTableName": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "AzureDataExplorerTable",
+		"schema": [],
+		"typeProperties": {
+			"table": {
+				"value": "@dataset().ADXTableName",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

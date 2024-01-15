@@ -1,0 +1,61 @@
+{
+	"name": "DS_D365_Country",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Lnk_D365_SQL_DB",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "CountryID",
+				"type": "uniqueidentifier"
+			},
+			{
+				"name": "Country",
+				"type": "nvarchar"
+			},
+			{
+				"name": "RegionID",
+				"type": "uniqueidentifier"
+			},
+			{
+				"name": "IsActive",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CountryStatus",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ippm_region_entitytype",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CreatedBy",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ModifiedBy",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CreatedOn",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "ModifiedOn",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"tableName": "[d365].[Country]"
+		}
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

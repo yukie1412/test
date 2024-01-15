@@ -1,0 +1,23 @@
+{
+	"name": "LS_BFHL_Monitoring_Admin",
+	"type": "Microsoft.Synapse/workspaces/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureMySql",
+		"typeProperties": {
+			"connectionString": "Server=52.140.97.105;Port=3306;Database=monitoring_uat;UID=monitoring_uat_admin;SSLMode=1;UseSystemTrustStore=0",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "LS_CDM_UAT_Vault",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "MONITORINGDBPASSWD"
+			}
+		},
+		"connectVia": {
+			"referenceName": "AutoResolveIntegrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

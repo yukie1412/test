@@ -1,0 +1,43 @@
+{
+	"name": "Pipeline 6",
+	"properties": {
+		"activities": [
+			{
+				"name": "Stored procedure1",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "TEST1",
+					"storedProcedureParameters": {
+						"id": {
+							"value": "idtest1",
+							"type": "Datetime"
+						},
+						"id1": {
+							"value": "test1",
+							"type": "Datetime"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "ParameterizedSql2",
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"aa": "ADMS-UX-TEST-SQL-ConnectionString"
+					}
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2022-01-28T07:33:55Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}

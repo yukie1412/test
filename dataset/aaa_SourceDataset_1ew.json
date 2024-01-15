@@ -1,0 +1,24 @@
+{
+	"name": "aaa_SourceDataset_1ew",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "aaa_SourceConnection_1ew",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"cw_path": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "ODataResource",
+		"schema": [],
+		"typeProperties": {
+			"path": {
+				"value": "@dataset().cw_path",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

@@ -1,0 +1,13 @@
+{
+	"name": "DS_BFHL_DoctorListing1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_BFHL_DoctorListing",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureMySqlTable",
+		"schema": []
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}
