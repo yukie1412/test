@@ -1,17 +1,21 @@
 {
 	"name": "Lakehouse1",
-	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"type": "Microsoft.Synapse/workspaces/linkedservices",
 	"properties": {
 		"annotations": [],
 		"type": "Lakehouse",
 		"typeProperties": {
-			"workspaceId": "bb378869-860e-4af0-9239-a845c3dbb0d1",
-			"artifactId": "1e54037c-b6f1-4162-b951-d46a5f8f6746",
-			"rootFolder": "Files",
-			"credential": {
-				"referenceName": "credential2",
-				"type": "CredentialReference"
-			}
+			"workspaceId": "934983cb-5913-47d9-9d02-e33057acb562",
+			"artifactId": "84c05ecb-8d38-4353-a9d1-2acdb916d1cd",
+			"tenant": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+			"servicePrincipalId": "9183bb9c-906b-41fe-b7b3-c356ed761548",
+			"servicePrincipalCredentialType": "ServicePrincipalKey",
+			"fabricEnvironment": "DXT",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIlNZTkFQU0VANTM4MDNGNDItQ0ZCNi00RDkyLTg2RkYtNjdGMjRBQkUxQUM3XzY2Yjc4YjBhLTFhYTktNGRiNC05ZTYxLWQ4NmJmOGM0YTI4YiINCn0="
+		},
+		"connectVia": {
+			"referenceName": "AutoResolveIntegrationRuntime",
+			"type": "IntegrationRuntimeReference"
 		}
 	}
 }

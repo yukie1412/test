@@ -22,6 +22,8 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
+					"method": "GET",
+					"disableCertValidation": false,
 					"url": {
 						"value": "@concat(\r\n         pipeline().parameters.APIBaseURL\r\n        ,'/odata/v2/',pipeline().parameters.Entity\r\n        ,'/$count?$filter=(lastModifiedDateTime gt '\r\n        ,''''\r\n        , activity('Lookup1-GetLastModifiedDate').output.firstRow.lastModifiedDateTime\r\n        ,''''\r\n        ,')'\r\n        )",
 						"type": "Expression"
@@ -30,8 +32,6 @@
 						"referenceName": "AutoResolveIntegrationRuntime",
 						"type": "IntegrationRuntimeReference"
 					},
-					"method": "GET",
-					"disableCertValidation": false,
 					"authentication": {
 						"type": "Basic",
 						"username": {

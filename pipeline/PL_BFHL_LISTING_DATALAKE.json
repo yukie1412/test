@@ -22,14 +22,14 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
+					"method": "POST",
+					"headers": {
+						"Content-Type": "application/json"
+					},
 					"url": "https://prod-20.centralindia.logic.azure.com:443/workflows/d98c8062fa834f4bacac51f64c369198/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=FwVaC2r3D5zdFJEtmdHSmdkn5gAfoW5Gzq13glHnG4w",
 					"connectVia": {
 						"referenceName": "AutoResolveIntegrationRuntime",
 						"type": "IntegrationRuntimeReference"
-					},
-					"method": "POST",
-					"headers": {
-						"Content-Type": "application/json"
 					},
 					"body": {
 						"value": "@concat('{\"DataFactoryName\":\" ' , pipeline().DataFactory , '\",\"PipelineName\":\"',pipeline().Pipeline,'\",\"Subject\":\"',pipeline().parameters.p_source_name,'-Synapse source to delta data load succeeded\",\"ErrorMessage\":\"\",\"EmailTo\":\"',activity('GETEmailList').output.firstrow.EmailAlert,'\"}')",
@@ -68,14 +68,14 @@
 							},
 							"userProperties": [],
 							"typeProperties": {
+								"method": "POST",
+								"headers": {
+									"Content-Type": "application/json"
+								},
 								"url": "https://prod-20.centralindia.logic.azure.com:443/workflows/d98c8062fa834f4bacac51f64c369198/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=FwVaC2r3D5zdFJEtmdHSmdkn5gAfoW5Gzq13glHnG4w",
 								"connectVia": {
 									"referenceName": "AutoResolveIntegrationRuntime",
 									"type": "IntegrationRuntimeReference"
-								},
-								"method": "POST",
-								"headers": {
-									"Content-Type": "application/json"
 								},
 								"body": {
 									"value": "@concat('{\"DataFactoryName\":\"',pipeline().DataFactory,'\",\"PipelineName\":\"',pipeline().Pipeline,'\",\"Subject\":\"',pipeline().parameters.p_source_name,'-Synapse source to Landing data load succeeded\",\"ErrorMessage\":\"\",\"EmailTo\":\"',activity('GETEmailList').output.firstrow.EmailAlert,'\"}')",
@@ -218,14 +218,14 @@
 							},
 							"userProperties": [],
 							"typeProperties": {
+								"method": "POST",
+								"headers": {
+									"Content-Type": "application/json"
+								},
 								"url": "https://prod-20.centralindia.logic.azure.com:443/workflows/d98c8062fa834f4bacac51f64c369198/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=FwVaC2r3D5zdFJEtmdHSmdkn5gAfoW5Gzq13glHnG4w",
 								"connectVia": {
 									"referenceName": "AutoResolveIntegrationRuntime",
 									"type": "IntegrationRuntimeReference"
-								},
-								"method": "POST",
-								"headers": {
-									"Content-Type": "application/json"
 								},
 								"body": {
 									"value": "@concat('{\"DataFactoryName\":\"',pipeline().DataFactory,'\",\"PipelineName\":\"',pipeline().Pipeline,'\",\"Subject\":\"',pipeline().parameters.p_source_name,'-synapse data load failed\",\"ErrorMessage\":\"The synapse pipeline has crashed! Please check the logs.\",\"EmailTo\":\"',activity('GETEmailList').output.firstrow.EmailAlert,'\"}')",
@@ -256,14 +256,14 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
+					"method": "POST",
+					"headers": {
+						"Content-Type": "application/json"
+					},
 					"url": "https://prod-20.centralindia.logic.azure.com:443/workflows/d98c8062fa834f4bacac51f64c369198/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=FwVaC2r3D5zdFJEtmdHSmdkn5gAfoW5Gzq13glHnG4w",
 					"connectVia": {
 						"referenceName": "AutoResolveIntegrationRuntime",
 						"type": "IntegrationRuntimeReference"
-					},
-					"method": "POST",
-					"headers": {
-						"Content-Type": "application/json"
 					},
 					"body": {
 						"value": "@concat('{\"DataFactoryName\":\"',pipeline().DataFactory,'\",\"PipelineName\":\"',pipeline().Pipeline,'\",\"Subject\":\"',pipeline().parameters.p_source_name,'-synapse Delta load failed\",\"ErrorMessage\":\"The Databricks-Synapse pipeline has crashed! Please check the logs.\",\"EmailTo\":\"',activity('GETEmailList').output.firstrow.EmailAlert,'\"}')",
@@ -442,14 +442,14 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
+					"method": "POST",
+					"headers": {
+						"Content-Type": "application/json"
+					},
 					"url": "https://prod-20.centralindia.logic.azure.com:443/workflows/d98c8062fa834f4bacac51f64c369198/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=FwVaC2r3D5zdFJEtmdHSmdkn5gAfoW5Gzq13glHnG4w",
 					"connectVia": {
 						"referenceName": "AutoResolveIntegrationRuntime",
 						"type": "IntegrationRuntimeReference"
-					},
-					"method": "POST",
-					"headers": {
-						"Content-Type": "application/json"
 					},
 					"body": {
 						"value": "@concat('{\"DataFactoryName\":\"',pipeline().DataFactory,'\",\"PipelineName\":\"',pipeline().Pipeline,'\",\"Subject\":\"',pipeline().parameters.p_source_name,'-synapse data load failed\",\"ErrorMessage\":\"The synapse pipeline has crashed! Please check the logs.\",\"EmailTo\":\"',activity('GETEmailList').output.firstrow.EmailAlert,'\"}')",
@@ -477,14 +477,14 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
+					"method": "POST",
+					"headers": {
+						"Content-Type": "application/json"
+					},
 					"url": "https://prod-20.centralindia.logic.azure.com:443/workflows/d98c8062fa834f4bacac51f64c369198/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=FwVaC2r3D5zdFJEtmdHSmdkn5gAfoW5Gzq13glHnG4w",
 					"connectVia": {
 						"referenceName": "AutoResolveIntegrationRuntime",
 						"type": "IntegrationRuntimeReference"
-					},
-					"method": "POST",
-					"headers": {
-						"Content-Type": "application/json"
 					},
 					"body": {
 						"value": "@concat('{\"DataFactoryName\":\"',pipeline().DataFactory,'\",\"PipelineName\":\"',pipeline().Pipeline,'\",\"Subject\":\"',pipeline().parameters.p_source_name,'-synapse load failed\",\"ErrorMessage\":\"The synapse pipeline has crashed! Please check the logs.\",\"EmailTo\":\"',activity('GETEmailList').output.firstrow.EmailAlert,'\"}')",

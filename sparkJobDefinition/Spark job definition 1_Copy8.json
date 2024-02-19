@@ -1,0 +1,35 @@
+{
+	"name": "Spark job definition 1_Copy8",
+	"properties": {
+		"targetBigDataPool": {
+			"referenceName": "aaaa",
+			"type": "BigDataPoolReference"
+		},
+		"requiredSparkVersion": "2.4",
+		"language": "scala",
+		"scanFolder": false,
+		"jobProperties": {
+			"name": "Spark job definition 1_Copy8",
+			"file": "abfss://filesystem@account.dfs.core.windows.net/mySpark.jar",
+			"className": "mmm",
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "1",
+				"spark.dynamicAllocation.maxExecutors": "2",
+				"spark.autotune.trackingId": "4cd95954-7175-450c-b2fc-af516d72bb58",
+				"spark.synapse.context.sjdname": "Spark job definition 1_Copy8"
+			},
+			"args": [],
+			"jars": [],
+			"pyFiles": [
+				""
+			],
+			"files": [],
+			"driverMemory": "56g",
+			"driverCores": 8,
+			"executorMemory": "56g",
+			"executorCores": 8,
+			"numExecutors": 2
+		}
+	}
+}

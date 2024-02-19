@@ -15,12 +15,12 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
+					"method": "GET",
 					"url": "http://asdf",
 					"connectVia": {
 						"referenceName": "IntegrationRuntime7Fang",
 						"type": "IntegrationRuntimeReference"
-					},
-					"method": "GET"
+					}
 				}
 			}
 		],

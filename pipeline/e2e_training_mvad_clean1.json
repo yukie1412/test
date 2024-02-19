@@ -352,11 +352,11 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
+					"method": "PUT",
 					"url": {
 						"value": "https://adtml-synapse-poc.dev.azuresynapse.net/triggers/Trigger15min?api-version=2020-12-01",
 						"type": "Expression"
 					},
-					"method": "PUT",
 					"body": {
 						"value": "{\n    \"properties\": {\n        \"pipelines\": [\n            {\n                \"pipelineReference\": {\n                    \"referenceName\": \"e2e_inferencing_mvad\",\n                    \"type\": \"PipelineReference\"\n                },\n                \"parameters\": {\n                    \"query\": \"@{pipeline().parameters.query}\",\n                    \"adls_account\": \"@{pipeline().parameters.adls_account}\",\n                    \"adls_container\": \"@{pipeline().parameters.adls_container}\",\n                    \"kusto_linked_service\": \"@{pipeline().parameters.kusto_linked_service}\",\n                    \"kusto_database\": \"@{pipeline().parameters.kusto_database}\",\n                    \"query_name\": \"@{pipeline().parameters.query_name}\",\n                    \"kv_linked_service\": \"@{pipeline().parameters.kv_linked_service}\",\n                    \"kv_name\": \"@{pipeline().parameters.kv_name}\",\n                    \"mvad_kv_secret_name\": \"@{pipeline().parameters.mvad_kv_secret_name}\",\n                    \"adls_kv_secret_name\": \"@{pipeline().parameters.adls_kv_secret_name}\",\n                    \"mvad_endpoint\": \"@{pipeline().parameters.mvad_endpoint}\",\n                    \"sliding_window\": @{pipeline().parameters.sliding_window},\n                    \"model_id\": \"@{variables('model_id')}\",\n                    \"adt_endpoint\": \"https://yizhu2-DhAdtInstance.api.wcus.digitaltwins.azure.net\",\n                    \"adx_table\": \"adt_dh_yizhu2_DhAdtInstance_westcentralus\",\n                    \"customer_adt_query\": \"SELECT SALT_MACHINE.$dtId as tid FROM DIGITALTWINS FACTORY JOIN SALT_MACHINE RELATED FACTORY.contains WHERE FACTORY.$dtId = 'OsloFactory' AND IS_OF_MODEL(SALT_MACHINE , 'dtmi:assetGen:SaltMachine;1')\",\n                    \"relevant_metrics\": [\n                        \"OutFlow\",\n                        \"InFlow\"\n                    ]\n                }\n            }\n        ],\n        \"type\": \"ScheduleTrigger\",\n        \"typeProperties\": {\n            \"recurrence\": {\n                \"frequency\": \"Minute\",\n                \"interval\": 10,\n                \"startTime\": \"2021-12-08T21:31:00\",\n                \"endTime\": \"2022-01-08T22:31:50\",\n                \"timeZone\": \"Eastern Standard Time\"\n            }\n        }\n    }\n}",
 						"type": "Expression"
@@ -387,11 +387,11 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
+					"method": "POST",
 					"url": {
 						"value": "https://adtml-synapse-poc.dev.azuresynapse.net/triggers/Trigger15min/start?api-version=2020-12-01",
 						"type": "Expression"
 					},
-					"method": "POST",
 					"authentication": {
 						"type": "MSI",
 						"resource": "https://dev.azuresynapse.net/"
