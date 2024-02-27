@@ -1,0 +1,16 @@
+{
+	"name": "AzureSynapseArtifacts1",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSynapseArtifacts",
+		"typeProperties": {
+			"endpoint": "https://3941workspace.dev.azuresynapse.net",
+			"authentication": "MSI",
+			"workspaceResourceId": "/subscriptions/d6b94691-be21-4876-bd3a-596acb689a50/resourceGroups/maarumug/providers/Microsoft.Synapse/workspaces/3941workspace"
+		},
+		"connectVia": {
+			"referenceName": "integrationRuntime2",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
