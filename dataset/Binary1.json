@@ -2,15 +2,15 @@
 	"name": "Binary1",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureBlobStorage2",
+			"referenceName": "AzureDataLakeStorage3",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
 		"type": "Binary",
 		"typeProperties": {
 			"location": {
-				"type": "AzureBlobStorageLocation",
-				"container": "asdf"
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "mgdcswsstesting"
 			}
 		}
 	},

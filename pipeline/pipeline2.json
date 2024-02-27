@@ -16,156 +16,47 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "Office365Source",
-						"startTime": "2023-10-09T00:00:00Z",
-						"endTime": "2023-10-23T00:00:00Z",
-						"outputColumns": [
-							{
-								"name": "id"
-							},
-							{
-								"name": "allowNewTimeProposals"
-							},
-							{
-								"name": "createdDateTime"
-							},
-							{
-								"name": "lastModifiedDateTime"
-							},
-							{
-								"name": "changeKey"
-							},
-							{
-								"name": "categories"
-							},
-							{
-								"name": "originalStartTimeZone"
-							},
-							{
-								"name": "originalEndTimeZone"
-							},
-							{
-								"name": "responseStatus"
-							},
-							{
-								"name": "iCalUId"
-							},
-							{
-								"name": "isOnlineMeeting"
-							},
-							{
-								"name": "reminderMinutesBeforeStart"
-							},
-							{
-								"name": "isReminderOn"
-							},
-							{
-								"name": "hasAttachments"
-							},
-							{
-								"name": "subject"
-							},
-							{
-								"name": "body"
-							},
-							{
-								"name": "importance"
-							},
-							{
-								"name": "sensitivity"
-							},
-							{
-								"name": "start"
-							},
-							{
-								"name": "end"
-							},
-							{
-								"name": "location"
-							},
-							{
-								"name": "isAllDay"
-							},
-							{
-								"name": "isCancelled"
-							},
-							{
-								"name": "isOrganizer"
-							},
-							{
-								"name": "onlineMeeting"
-							},
-							{
-								"name": "onlineMeetingProvider"
-							},
-							{
-								"name": "recurrence"
-							},
-							{
-								"name": "responseRequested"
-							},
-							{
-								"name": "showAs"
-							},
-							{
-								"name": "transactionId"
-							},
-							{
-								"name": "type"
-							},
-							{
-								"name": "attendees"
-							},
-							{
-								"name": "organizer"
-							},
-							{
-								"name": "webLink"
-							},
-							{
-								"name": "attachments"
-							},
-							{
-								"name": "bodyPreview"
-							},
-							{
-								"name": "locations"
-							},
-							{
-								"name": "onlineMeetingUrl"
-							},
-							{
-								"name": "seriesMasterId"
-							},
-							{
-								"name": "originalStart"
-							}
-						]
-					},
-					"sink": {
-						"type": "BinarySink",
-						"storeSettings": {
-							"type": "AzureBlobStorageWriteSettings"
+						"type": "SnowflakeSource",
+						"exportSettings": {
+							"type": "SnowflakeExportCopyCommand"
 						}
 					},
-					"enableStaging": false
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": true,
+					"stagingSettings": {
+						"linkedServiceName": {
+							"referenceName": "blobSas",
+							"type": "LinkedServiceReference"
+						},
+						"path": "jenoutput"
+					}
 				},
 				"inputs": [
 					{
-						"referenceName": "Microsoft365Table1",
+						"referenceName": "SnowflakeTable1",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "Binary1",
+						"referenceName": "DelimitedText2",
 						"type": "DatasetReference"
 					}
 				]
 			}
 		],
 		"annotations": [],
-		"lastPublishTime": "2023-10-07T06:15:46Z"
+		"lastPublishTime": "2023-01-16T07:29:50Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }

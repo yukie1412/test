@@ -5,17 +5,13 @@
 		"annotations": [],
 		"type": "Lakehouse",
 		"typeProperties": {
-			"workspaceId": "a9176e17-791e-4a41-a86d-347a92cfd66f",
-			"artifactId": "bbedea45-7447-4dea-8809-f14db5cf6e50",
-			"rootFolder": "Tables",
+			"workspaceId": "bb378869-860e-4af0-9239-a845c3dbb0d1",
+			"artifactId": "1e54037c-b6f1-4162-b951-d46a5f8f6746",
+			"rootFolder": "Files",
 			"credential": {
 				"referenceName": "credential2",
 				"type": "CredentialReference"
 			}
-		},
-		"connectVia": {
-			"referenceName": "integrationRuntime1",
-			"type": "IntegrationRuntimeReference"
 		}
 	}
 }

@@ -9,7 +9,7 @@
 		"type": "Office365Table",
 		"schema": [],
 		"typeProperties": {
-			"tableName": "BasicDataSet_v0.CalendarView_v0"
+			"tableName": "BasicDataSet_v0.Contact_v0"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"

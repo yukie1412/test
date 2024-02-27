@@ -2,22 +2,25 @@
 	"name": "DelimitedText3",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureBlobStorage1",
+			"referenceName": "adlsJenq",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
-				"type": "AzureBlobStorageLocation",
-				"fileName": "testIRauto",
-				"container": "test1"
+				"type": "AzureBlobFSLocation",
+				"fileName": "abcde.txt",
+				"folderPath": "source",
+				"fileSystem": "jenoutput"
 			},
 			"columnDelimiter": ",",
+			"encodingName": "UTF-16LE",
 			"escapeChar": "\\",
+			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
 		"schema": []
 	},
-	"type": "Microsoft.Synapse/workspaces/datasets"
+	"type": "Microsoft.DataFactory/factories/datasets"
 }

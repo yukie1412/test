@@ -2,14 +2,17 @@
 	"name": "DelimitedText1",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "Lakehouse1",
+			"referenceName": "AzureBlobStorage1",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
-				"type": "LakehouseLocation"
+				"type": "AzureBlobStorageLocation",
+				"fileName": "s1.txt",
+				"folderPath": "source",
+				"container": "jenoutput"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",

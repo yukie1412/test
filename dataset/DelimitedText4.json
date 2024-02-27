@@ -2,24 +2,22 @@
 	"name": "DelimitedText4",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureBlobStorage1",
+			"referenceName": "FileServer1",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
-				"type": "AzureBlobStorageLocation",
-				"fileName": "test",
-				"folderPath": "test",
-				"container": "test"
+				"type": "FileServerLocation"
 			},
 			"columnDelimiter": ",",
-			"escapeChar": "\\",
-			"firstRowAsHeader": false,
-			"quoteChar": "\""
+			"encodingName": "UTF-8",
+			"escapeChar": "",
+			"firstRowAsHeader": true,
+			"quoteChar": ""
 		},
 		"schema": []
 	},
-	"type": "Microsoft.Synapse/workspaces/datasets"
+	"type": "Microsoft.DataFactory/factories/datasets"
 }

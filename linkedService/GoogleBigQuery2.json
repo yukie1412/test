@@ -1,0 +1,15 @@
+{
+	"name": "GoogleBigQuery2",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "GoogleBigQuery",
+		"typeProperties": {
+			"project": "asdf",
+			"additionalProjects": "",
+			"requestGoogleDriveScope": false,
+			"authenticationType": "UserAuthentication",
+			"clientId": ""
+		}
+	}
+}

@@ -1,16 +1,12 @@
 {
 	"name": "AzureDataLakeStorage1",
-	"type": "Microsoft.Synapse/workspaces/linkedservices",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
 		"annotations": [],
 		"type": "AzureBlobFS",
 		"typeProperties": {
-			"url": "https://accountname.dfs.core.windows.net",
-			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIlNZTkFQU0VANTM4MDNGNDItQ0ZCNi00RDkyLTg2RkYtNjdGMjRBQkUxQUM3X2ZhMDQzNTA0LWI3NWUtNDAzMy1hMTI4LTk0MDViNjUxODkxYyINCn0="
-		},
-		"connectVia": {
-			"referenceName": "AutoResolveIntegrationRuntime",
-			"type": "IntegrationRuntimeReference"
+			"url": "https://admsuxtest.dfs.core.windows.net/",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQEIxRTM0M0EzLTMzRjktNDQ3NS1COTQzLTBCRTY0MDEwODYzMl8wY2E3OTg5MC1iMjhiLTQ3YTItOGU1OC1mYTZkMzZmMjJlMjYiDQp9"
 		}
 	}
 }

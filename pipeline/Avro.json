@@ -58,7 +58,7 @@
 			}
 		],
 		"parameters": {
-			"a_b": {
+			"a b": {
 				"type": "string"
 			}
 		},
