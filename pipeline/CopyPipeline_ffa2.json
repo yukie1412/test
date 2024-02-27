@@ -16,7 +16,10 @@
 				"userProperties": [],
 				"typeProperties": {
 					"notebook": {
-						"referenceName": "Notebook 1aaabbbb",
+						"referenceName": {
+							"value": "@pipeline().parameters.nb",
+							"type": "Expression"
+						},
 						"type": "NotebookReference"
 					},
 					"snapshot": true,
@@ -26,9 +29,18 @@
 						"spark.dynamicAllocation.maxExecutors": null
 					},
 					"numExecutors": null
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureSynapseArtifacts1",
+					"type": "LinkedServiceReference"
 				}
 			}
 		],
+		"parameters": {
+			"nb": {
+				"type": "String"
+			}
+		},
 		"annotations": [],
 		"lastPublishTime": "2023-02-13T04:43:05Z"
 	},
