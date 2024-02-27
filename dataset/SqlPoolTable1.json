@@ -2,15 +2,11 @@
 	"name": "SqlPoolTable1",
 	"properties": {
 		"annotations": [],
-		"type": "SqlPoolTable",
+		"type": "AzureSqlTable",
 		"schema": [],
 		"typeProperties": {
 			"schema": "dbo",
 			"table": "Persons"
-		},
-		"sqlPool": {
-			"referenceName": "fangl",
-			"type": "SqlPoolReference"
 		}
 	},
 	"type": "Microsoft.Synapse/workspaces/datasets"
