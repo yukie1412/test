@@ -1,16 +1,11 @@
 {
 	"name": "SourceDataset_bht",
 	"properties": {
-		"linkedServiceName": {
-			"referenceName": "AmazonS3Compatible1",
-			"type": "LinkedServiceReference"
-		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
-				"type": "AmazonS3CompatibleLocation",
-				"fileName": "asdf"
+				"type": "HttpServerLocation"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
