@@ -1,6 +1,10 @@
 {
 	"name": "da_DestinationDataset_2vf",
 	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AmazonS31",
+			"type": "LinkedServiceReference"
+		},
 		"parameters": {
 			"cw_fileName": {
 				"type": "String"
@@ -10,13 +14,13 @@
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
-				"type": "AzureBlobStorageLocation",
+				"type": "AmazonS3Location",
+				"bucketName": "testmetadatadriven",
+				"folderPath": "powerquery-output",
 				"fileName": {
 					"value": "@dataset().cw_fileName",
 					"type": "Expression"
-				},
-				"folderPath": "powerquery-output",
-				"container": "testmetadatadriven"
+				}
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
