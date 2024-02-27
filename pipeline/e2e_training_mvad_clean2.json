@@ -23,7 +23,10 @@
 				"userProperties": [],
 				"typeProperties": {
 					"notebook": {
-						"referenceName": "cleaned_mvad_training_ingestion2",
+						"referenceName": {
+							"value": "@pipeline().parameters.adls_account",
+							"type": "Expression"
+						},
 						"type": "NotebookReference"
 					},
 					"parameters": {
@@ -78,16 +81,16 @@
 						}
 					},
 					"snapshot": true,
-					"sparkPool": {
-						"referenceName": "testspark",
-						"type": "BigDataPoolReference"
-					},
 					"conf": {
 						"spark.dynamicAllocation.enabled": null,
 						"spark.dynamicAllocation.minExecutors": null,
 						"spark.dynamicAllocation.maxExecutors": null
 					},
 					"numExecutors": null
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureSynapseArtifacts1",
+					"type": "LinkedServiceReference"
 				}
 			},
 			{
@@ -188,7 +191,10 @@
 				"userProperties": [],
 				"typeProperties": {
 					"notebook": {
-						"referenceName": "cleaned_mvad_api_refactor_train_sas2",
+						"referenceName": {
+							"value": "@activity('Copy data1').output.pipelineReturnValue",
+							"type": "Expression"
+						},
 						"type": "NotebookReference"
 					},
 					"parameters": {
@@ -278,16 +284,16 @@
 						}
 					},
 					"snapshot": true,
-					"sparkPool": {
-						"referenceName": "aaaa",
-						"type": "BigDataPoolReference"
-					},
 					"conf": {
 						"spark.dynamicAllocation.enabled": null,
 						"spark.dynamicAllocation.minExecutors": null,
 						"spark.dynamicAllocation.maxExecutors": null
 					},
 					"numExecutors": null
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureSynapseArtifacts1",
+					"type": "LinkedServiceReference"
 				}
 			},
 			{
@@ -390,6 +396,10 @@
 					"url": {
 						"value": "https://adtml-synapse-poc.dev.azuresynapse.net/triggers/Trigger15min/start?api-version=2020-12-01",
 						"type": "Expression"
+					},
+					"connectVia": {
+						"referenceName": "AutoResolveIntegrationRuntime",
+						"type": "IntegrationRuntimeReference"
 					},
 					"authentication": {
 						"type": "MSI",

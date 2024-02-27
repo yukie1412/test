@@ -16,12 +16,30 @@
 				"userProperties": [],
 				"typeProperties": {
 					"sparkJob": {
-						"referenceName": "Spark job definition 1",
+						"referenceName": {
+							"value": "@pipeline().parameters.nb",
+							"type": "Expression"
+						},
 						"type": "SparkJobDefinitionReference"
-					}
+					},
+					"conf": {
+						"spark.dynamicAllocation.enabled": null,
+						"spark.dynamicAllocation.minExecutors": null,
+						"spark.dynamicAllocation.maxExecutors": null
+					},
+					"numExecutors": null
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureSynapseArtifacts1",
+					"type": "LinkedServiceReference"
 				}
 			}
 		],
+		"parameters": {
+			"nb": {
+				"type": "String"
+			}
+		},
 		"annotations": [],
 		"lastPublishTime": "2022-12-08T02:17:27Z"
 	},
