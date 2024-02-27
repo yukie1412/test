@@ -2,7 +2,7 @@
 	"name": "da_SourceDataset_2vf",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "da_SourceConnection_2vf",
+			"referenceName": "LoadFromOdata_SourceConnection_tji",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {

@@ -2,7 +2,7 @@
 	"name": "da_DestinationDataset_2vf",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "da_DestinationConnection_2vf",
+			"referenceName": "AzureBlobStorage1",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {

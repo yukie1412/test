@@ -2,14 +2,14 @@
 	"name": "SourceDataset_di8",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AdventureWorks Products",
+			"referenceName": "AmazonS3Compatible1",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
-				"type": "HttpServerLocation"
+				"type": "AmazonS3CompatibleLocation"
 			},
 			"columnDelimiter": ",",
 			"rowDelimiter": "\n",
