@@ -50,7 +50,10 @@
 				"inputs": [
 					{
 						"referenceName": "aaa_DestinationDataset_1ew",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"cw_fileName": "asdf"
+						}
 					}
 				],
 				"outputs": [
