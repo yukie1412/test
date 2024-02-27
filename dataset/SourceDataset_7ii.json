@@ -1,5 +1,5 @@
 {
-	"name": "DelimitedText2",
+	"name": "SourceDataset_7ii",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureBlobStorage1",
@@ -10,14 +10,18 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"folderPath": "csvSink",
-				"container": "outputfolder"
+				"fileName": "dboConnectionControlTable_l8b.txt",
+				"container": "testmetadatadriven"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
+			"firstRowAsHeader": false,
 			"quoteChar": "\""
 		},
 		"schema": [
+			{
+				"type": "String"
+			},
 			{
 				"type": "String"
 			},

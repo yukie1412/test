@@ -1,0 +1,20 @@
+{
+	"name": "MetadataDrivenCopyTask_8wk_ControlDS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "MetadataDrivenCopyTask_8wk_20230821"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "MainControlTable_8wk"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

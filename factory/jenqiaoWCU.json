@@ -1,0 +1,14 @@
+{
+	"name": "jenqiaoWCU",
+	"properties": {
+		"globalConfigurations": {
+			"mountedConfiguration": []
+		}
+	},
+	"location": "westcentralus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "a0d2780e-1598-49e2-9b70-9450e820813b",
+		"tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+	}
+}

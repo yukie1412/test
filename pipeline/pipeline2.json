@@ -16,47 +16,156 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "SnowflakeSource",
-						"exportSettings": {
-							"type": "SnowflakeExportCopyCommand"
-						}
+						"type": "Office365Source",
+						"startTime": "2023-10-09T00:00:00Z",
+						"endTime": "2023-10-23T00:00:00Z",
+						"outputColumns": [
+							{
+								"name": "id"
+							},
+							{
+								"name": "allowNewTimeProposals"
+							},
+							{
+								"name": "createdDateTime"
+							},
+							{
+								"name": "lastModifiedDateTime"
+							},
+							{
+								"name": "changeKey"
+							},
+							{
+								"name": "categories"
+							},
+							{
+								"name": "originalStartTimeZone"
+							},
+							{
+								"name": "originalEndTimeZone"
+							},
+							{
+								"name": "responseStatus"
+							},
+							{
+								"name": "iCalUId"
+							},
+							{
+								"name": "isOnlineMeeting"
+							},
+							{
+								"name": "reminderMinutesBeforeStart"
+							},
+							{
+								"name": "isReminderOn"
+							},
+							{
+								"name": "hasAttachments"
+							},
+							{
+								"name": "subject"
+							},
+							{
+								"name": "body"
+							},
+							{
+								"name": "importance"
+							},
+							{
+								"name": "sensitivity"
+							},
+							{
+								"name": "start"
+							},
+							{
+								"name": "end"
+							},
+							{
+								"name": "location"
+							},
+							{
+								"name": "isAllDay"
+							},
+							{
+								"name": "isCancelled"
+							},
+							{
+								"name": "isOrganizer"
+							},
+							{
+								"name": "onlineMeeting"
+							},
+							{
+								"name": "onlineMeetingProvider"
+							},
+							{
+								"name": "recurrence"
+							},
+							{
+								"name": "responseRequested"
+							},
+							{
+								"name": "showAs"
+							},
+							{
+								"name": "transactionId"
+							},
+							{
+								"name": "type"
+							},
+							{
+								"name": "attendees"
+							},
+							{
+								"name": "organizer"
+							},
+							{
+								"name": "webLink"
+							},
+							{
+								"name": "attachments"
+							},
+							{
+								"name": "bodyPreview"
+							},
+							{
+								"name": "locations"
+							},
+							{
+								"name": "onlineMeetingUrl"
+							},
+							{
+								"name": "seriesMasterId"
+							},
+							{
+								"name": "originalStart"
+							}
+						]
 					},
 					"sink": {
-						"type": "DelimitedTextSink",
+						"type": "BinarySink",
 						"storeSettings": {
 							"type": "AzureBlobStorageWriteSettings"
-						},
-						"formatSettings": {
-							"type": "DelimitedTextWriteSettings",
-							"quoteAllText": true,
-							"fileExtension": ".txt"
 						}
 					},
-					"enableStaging": true,
-					"stagingSettings": {
-						"linkedServiceName": {
-							"referenceName": "blobSas",
-							"type": "LinkedServiceReference"
-						},
-						"path": "jenoutput"
-					}
+					"enableStaging": false
 				},
 				"inputs": [
 					{
-						"referenceName": "SnowflakeTable1",
+						"referenceName": "Microsoft365Table1",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "DelimitedText2",
+						"referenceName": "Binary1",
 						"type": "DatasetReference"
 					}
 				]
 			}
 		],
 		"annotations": [],
-		"lastPublishTime": "2023-01-16T07:29:50Z"
+		"lastPublishTime": "2023-10-07T06:15:46Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }

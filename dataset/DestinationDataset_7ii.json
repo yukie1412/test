@@ -1,15 +1,16 @@
 {
-	"name": "Microsoft365Table1",
+	"name": "DestinationDataset_7ii",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "Microsoft3651",
+			"referenceName": "AzureSqlDatabase1",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
-		"type": "Office365Table",
+		"type": "AzureSqlTable",
 		"schema": [],
 		"typeProperties": {
-			"tableName": "BasicDataSet_v0.CalendarView_v0"
+			"schema": "dbo",
+			"table": "dboConnectionControlTable_l8b"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
