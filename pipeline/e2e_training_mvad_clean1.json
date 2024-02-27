@@ -395,7 +395,7 @@
 				"typeProperties": {
 					"method": "POST",
 					"url": {
-						"value": "https://adtml-synapse-poc.dev.azuresynapse.net/triggers/Trigger15min/start?api-version=2020-12-01",
+						"value": "@activity('MVAD Training').output.pipelineReturnValue",
 						"type": "Expression"
 					},
 					"connectVia": {
