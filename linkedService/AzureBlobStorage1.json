@@ -1,0 +1,14 @@
+{
+	"name": "AzureBlobStorage1",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [
+			"a",
+			"b"
+		],
+		"type": "AzureBlobStorage",
+		"typeProperties": {
+			"sasUri": "a"
+		}
+	}
+}
