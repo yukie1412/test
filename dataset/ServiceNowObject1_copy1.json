@@ -1,0 +1,16 @@
+{
+	"name": "ServiceNowObject1_copy1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ServiceNow2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "ServiceNowV2Object",
+		"schema": [],
+		"typeProperties": {
+			"tableName": "a"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

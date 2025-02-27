@@ -16,11 +16,11 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "GoogleBigQuerySource",
+						"type": "GoogleBigQueryV2Source",
 						"query": "abc"
 					},
 					"dataset": {
-						"referenceName": "GoogleBigQueryObject1",
+						"referenceName": "GoogleBigQueryObject1_copy1",
 						"type": "DatasetReference"
 					}
 				}
@@ -39,11 +39,11 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "PostgreSqlSource",
+						"type": "PostgreSqlV2Source",
 						"query": "abc"
 					},
 					"dataset": {
-						"referenceName": "PostgreSqlTable1",
+						"referenceName": "PostgreSqlTable1_copy1",
 						"type": "DatasetReference"
 					}
 				}
@@ -62,12 +62,12 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "SalesforceSource",
-						"query": "abc",
-						"readBehavior": "query"
+						"type": "SalesforceV2Source",
+						"query": "abcd",
+						"includeDeletedObjects": false
 					},
 					"dataset": {
-						"referenceName": "SalesforceObject1",
+						"referenceName": "SalesforceObject1_copy1",
 						"type": "DatasetReference"
 					}
 				}
@@ -112,11 +112,11 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "ServiceNowSource",
-						"query": "abc"
+						"type": "ServiceNowV2Source",
+						"pageSize": 300
 					},
 					"dataset": {
-						"referenceName": "ServiceNowObject1",
+						"referenceName": "ServiceNowObject1_copy1",
 						"type": "DatasetReference"
 					}
 				}
