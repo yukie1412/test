@@ -1,15 +1,16 @@
 {
-	"name": "SalesforceObject1",
+	"name": "GoogleBigQueryObject1",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "Salesforce1",
+			"referenceName": "GoogleBigQuery1",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
-		"type": "SalesforceObject",
+		"type": "GoogleBigQueryObject",
 		"schema": [],
 		"typeProperties": {
-			"objectApiName": "a"
+			"dataset": "a",
+			"table": "a"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"

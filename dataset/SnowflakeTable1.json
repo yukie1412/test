@@ -9,8 +9,8 @@
 		"type": "SnowflakeTable",
 		"schema": [],
 		"typeProperties": {
-			"schema": "PUBLIC",
-			"table": "test0728"
+			"schema": "a",
+			"table": "a"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"

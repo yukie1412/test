@@ -1,15 +1,16 @@
 {
-	"name": "SalesforceObject1",
+	"name": "PostgreSqlTable1",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "Salesforce1",
+			"referenceName": "PostgreSql1",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
-		"type": "SalesforceObject",
+		"type": "PostgreSqlTable",
 		"schema": [],
 		"typeProperties": {
-			"objectApiName": "a"
+			"schema": "a",
+			"table": "a"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"

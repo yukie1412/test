@@ -6,8 +6,11 @@
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
-		"type": "ServiceNowObject",
-		"schema": []
+		"type": "ServiceNowV2Object",
+		"schema": [],
+		"typeProperties": {
+			"tableName": "asdf"
+		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
 }

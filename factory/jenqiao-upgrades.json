@@ -1,0 +1,19 @@
+{
+	"name": "jenqiao-upgrades",
+	"properties": {
+		"globalConfigurations": {
+			"mountedConfiguration": [
+				{
+					"workspaceId": "aa613f3d-c25c-4f6b-9420-b80e681150e3",
+					"artifactId": "f9c7bc2d-d230-4003-8eba-92dabd8feaac"
+				}
+			]
+		}
+	},
+	"location": "eastasia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "6f9ce0a5-1989-4fc8-a9e3-5da6444b2122",
+		"tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+	}
+}

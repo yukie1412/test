@@ -1,5 +1,5 @@
 {
-	"name": "pipeline1",
+	"name": "snowCopy",
 	"properties": {
 		"activities": [
 			{
@@ -16,27 +16,10 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "ServiceNowV2Source",
-						"expression": {
-							"type": "Nary",
-							"operators": [
-								"="
-							],
-							"operands": [
-								{
-									"type": "Field",
-									"value": "a"
-								},
-								{
-									"type": "Constant",
-									"value": {
-										"value": "@pipeline().parameters.test",
-										"type": "Expression"
-									}
-								}
-							]
-						},
-						"pageSize": 300
+						"type": "SnowflakeSource",
+						"exportSettings": {
+							"type": "SnowflakeExportCopyCommand"
+						}
 					},
 					"sink": {
 						"type": "DelimitedTextSink",
@@ -49,19 +32,11 @@
 							"fileExtension": ".txt"
 						}
 					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"typeConversion": true,
-						"typeConversionSettings": {
-							"allowDataTruncation": true,
-							"treatBooleanAsNumber": false
-						}
-					}
+					"enableStaging": false
 				},
 				"inputs": [
 					{
-						"referenceName": "ServiceNowObject2",
+						"referenceName": "SnowflakeTable2",
 						"type": "DatasetReference"
 					}
 				],
@@ -73,13 +48,8 @@
 				]
 			}
 		],
-		"parameters": {
-			"test": {
-				"type": "String"
-			}
-		},
 		"annotations": [],
-		"lastPublishTime": "2025-02-21T06:12:02Z"
+		"lastPublishTime": "2025-02-21T13:35:19Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }

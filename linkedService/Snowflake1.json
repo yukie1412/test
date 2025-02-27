@@ -6,8 +6,8 @@
 		"type": "Snowflake",
 		"typeProperties": {
 			"authenticationType": "Basic",
-			"connectionString": "jdbc:snowflake://microsoft_partner.east-us-2.azure.snowflakecomputing.com/?user=WENCHAOHU&db=TEST_DB&warehouse=ADF_QUERY_TEST&schema=PUBLIC",
-			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQEIxRTM0M0EzLTMzRjktNDQ3NS1COTQzLTBCRTY0MDEwODYzMl8wMjY2NDk4YS0xZDc2LTQ2OTctOTc3OC0wNGYwNmM3MGNiZjgiDQp9"
+			"connectionString": "jdbc:snowflake://a.snowflakecomputing.com/?user=a&db=a&warehouse=a",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDFFOTg3NTU0LUI3OTMtNDk4Qi1CNDZBLUNDMEM1QThDRkEzMV81YmE4NzU1MS1kMWM3LTRiZTQtYThkMy03MzA2N2I5YTU4YjUiDQp9"
 		}
 	}
 }

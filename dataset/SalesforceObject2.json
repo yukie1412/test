@@ -1,5 +1,5 @@
 {
-	"name": "SalesforceObject1",
+	"name": "SalesforceObject2",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "Salesforce1",

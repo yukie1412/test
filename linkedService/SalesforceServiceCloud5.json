@@ -1,0 +1,15 @@
+{
+	"name": "SalesforceServiceCloud5",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SalesforceServiceCloudV2",
+		"typeProperties": {
+			"environmentUrl": "https://a.my.salesforce.com",
+			"clientId": "a",
+			"apiVersion": "54.0",
+			"authenticationType": "OAuth2ClientCredential",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDFFOTg3NTU0LUI3OTMtNDk4Qi1CNDZBLUNDMEM1QThDRkEzMV9mMWI4NjE2Ny0zNzc0LTQzZGEtYjQ1Ni1mNTdmYThjZGQ5Y2UiDQp9"
+		}
+	}
+}

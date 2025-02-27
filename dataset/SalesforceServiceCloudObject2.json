@@ -1,15 +1,15 @@
 {
-	"name": "SalesforceObject1",
+	"name": "SalesforceServiceCloudObject2",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "Salesforce1",
+			"referenceName": "SalesforceServiceCloud3",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
-		"type": "SalesforceObject",
+		"type": "SalesforceServiceCloudV2Object",
 		"schema": [],
 		"typeProperties": {
-			"objectApiName": "a"
+			"objectApiName": "asdf"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
