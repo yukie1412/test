@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "PostgreSqlV2Source"
+						"type": "PostgreSqlSource"
 					},
 					"sink": {
 						"type": "DelimitedTextSink",
@@ -54,7 +54,7 @@
 			}
 		],
 		"annotations": [],
-		"lastPublishTime": "2025-02-27T02:31:36Z"
+		"lastPublishTime": "2024-12-27T07:42:54Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }

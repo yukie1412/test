@@ -16,8 +16,8 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "ServiceNowV2Source",
-						"pageSize": 300
+						"type": "ServiceNowSource",
+						"query": "fdhfdh"
 					},
 					"sink": {
 						"type": "DelimitedTextSink",
@@ -55,7 +55,7 @@
 			}
 		],
 		"annotations": [],
-		"lastPublishTime": "2025-02-27T02:31:36Z"
+		"lastPublishTime": "2025-01-03T15:19:17Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }

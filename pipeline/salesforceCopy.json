@@ -16,13 +16,13 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "SalesforceV2Source",
-						"query": "abcd",
-						"includeDeletedObjects": false
+						"type": "SalesforceSource",
+						"query": "abcf",
+						"readBehavior": "query"
 					},
 					"sink": {
-						"type": "SalesforceServiceCloudV2Sink",
-						"writeBatchSize": 100000,
+						"type": "SalesforceServiceCloudSink",
+						"writeBatchSize": 5000,
 						"writeBehavior": "insert"
 					},
 					"enableStaging": false,
@@ -50,7 +50,7 @@
 			}
 		],
 		"annotations": [],
-		"lastPublishTime": "2025-02-27T02:31:36Z"
+		"lastPublishTime": "2025-01-03T15:19:17Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }

@@ -2,11 +2,11 @@
 	"name": "PostgreSqlTable1",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "PostgreSql2",
+			"referenceName": "PostgreSql1",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
-		"type": "PostgreSqlV2Table",
+		"type": "PostgreSqlTable",
 		"schema": [],
 		"typeProperties": {
 			"schema": "a",

@@ -16,7 +16,8 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "GoogleBigQueryV2Source"
+						"type": "GoogleBigQuerySource",
+						"query": "abc"
 					},
 					"dataset": {
 						"referenceName": "GoogleBigQueryObject1",
@@ -38,7 +39,8 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "PostgreSqlV2Source"
+						"type": "PostgreSqlSource",
+						"query": "abc"
 					},
 					"dataset": {
 						"referenceName": "PostgreSqlTable1",
@@ -60,8 +62,9 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "SalesforceV2Source",
-						"includeDeletedObjects": false
+						"type": "SalesforceSource",
+						"query": "abc",
+						"readBehavior": "query"
 					},
 					"dataset": {
 						"referenceName": "SalesforceObject1",
@@ -109,8 +112,8 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "ServiceNowV2Source",
-						"pageSize": 300
+						"type": "ServiceNowSource",
+						"query": "abc"
 					},
 					"dataset": {
 						"referenceName": "ServiceNowObject1",
@@ -120,7 +123,7 @@
 			}
 		],
 		"annotations": [],
-		"lastPublishTime": "2025-02-27T02:31:37Z"
+		"lastPublishTime": "2025-02-24T09:44:48Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }

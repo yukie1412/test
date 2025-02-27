@@ -2,11 +2,11 @@
 	"name": "SalesforceServiceCloudObject1",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "SalesforceServiceCloud2",
+			"referenceName": "SalesforceServiceCloud1",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
-		"type": "SalesforceServiceCloudV2Object",
+		"type": "SalesforceServiceCloudObject",
 		"schema": [],
 		"typeProperties": {
 			"objectApiName": "a"

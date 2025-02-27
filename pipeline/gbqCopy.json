@@ -16,11 +16,11 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "GoogleBigQueryV2Source"
+						"type": "GoogleBigQuerySource"
 					},
 					"sink": {
-						"type": "SalesforceV2Sink",
-						"writeBatchSize": 100000,
+						"type": "SalesforceSink",
+						"writeBatchSize": 5000,
 						"writeBehavior": "insert"
 					},
 					"enableStaging": false,
@@ -52,7 +52,7 @@
 			"b",
 			"c"
 		],
-		"lastPublishTime": "2025-02-27T02:31:37Z"
+		"lastPublishTime": "2025-01-13T02:28:58Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }
