@@ -2,11 +2,11 @@
 	"name": "GoogleBigQueryObject1",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "GoogleBigQuery1",
+			"referenceName": "GoogleBigQuery2",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
-		"type": "GoogleBigQueryObject",
+		"type": "GoogleBigQueryV2Object",
 		"schema": [],
 		"typeProperties": {
 			"dataset": "a",

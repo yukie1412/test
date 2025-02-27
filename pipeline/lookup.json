@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "GoogleBigQuerySource"
+						"type": "GoogleBigQueryV2Source"
 					},
 					"dataset": {
 						"referenceName": "GoogleBigQueryObject1",
@@ -38,7 +38,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "PostgreSqlSource"
+						"type": "PostgreSqlV2Source"
 					},
 					"dataset": {
 						"referenceName": "PostgreSqlTable1",
@@ -60,8 +60,8 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "SalesforceSource",
-						"readBehavior": "query"
+						"type": "SalesforceV2Source",
+						"includeDeletedObjects": false
 					},
 					"dataset": {
 						"referenceName": "SalesforceObject1",
@@ -109,7 +109,8 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "ServiceNowSource"
+						"type": "ServiceNowV2Source",
+						"pageSize": 300
 					},
 					"dataset": {
 						"referenceName": "ServiceNowObject1",

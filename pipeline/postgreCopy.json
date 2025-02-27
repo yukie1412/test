@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "PostgreSqlSource"
+						"type": "PostgreSqlV2Source"
 					},
 					"sink": {
 						"type": "DelimitedTextSink",

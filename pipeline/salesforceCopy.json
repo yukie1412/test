@@ -16,13 +16,13 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "SalesforceSource",
-						"query": "abcf",
-						"readBehavior": "query"
+						"type": "SalesforceV2Source",
+						"query": "abcd",
+						"includeDeletedObjects": false
 					},
 					"sink": {
-						"type": "SalesforceServiceCloudSink",
-						"writeBatchSize": 5000,
+						"type": "SalesforceServiceCloudV2Sink",
+						"writeBatchSize": 100000,
 						"writeBehavior": "insert"
 					},
 					"enableStaging": false,

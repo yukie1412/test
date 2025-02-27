@@ -2,11 +2,11 @@
 	"name": "ServiceNowObject1",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "ServiceNow1",
+			"referenceName": "ServiceNow2",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
-		"type": "ServiceNowObject",
+		"type": "ServiceNowV2Object",
 		"schema": [],
 		"typeProperties": {
 			"tableName": "a"

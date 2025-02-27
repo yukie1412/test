@@ -16,8 +16,8 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "ServiceNowSource",
-						"query": "fdhfdh"
+						"type": "ServiceNowV2Source",
+						"pageSize": 300
 					},
 					"sink": {
 						"type": "DelimitedTextSink",
