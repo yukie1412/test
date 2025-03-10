@@ -1,0 +1,19 @@
+{
+	"name": "Greenplum1",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "Greenplum",
+		"typeProperties": {
+			"connectionString": "HOST=a;Port=;DB=b;UID=c",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "AzureKeyVault1",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "a"
+			}
+		}
+	}
+}
