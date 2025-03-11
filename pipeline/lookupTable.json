@@ -20,7 +20,10 @@
 					},
 					"dataset": {
 						"referenceName": "GoogleBigQueryObject1",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"a": "a"
+						}
 					}
 				}
 			},
@@ -118,7 +121,7 @@
 			}
 		],
 		"annotations": [],
-		"lastPublishTime": "2025-01-03T09:07:12Z"
+		"lastPublishTime": "2025-03-10T08:44:34Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }

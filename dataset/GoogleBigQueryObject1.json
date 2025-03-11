@@ -5,11 +5,19 @@
 			"referenceName": "GoogleBigQuery1",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"a": {
+				"type": "String"
+			}
+		},
 		"annotations": [],
 		"type": "GoogleBigQueryObject",
 		"schema": [],
 		"typeProperties": {
-			"dataset": "a",
+			"dataset": {
+				"value": "@dataset().a",
+				"type": "Expression"
+			},
 			"table": "a"
 		}
 	},

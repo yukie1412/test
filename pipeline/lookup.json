@@ -21,7 +21,10 @@
 					},
 					"dataset": {
 						"referenceName": "GoogleBigQueryObject1",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"a": "a"
+						}
 					}
 				}
 			},
@@ -63,7 +66,10 @@
 				"typeProperties": {
 					"source": {
 						"type": "SalesforceSource",
-						"query": "abc",
+						"query": {
+							"value": "@pipeline().parameters.test",
+							"type": "Expression"
+						},
 						"readBehavior": "query"
 					},
 					"dataset": {
@@ -122,8 +128,13 @@
 				}
 			}
 		],
+		"parameters": {
+			"test": {
+				"type": "String"
+			}
+		},
 		"annotations": [],
-		"lastPublishTime": "2025-02-24T09:44:48Z"
+		"lastPublishTime": "2025-03-10T08:44:34Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }
