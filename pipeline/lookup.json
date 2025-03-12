@@ -119,7 +119,10 @@
 				"typeProperties": {
 					"source": {
 						"type": "ServiceNowSource",
-						"query": "abc"
+						"query": {
+							"value": "@pipeline().parameters.test",
+							"type": "Expression"
+						}
 					},
 					"dataset": {
 						"referenceName": "ServiceNowObject1",
