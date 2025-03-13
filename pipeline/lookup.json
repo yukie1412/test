@@ -120,9 +120,56 @@
 					"source": {
 						"type": "ServiceNowSource",
 						"query": {
-							"value": "@pipeline().parameters.test",
+							"value": "@pipeline().parameters.abc",
 							"type": "Expression"
 						}
+					},
+					"dataset": {
+						"referenceName": "ServiceNowObject1",
+						"type": "DatasetReference"
+					}
+				}
+			},
+			{
+				"name": "Lookup1",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SalesforceServiceCloudSource",
+						"query": "abcd",
+						"readBehavior": "queryAll"
+					},
+					"dataset": {
+						"referenceName": "SalesforceServiceCloudObject1",
+						"type": "DatasetReference"
+					}
+				}
+			},
+			{
+				"name": "Lookup2",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "ServiceNowSource",
+						"query": "abdc"
 					},
 					"dataset": {
 						"referenceName": "ServiceNowObject1",
@@ -133,6 +180,9 @@
 		],
 		"parameters": {
 			"test": {
+				"type": "String"
+			},
+			"abc": {
 				"type": "String"
 			}
 		},
