@@ -21,6 +21,14 @@
 				"typeProperties": {
 					"scripts": [
 						{
+							"parameters": [
+								{
+									"name": "a",
+									"type": "Boolean",
+									"value": "",
+									"direction": "Input"
+								}
+							],
 							"type": "Query",
 							"text": "a"
 						}
