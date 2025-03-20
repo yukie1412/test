@@ -81,6 +81,10 @@
 				"typeProperties": {
 					"scripts": [
 						{
+							"parameters": {
+								"value": "@pipeline().parameters.param",
+								"type": "Expression"
+							},
 							"type": "Query",
 							"text": {
 								"value": "@pipeline().parameters.query",
@@ -128,6 +132,9 @@
 		"parameters": {
 			"query": {
 				"type": "String"
+			},
+			"param": {
+				"type": "Array"
 			}
 		},
 		"annotations": [],
