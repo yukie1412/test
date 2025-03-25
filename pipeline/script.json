@@ -55,6 +55,14 @@
 				"typeProperties": {
 					"scripts": [
 						{
+							"parameters": [
+								{
+									"name": "abc",
+									"type": "Decimal",
+									"value": "",
+									"direction": "Input"
+								}
+							],
 							"type": "NonQuery",
 							"text": "non-query"
 						}
