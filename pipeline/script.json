@@ -21,6 +21,14 @@
 				"typeProperties": {
 					"scripts": [
 						{
+							"parameters": [
+								{
+									"name": "a",
+									"type": "Boolean",
+									"value": "",
+									"direction": "Output"
+								}
+							],
 							"type": "Query",
 							"text": "a"
 						}
@@ -123,7 +131,7 @@
 			}
 		},
 		"annotations": [],
-		"lastPublishTime": "2025-01-03T07:38:02Z"
+		"lastPublishTime": "2025-04-14T07:37:47Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }

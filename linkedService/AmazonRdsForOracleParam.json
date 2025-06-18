@@ -1,0 +1,36 @@
+{
+	"name": "AmazonRdsForOracleParam",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"parameters": {
+			"host": {
+				"type": "String"
+			},
+			"key": {
+				"type": "String"
+			},
+			"port": {
+				"type": "String"
+			},
+			"sid": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "AmazonRdsForOracle",
+		"typeProperties": {
+			"connectionString": "host=@{linkedService().host};port=@{linkedService().port};sid=@{linkedService().sid};user id=@{linkedService().key}",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "AzureKeyVault1",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": {
+					"value": "@linkedService().key",
+					"type": "Expression"
+				}
+			}
+		}
+	}
+}

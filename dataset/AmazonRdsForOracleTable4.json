@@ -1,0 +1,17 @@
+{
+	"name": "AmazonRdsForOracleTable4",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AmazonRdsForOracleParam",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AmazonRdsForOracleTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "a",
+			"table": "b"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

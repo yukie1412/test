@@ -1,0 +1,13 @@
+{
+	"name": "GreenplumTable3",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Greenplum1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "GreenplumTable",
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

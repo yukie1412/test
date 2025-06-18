@@ -1,0 +1,166 @@
+{
+	"name": "sv_copy3",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "ServiceNowV2Source",
+						"expression": {
+							"type": "Nary",
+							"operators": [
+								"NQ",
+								"NQ"
+							],
+							"operands": [
+								{
+									"type": "Nary",
+									"operators": [
+										"OR"
+									],
+									"operands": [
+										{
+											"type": "Nary",
+											"operators": [
+												"="
+											],
+											"operands": [
+												{
+													"type": "Field",
+													"value": "a"
+												},
+												{
+													"type": "Constant",
+													"value": "b"
+												}
+											]
+										},
+										{
+											"type": "Nary",
+											"operators": [
+												"="
+											],
+											"operands": [
+												{
+													"type": "Field",
+													"value": "e"
+												},
+												{
+													"type": "Constant",
+													"value": "f"
+												}
+											]
+										}
+									]
+								},
+								{
+									"type": "Nary",
+									"operators": [
+										"AND"
+									],
+									"operands": [
+										{
+											"type": "Nary",
+											"operators": [
+												"="
+											],
+											"operands": [
+												{
+													"type": "Field",
+													"value": "c"
+												},
+												{
+													"type": "Constant",
+													"value": "d"
+												}
+											]
+										},
+										{
+											"type": "Nary",
+											"operators": [
+												"="
+											],
+											"operands": [
+												{
+													"type": "Field",
+													"value": "g"
+												},
+												{
+													"type": "Constant",
+													"value": "h"
+												}
+											]
+										}
+									]
+								},
+								{
+									"type": "Nary",
+									"operators": [
+										"="
+									],
+									"operands": [
+										{
+											"type": "Field",
+											"value": "i"
+										},
+										{
+											"type": "Constant",
+											"value": "j"
+										}
+									]
+								}
+							]
+						},
+						"pageSize": 300
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ServiceNowObject2",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DelimitedText1",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2025-06-12T07:27:55Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

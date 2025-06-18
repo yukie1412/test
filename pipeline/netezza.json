@@ -1,0 +1,80 @@
+{
+	"name": "netezza",
+	"properties": {
+		"activities": [
+			{
+				"name": "Lookup1",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "NetezzaSource",
+						"partitionOption": "DataSlice"
+					},
+					"dataset": {
+						"referenceName": "NetezzaTable1",
+						"type": "DatasetReference"
+					}
+				}
+			},
+			{
+				"name": "Lookup2",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "NetezzaSource",
+						"partitionOption": "DataSlice"
+					},
+					"dataset": {
+						"referenceName": "NetezzaTable2",
+						"type": "DatasetReference"
+					}
+				}
+			},
+			{
+				"name": "Lookup3",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "NetezzaSource",
+						"query": "asdf",
+						"partitionOption": "DataSlice"
+					},
+					"dataset": {
+						"referenceName": "NetezzaTable3",
+						"type": "DatasetReference"
+					}
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2025-06-06T09:35:31Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,17 @@
+{
+	"name": "AmazonRdsForOracleTable1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AmazonRdsForOracle1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AmazonRdsForOracleTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "a",
+			"table": "b"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

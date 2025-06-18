@@ -1,0 +1,32 @@
+{
+	"name": "QuickBooks2",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "QuickBooks",
+		"typeProperties": {
+			"connectionProperties": {
+				"endpoint": "as",
+				"companyId": "sdf",
+				"consumerKey": "sdf",
+				"consumerSecret": {
+					"type": "AzureKeyVaultSecret",
+					"store": {
+						"referenceName": "AzureKeyVault1",
+						"type": "LinkedServiceReference"
+					},
+					"secretName": "asdf"
+				},
+				"refreshToken": {
+					"type": "AzureKeyVaultSecret",
+					"store": {
+						"referenceName": "AzureKeyVault1",
+						"type": "LinkedServiceReference"
+					},
+					"secretName": "asf"
+				},
+				"useEncryptedEndpoints": true
+			}
+		}
+	}
+}

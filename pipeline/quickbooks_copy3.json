@@ -1,0 +1,32 @@
+{
+	"name": "quickbooks_copy3",
+	"properties": {
+		"activities": [
+			{
+				"name": "Lookup1",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "QuickBooksSource"
+					},
+					"dataset": {
+						"referenceName": "QuickBooksObject1",
+						"type": "DatasetReference"
+					}
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2025-06-12T07:27:55Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

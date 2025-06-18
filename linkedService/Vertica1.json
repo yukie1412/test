@@ -1,0 +1,21 @@
+{
+	"name": "Vertica1",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"description": "desabcd",
+		"parameters": {
+			"name": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "Vertica",
+		"typeProperties": {
+			"connectionString": "Server=@{linkedService().name};Port=5433;Database=a;UID=a"
+		},
+		"connectVia": {
+			"referenceName": "integrationRuntime2",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

@@ -1,0 +1,17 @@
+{
+	"name": "NetezzaTable2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Netezza2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "NetezzaTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "a",
+			"table": "a"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

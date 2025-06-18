@@ -1,0 +1,15 @@
+{
+	"name": "Oracle6",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "Oracle",
+		"version": "2.0",
+		"typeProperties": {
+			"server": "a",
+			"authenticationType": "Basic",
+			"username": "a",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDFFOTg3NTU0LUI3OTMtNDk4Qi1CNDZBLUNDMEM1QThDRkEzMV9jNzA3YTYwMC02YjI3LTRhZWItODdhNC1hZmRmODY4YjgwYmUiDQp9"
+		}
+	}
+}

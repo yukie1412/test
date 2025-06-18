@@ -119,7 +119,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "ServiceNowSource",
-						"query": "abc"
+						"query": "SELECT col_value FROM Actual.alm_asset"
 					},
 					"dataset": {
 						"referenceName": "ServiceNowObject1",
@@ -134,7 +134,7 @@
 			}
 		},
 		"annotations": [],
-		"lastPublishTime": "2025-03-10T08:44:34Z"
+		"lastPublishTime": "2025-03-28T06:23:54Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }

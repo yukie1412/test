@@ -1,0 +1,19 @@
+{
+	"name": "Netezza3",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "Netezza",
+		"typeProperties": {
+			"connectionString": "Server=a;Port=2;Database=a;UID=a;SecurityLevel=preferredUnSecured;CaCertFile=",
+			"pwd": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "AzureKeyVault1",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "a"
+			}
+		}
+	}
+}

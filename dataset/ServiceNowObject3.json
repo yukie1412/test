@@ -1,0 +1,16 @@
+{
+	"name": "ServiceNowObject3",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ServiceNow1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "ServiceNowObject",
+		"schema": [],
+		"typeProperties": {
+			"tableName": "test"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

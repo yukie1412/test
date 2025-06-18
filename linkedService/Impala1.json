@@ -1,0 +1,15 @@
+{
+	"name": "Impala1",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "Impala",
+		"typeProperties": {
+			"host": "a",
+			"port": 21050,
+			"authenticationType": "SASLUsername",
+			"username": "a",
+			"enableSsl": false
+		}
+	}
+}

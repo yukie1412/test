@@ -1,0 +1,13 @@
+{
+	"name": "ImpalaObject1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Impala1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "ImpalaObject",
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

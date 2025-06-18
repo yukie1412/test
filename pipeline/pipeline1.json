@@ -3,8 +3,8 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy data1",
-				"type": "Copy",
+				"name": "Lookup1",
+				"type": "Lookup",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -16,70 +16,20 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "ServiceNowV2Source",
-						"expression": {
-							"type": "Nary",
-							"operators": [
-								"="
-							],
-							"operands": [
-								{
-									"type": "Field",
-									"value": "a"
-								},
-								{
-									"type": "Constant",
-									"value": {
-										"value": "@pipeline().parameters.test",
-										"type": "Expression"
-									}
-								}
-							]
-						},
-						"pageSize": 300
+						"type": "AmazonRdsForOracleSource",
+						"oracleReaderQuery": "asdf",
+						"partitionOption": "None",
+						"queryTimeout": "02:00:00"
 					},
-					"sink": {
-						"type": "DelimitedTextSink",
-						"storeSettings": {
-							"type": "AzureBlobStorageWriteSettings"
-						},
-						"formatSettings": {
-							"type": "DelimitedTextWriteSettings",
-							"quoteAllText": true,
-							"fileExtension": ".txt"
-						}
-					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"typeConversion": true,
-						"typeConversionSettings": {
-							"allowDataTruncation": true,
-							"treatBooleanAsNumber": false
-						}
-					}
-				},
-				"inputs": [
-					{
-						"referenceName": "ServiceNowObject2",
+					"dataset": {
+						"referenceName": "AmazonRdsForOracleTable4",
 						"type": "DatasetReference"
 					}
-				],
-				"outputs": [
-					{
-						"referenceName": "DelimitedText1",
-						"type": "DatasetReference"
-					}
-				]
+				}
 			}
 		],
-		"parameters": {
-			"test": {
-				"type": "String"
-			}
-		},
 		"annotations": [],
-		"lastPublishTime": "2025-02-21T06:12:02Z"
+		"lastPublishTime": "2025-06-09T08:05:13Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }

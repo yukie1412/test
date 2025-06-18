@@ -1,0 +1,13 @@
+{
+	"name": "SparkObject1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Spark1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SparkObject",
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

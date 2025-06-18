@@ -1,0 +1,22 @@
+{
+	"name": "Vertica3",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"description": "desabcd",
+		"parameters": {
+			"name": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "Vertica",
+		"typeProperties": {
+			"connectionString": "server=@{linkedService().name};port=5433;database=a;uid=a",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiIyYjgzODhlMi1hNzg5LTQ3MjEtOTNmMS1mZWU1ODg3ZTcxNjciLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "integrationRuntime2",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

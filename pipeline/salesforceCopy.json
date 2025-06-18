@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SalesforceSource",
-						"query": "abcf",
+						"query": "SELECT Col_Currency__c, Col_Date__c, Col_Email__c FROM AllDataType__c",
 						"readBehavior": "query"
 					},
 					"sink": {
@@ -50,7 +50,7 @@
 			}
 		],
 		"annotations": [],
-		"lastPublishTime": "2025-02-27T03:54:00Z"
+		"lastPublishTime": "2025-03-28T06:23:53Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }

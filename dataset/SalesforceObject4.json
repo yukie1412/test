@@ -1,0 +1,13 @@
+{
+	"name": "SalesforceObject4",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Salesforce3",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SalesforceV2Object",
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

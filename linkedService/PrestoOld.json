@@ -1,0 +1,20 @@
+{
+	"name": "PrestoOld",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [
+			"abcd"
+		],
+		"type": "Presto",
+		"typeProperties": {
+			"host": "a",
+			"serverVersion": "a",
+			"catalog": "a",
+			"port": 8080,
+			"authenticationType": "Anonymous",
+			"enableSsl": true,
+			"trustedCertPath": "asdf",
+			"timeZoneID": "aabb"
+		}
+	}
+}

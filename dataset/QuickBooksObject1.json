@@ -1,0 +1,16 @@
+{
+	"name": "QuickBooksObject1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "QuickBooks1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "QuickBooksObject",
+		"schema": [],
+		"typeProperties": {
+			"tableName": "abc"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

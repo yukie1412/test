@@ -1,0 +1,33 @@
+{
+	"name": "spark_copy4",
+	"properties": {
+		"activities": [
+			{
+				"name": "Lookup1",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SparkSource",
+						"query": "abc"
+					},
+					"dataset": {
+						"referenceName": "SparkObject1",
+						"type": "DatasetReference"
+					}
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2025-06-12T07:27:55Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

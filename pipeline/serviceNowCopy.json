@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "ServiceNowSource",
-						"query": "fdhfdh"
+						"query": "SELECT col_value FROM Actual.alm_asset"
 					},
 					"sink": {
 						"type": "DelimitedTextSink",
@@ -55,7 +55,7 @@
 			}
 		],
 		"annotations": [],
-		"lastPublishTime": "2025-02-27T03:54:00Z"
+		"lastPublishTime": "2025-03-28T06:23:53Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }

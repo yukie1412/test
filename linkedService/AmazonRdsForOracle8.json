@@ -1,0 +1,33 @@
+{
+	"name": "AmazonRdsForOracle8",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"parameters": {
+			"host": {
+				"type": "String"
+			},
+			"key": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "AmazonRdsForOracle",
+		"version": "2.0",
+		"typeProperties": {
+			"server": "@{linkedService().host}",
+			"authenticationType": "Basic",
+			"username": "@{linkedService().key}",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "AzureKeyVault1",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": {
+					"value": "@linkedService().key",
+					"type": "Expression"
+				}
+			}
+		}
+	}
+}

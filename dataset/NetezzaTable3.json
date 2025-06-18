@@ -1,0 +1,13 @@
+{
+	"name": "NetezzaTable3",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Netezza3",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "NetezzaTable",
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

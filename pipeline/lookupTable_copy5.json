@@ -1,0 +1,127 @@
+{
+	"name": "lookupTable_copy5",
+	"properties": {
+		"activities": [
+			{
+				"name": "gbq",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "GoogleBigQuerySource"
+					},
+					"dataset": {
+						"referenceName": "GoogleBigQueryObject1",
+						"type": "DatasetReference",
+						"parameters": {
+							"a": "a"
+						}
+					}
+				}
+			},
+			{
+				"name": "postgre",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "PostgreSqlSource"
+					},
+					"dataset": {
+						"referenceName": "PostgreSqlTable1",
+						"type": "DatasetReference"
+					}
+				}
+			},
+			{
+				"name": "salesforce",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SalesforceSource",
+						"readBehavior": "query"
+					},
+					"dataset": {
+						"referenceName": "SalesforceObject1",
+						"type": "DatasetReference"
+					}
+				}
+			},
+			{
+				"name": "snow",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SnowflakeSource",
+						"exportSettings": {
+							"type": "SnowflakeExportCopyCommand"
+						}
+					},
+					"dataset": {
+						"referenceName": "SnowflakeTable1",
+						"type": "DatasetReference"
+					}
+				}
+			},
+			{
+				"name": "servicenow",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "ServiceNowSource"
+					},
+					"dataset": {
+						"referenceName": "ServiceNowObject1",
+						"type": "DatasetReference"
+					}
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2025-06-12T07:19:37Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

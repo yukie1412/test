@@ -1,0 +1,16 @@
+{
+	"name": "MariaDBTable2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "MariaDB2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "MariaDBTable",
+		"schema": [],
+		"typeProperties": {
+			"tableName": "abc"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

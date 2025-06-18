@@ -1,0 +1,17 @@
+{
+	"name": "GreenplumTable2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "GreenplumAkv",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "GreenplumTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "ab",
+			"table": "cd"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,27 @@
+{
+	"name": "Teradata2",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"description": "asdf",
+		"parameters": {
+			"name": {
+				"type": "String"
+			}
+		},
+		"annotations": [
+			"asdf"
+		],
+		"type": "Teradata",
+		"typeProperties": {
+			"connectionString": "234=234;DbcName=@{linkedService().name};UID=asdf;asdf=asf",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "AzureKeyVault1",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "asdf"
+			}
+		}
+	}
+}

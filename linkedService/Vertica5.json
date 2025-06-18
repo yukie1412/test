@@ -1,0 +1,25 @@
+{
+	"name": "Vertica5",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"description": "qwerqwer",
+		"annotations": [],
+		"type": "Vertica",
+		"typeProperties": {
+			"123": "321",
+			"connectionString": "123=321;Server=abc;Port=5433;Database=abc;UID=abc",
+			"pwd": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "AzureKeyVault1",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "abc"
+			}
+		},
+		"connectVia": {
+			"referenceName": "integrationRuntime2",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

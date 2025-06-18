@@ -1,0 +1,13 @@
+{
+	"name": "VerticaTable4",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Vertica5",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "VerticaTable",
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

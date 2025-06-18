@@ -1,0 +1,17 @@
+{
+	"name": "CassandraTable1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Cassandra1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "CassandraTable",
+		"schema": [],
+		"typeProperties": {
+			"tableName": "abc",
+			"keyspace": "abc"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
